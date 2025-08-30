@@ -6,8 +6,10 @@ package mr
 // remember to capitalize all names.
 //
 
-import "os"
-import "strconv"
+import (
+	"os"
+	"strconv"
+)
 
 //
 // example to show how to declare the arguments
@@ -22,6 +24,31 @@ type ExampleReply struct {
 	Y int
 }
 
+type MsgType int
+
+const (
+	AllocMap MsgType = iota
+	AllocReduce
+	Wait
+	Shutdown
+	AskTask
+	DoneMap
+	FailMap
+	DoneReduce
+	FailReduce
+)
+
+type MessageSend struct {
+	Type MsgType
+	TaskID int
+}
+
+type MessageReply struct {
+	Type MsgType
+	NReduce int
+	TaskID int
+	TaskName string
+}
 // Add your RPC definitions here.
 
 

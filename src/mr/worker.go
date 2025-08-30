@@ -1,10 +1,15 @@
 package mr
 
-import "fmt"
-import "log"
-import "net/rpc"
-import "hash/fnv"
-
+import (
+	"encoding/json"
+	"fmt"
+	"hash/fnv"
+	"io/ioutil"
+	"log"
+	"net/rpc"
+	"os"
+	"sort"
+)
 
 //
 // Map functions return a slice of KeyValue.
@@ -14,6 +19,12 @@ type KeyValue struct {
 	Value string
 }
 
+type ByKey []KeyValue
+
+// for sorting by key.
+func (a ByKey) Len() int           { return len(a) }
+func (a ByKey) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a ByKey) Less(i, j int) bool { return a[i].Key < a[j].Key }
 //
 // use ihash(key) % NReduce to choose the reduce
 // task number for each KeyValue emitted by Map.
@@ -35,7 +46,92 @@ func Worker(mapf func(string, string) []KeyValue,
 
 	// uncomment to send the Example RPC to the coordinator.
 	// CallExample()
+	for {
+		reply := GetTask()
+		switch reply.Type {
+		case AllocMap:
+			ok := ExecuteMap(reply, mapf);
+			if ok {
+				ReportTask(reply.TaskID, DoneMap)
+			} else {
+				ReportTask(reply.TaskID, FailMap)
+			}
+		case AllocReduce:
+		case Wait:
+		case Shutdown:
+		}
+	}
 
+}
+
+func ExecuteMap(reply *MessageReply, mapf func(string, string) []KeyValue) bool {
+
+	filename := reply.TaskName
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Fatalf("cannot open %v", filename)
+		return false
+	}
+	content, err := ioutil.ReadAll(file)
+	if err != nil {
+		log.Fatalf("cannot read %v", filename)
+		return false
+	}
+	file.Close()
+	kva := mapf(filename, string(content))
+	sort.Sort(ByKey(kva))
+
+	tempFiles := make([]*os.File, reply.NReduce)
+	encoders := make([]*json.Encoder, reply.NReduce)
+
+	for _, kv := range kva {
+		reduceID := ihash(kv.Key) % reply.NReduce
+		if tempFiles[reduceID] == nil {
+			tempFile, err := os.CreateTemp("", fmt.Sprintf("mr-tmp-%d", reduceID))
+			if err != nil {
+				log.Fatalf("cannot create temp file")
+				return false
+			}
+			defer tempFiles[reduceID].Close()
+			tempFiles[reduceID] = tempFile
+			encoders[reduceID] = json.NewEncoder(tempFile)
+		}
+		err := encoders[reduceID].Encode(kv)
+		if err != nil {
+			log.Fatalf("cannot encode")
+			return false
+		}
+	}
+
+	for i, file := range tempFiles { 
+		if file != nil {
+			file.Close()
+			err := os.Rename(file.Name(), fmt.Sprintf("mr-out-%d-%d", reply.TaskID, i))
+			if err != nil {
+				log.Fatalf("cannot rename")
+				return false
+			}
+		}
+	}
+	return true
+}
+
+func GetTask() *MessageReply { 
+	args := MessageSend{ Type: AskTask }
+	reply := MessageReply{}
+	ok := call("Coordinator.AllocTask", &args, &reply)
+	if ok {
+		return &reply
+	} else {
+		return nil
+	}
+}
+
+func ReportTask(taskID int, msgType MsgType) bool {
+	args := MessageSend{ Type: msgType, TaskID: taskID }
+	reply := MessageReply{}
+	ok := call("Coordinator.ReportTask", &args, &reply)
+	return ok
 }
 
 //

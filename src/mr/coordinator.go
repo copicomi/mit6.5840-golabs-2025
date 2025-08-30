@@ -1,10 +1,12 @@
 package mr
 
-import "log"
-import "net"
-import "os"
-import "net/rpc"
-import "net/http"
+import (
+	"log"
+	"net"
+	"net/http"
+	"net/rpc"
+	"os"
+)
 
 
 type Coordinator struct {
@@ -21,6 +23,16 @@ type Coordinator struct {
 //
 func (c *Coordinator) Example(args *ExampleArgs, reply *ExampleReply) error {
 	reply.Y = args.X + 1
+	return nil
+}
+
+func (c *Coordinator) AllocTask(args *MessageSend, reply *MessageReply) error {
+	// Your code here.
+	return nil
+}
+
+func (c *Coordinator) ReportTask(args *MessageSend, reply *MessageReply) error {
+	// Your code here.
 	return nil
 }
 
