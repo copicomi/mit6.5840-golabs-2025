@@ -32,9 +32,9 @@ const (
 	Wait
 	Shutdown
 	AskTask
-	DoneMap
+	SuccessMap
 	FailMap
-	DoneReduce
+	SuccessReduce
 	FailReduce
 )
 

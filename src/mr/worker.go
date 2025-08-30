@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"hash/fnv"
-	"io/ioutil"
 	"log"
 	"net/rpc"
 	"os"
 	"sort"
+	"time"
 )
 
 //
@@ -52,16 +52,81 @@ func Worker(mapf func(string, string) []KeyValue,
 		case AllocMap:
 			ok := ExecuteMap(reply, mapf);
 			if ok {
-				ReportTask(reply.TaskID, DoneMap)
+				ReportTask(reply.TaskID, SuccessMap)
 			} else {
 				ReportTask(reply.TaskID, FailMap)
 			}
 		case AllocReduce:
+			ok := ExecuteReduce(reply, reducef);
+			if ok {
+				ReportTask(reply.TaskID, SuccessReduce)
+			} else {
+				ReportTask(reply.TaskID, FailReduce)
+			}
 		case Wait:
+			time.Sleep(100 * time.Millisecond)
 		case Shutdown:
+			os.Exit(0)
+		}
+		time.Sleep(100 * time.Millisecond) 
+	}
+
+}
+
+func ExecuteReduce(reply *MessageReply, reducef func(string, []string) string) bool { 
+	key_id := reply.TaskID
+	kvs := map[string][]string{}
+
+	files, err := GetFiles(fmt.Sprintf("^mr-\\d+-%d$", key_id), "./");
+	if err != nil {
+		log.Fatalf("cannot get files")
+		return false;
+	}
+
+	for _, file := range files {
+		dec := json.NewDecoder(file)
+		for {
+			var kv KeyValue
+			if err := dec.Decode(&kv); err != nil {
+				break
+			}
+			kvs[kv.Key] = append(kvs[kv.Key], kv.Value)
+		}
+		file.Close();
+	}
+
+	var keys []string
+	for k := range kvs {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+
+	tempfile, err := os.CreateTemp("", fmt.Sprintf("mr-tmp-%d", key_id))
+	if err != nil {
+		log.Fatalf("cannot create temp file")
+		return false
+	}
+
+	for _, k := range keys {
+		values := kvs[k]
+		output := reducef(k, values)
+		_, err := fmt.Fprintf(tempfile, "%v %v\n", k, output)
+		if err != nil {
+			log.Fatalf("cannot write to temp file")
+			return false
 		}
 	}
 
+	tempfile.Close()
+	err = os.Rename(tempfile.Name(), fmt.Sprintf("mr-out-%d", key_id));
+	if err != nil {
+		log.Fatalf("cannot rename temp file")
+		return false
+	}
+
+	RemoveFiles(fmt.Sprintf("^mr-\\d+-%d$", key_id), "./");
+
+	return true;
 }
 
 func ExecuteMap(reply *MessageReply, mapf func(string, string) []KeyValue) bool {
@@ -69,10 +134,9 @@ func ExecuteMap(reply *MessageReply, mapf func(string, string) []KeyValue) bool 
 	filename := reply.TaskName
 	file, err := os.Open(filename)
 	if err != nil {
-		log.Fatalf("cannot open %v", filename)
 		return false
 	}
-	content, err := ioutil.ReadAll(file)
+	content, err := os.ReadFile(filename)
 	if err != nil {
 		log.Fatalf("cannot read %v", filename)
 		return false
@@ -92,7 +156,7 @@ func ExecuteMap(reply *MessageReply, mapf func(string, string) []KeyValue) bool 
 				log.Fatalf("cannot create temp file")
 				return false
 			}
-			defer tempFiles[reduceID].Close()
+			defer tempFile.Close()
 			tempFiles[reduceID] = tempFile
 			encoders[reduceID] = json.NewEncoder(tempFile)
 		}
@@ -106,7 +170,7 @@ func ExecuteMap(reply *MessageReply, mapf func(string, string) []KeyValue) bool 
 	for i, file := range tempFiles { 
 		if file != nil {
 			file.Close()
-			err := os.Rename(file.Name(), fmt.Sprintf("mr-out-%d-%d", reply.TaskID, i))
+			err := os.Rename(file.Name(), fmt.Sprintf("mr-%d-%d", reply.TaskID, i))
 			if err != nil {
 				log.Fatalf("cannot rename")
 				return false
