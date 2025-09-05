@@ -40,9 +40,14 @@ func (lk *Lock) Acquire() {
 		val, ver, err := lk.ck.Get(lk.LockKey)
 		if err == rpc.OK {
 			if val == Unlocked {
-				success := lk.ck.Put(lk.LockKey, lk.ClientID, ver)
-				if success == rpc.OK {
+				ok := lk.ck.Put(lk.LockKey, lk.ClientID, ver)
+				if ok == rpc.OK {
 					return
+				} else if ok == rpc.ErrMaybe {
+					newVal, _, checkErr := lk.ck.Get(lk.LockKey)
+					if checkErr == rpc.OK && newVal == lk.ClientID{
+						return
+					}
 				}
 			} 
 		}
@@ -56,9 +61,14 @@ func (lk *Lock) Release() {
 		val, ver, err := lk.ck.Get(lk.LockKey)
 		if err == rpc.OK {
 			if val == lk.ClientID {
-				success := lk.ck.Put(lk.LockKey, Unlocked, ver)
-				if success == rpc.OK {
+				ok := lk.ck.Put(lk.LockKey, Unlocked, ver)
+				if ok == rpc.OK {
 					return
+				} else if ok == rpc.ErrMaybe {
+					newVal, _, checkErr := lk.ck.Get(lk.LockKey)
+					if checkErr == rpc.OK && newVal != lk.ClientID {
+						return
+					}
 				}
 			} 
 		}
