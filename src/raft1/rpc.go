@@ -135,4 +135,14 @@ func (rf *Raft) ChangeRoleWithoutLock(role int, term int) {
 	if role == Follower {
 		rf.votedFor = Nobody
 	}
+	if role == Candidate {
+		rf.votedFor = rf.me
+		rf.voteCount = 1
+	}
+}
+
+func (rf *Raft) ChangeRole(role int, term int) { 
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	rf.ChangeRoleWithoutLock(role, term)
 }
