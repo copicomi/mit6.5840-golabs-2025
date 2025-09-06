@@ -1,7 +1,6 @@
 package raft
 
 import (
-	"math/rand"
 	"time"
 )
 
@@ -19,6 +18,8 @@ func (rf *Raft) SendHeartbeat() {
 			rf.sendAppendEntries(server, args, reply)
 		}(i)
 	}
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
 	rf.lastHeartbeatTime = time.Now()
 }
 
@@ -65,51 +66,24 @@ func (rf *Raft) incTerm() {
 	rf.incTermWithoutLock()
 }
 
-
-func (rf *Raft) CheckNewLeader(term int) bool {
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
-	if rf.state == Leader {
-		if term > rf.currentTerm {
-			rf.state = Follower
-			rf.votedFor = -1
-			rf.currentTerm = term
-			rf.lastHeartbeatTime = time.Now()
-			return true
-		}
-	} else if rf.state == Candidate {
-		if term > rf.currentTerm {
-			rf.state = Follower
-			rf.votedFor = -1
-			rf.currentTerm = term
-			rf.lastHeartbeatTime = time.Now()
-			return true
-		}
-	}
-	return false
-}
-
 func (rf *Raft) ticker() {
 	for rf.killed() == false {
-
 		// Your code here (3A)
 		// Check if a leader election should be started.
 		rf.mu.Lock()
+		var sleepMs int
 		state := rf.state
-		rf.mu.Unlock()
-		if state == Leader {
+		heartbeatTimeout := time.Duration(rf.electionTimeout)*time.Millisecond 
+		if state == Leader { // 发送心跳
 			go rf.SendHeartbeat();
-			// leader 固定间隔发送心跳
-			time.Sleep(time.Duration(rf.heartbeatInterval) * time.Millisecond)
-		} else if state == Follower || state == Candidate { 
-			heartbeatTimeout := time.Duration(rf.electionTimeout)*time.Millisecond 
+			sleepMs = rf.heartbeatInterval
+		} else if state == Follower || state == Candidate { // 等待心跳
 			if time.Since(rf.lastHeartbeatTime) > heartbeatTimeout{
 				go rf.StartElection()
 			}
-			// follower 随机等待一段时间
-			ms := 50 + (rand.Int63() % 300)
-			time.Sleep(time.Duration(ms) * time.Millisecond)
+			sleepMs = GetRand(50, 350)
 		} 
-
+		rf.mu.Unlock()
+		time.Sleep(time.Duration(sleepMs) * time.Millisecond)
 	}
 }
