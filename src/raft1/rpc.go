@@ -6,37 +6,65 @@ import "time"
 // field names must start with capital letters!
 type RequestVoteArgs struct {
 	// Your data here (3A, 3B).
-	term int
-	candidateId int
-	lastLogIndex int
-	lastLogTerm int
+	Term int
+	CandidateId int
+	LastLogIndex int
+	LastLogTerm int
 }
 
 // example RequestVote RPC reply structure.
 // field names must start with capital letters!
 type RequestVoteReply struct {
 	// Your data here (3A).
-	term int
-	voteGranted bool
+	Term int
+	VoteGranted bool
 }
 
 type AppendEntriesArgs struct {
-	term int
-	leaderId int
-	prevLogIndex int
-	prevLogTerm int
-	entries []LogEntry
-	leaderCommit int
+	Term int
+	LeaderId int
+	PrevLogIndex int
+	PrevLogTerm int
+	Entries []LogEntry
+	LeaderCommit int
 }
 
 type AppendEntriesReply struct {
-	term int
-	success bool
+	Term int
+	Success bool
 }
+
+const (
+	Nobody int = -1
+)
 
 // example RequestVote RPC handler.
 func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	// Your code here (3A, 3B).
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	term := args.Term
+
+	reply.Term = rf.currentTerm
+	reply.VoteGranted = false
+
+	if term < rf.currentTerm {
+		// 过时 RPC
+		return
+	} else if term > rf.currentTerm {
+		// 发现自己已经过期，变为 follower
+		rf.ChangeRoleWithoutLock(Follower, term)
+	} else { // term == rf.currentTerm
+		// 该 term 内已经投给别人
+		if rf.votedFor != Nobody && rf.votedFor != args.CandidateId {
+			return
+		}
+		// TODO: 检查 candidate 的 log 是否至少和自己一样新
+	}
+
+	rf.votedFor = args.CandidateId
+	reply.VoteGranted = true
+
 }
 
 // example code to send a RequestVote RPC to a server.
@@ -75,11 +103,23 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	// 更新 heartbeat 
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	term := args.term
+
+	reply.Term = rf.currentTerm
+	reply.Success = true
+
+	term := args.Term
 	if term < rf.currentTerm {
-		reply.term = rf.currentTerm
-		reply.success = false
+		// 过时 RPC
+		reply.Success = false
 		return
+	} else if term > rf.currentTerm {
+		rf.ChangeRoleWithoutLock(Follower, term)
+		// 发现自己已经过期，变为 follower
+	} else { // term == rf.currentTerm
+		// 收到同任期 leader 的心跳，变为 follower
+		if rf.state == Candidate {
+			rf.ChangeRoleWithoutLock(Follower, term)
+		}
 	}
 	rf.lastHeartbeatTime = time.Now()
 }
@@ -87,4 +127,12 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 func (rf *Raft) sendAppendEntries(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) bool { 
 	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
 	return ok
+}
+
+func (rf *Raft) ChangeRoleWithoutLock(role int, term int) { 
+	rf.state = role
+	rf.currentTerm = term
+	if role == Follower {
+		rf.votedFor = Nobody
+	}
 }

@@ -7,8 +7,8 @@ import (
 
 func (rf *Raft) SendHeartbeat() {
 	args := &AppendEntriesArgs{
-		term: rf.currentTerm,
-		leaderId: rf.me,
+		Term: rf.currentTerm,
+		LeaderId: rf.me,
 	}
 	for i := range rf.peers {
 		if i == rf.me {
@@ -24,8 +24,8 @@ func (rf *Raft) SendHeartbeat() {
 
 func (rf *Raft) StartElection() {
 	args := &RequestVoteArgs{ 
-		term: rf.currentTerm,
-		candidateId: rf.me,
+		Term: rf.currentTerm,
+		CandidateId: rf.me,
 	}
 	for i := range rf.peers {
 		if i == rf.me {
