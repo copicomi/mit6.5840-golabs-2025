@@ -49,16 +49,12 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	reply.VoteGranted = false
 
 	if term < rf.currentTerm {
-		// 过时 RPC
 		return
 	} else if term > rf.currentTerm {
-		// 发现自己已经过期，变为 follower
 		rf.ChangeRoleWithoutLock(Follower, term)
-	} else { // term == rf.currentTerm
-		// 该 term 内已经投给别人
-		if rf.votedFor != Nobody && rf.votedFor != args.CandidateId {
-			return
-		}
+	} else if rf.votedFor != Nobody && rf.votedFor != args.CandidateId {
+		return
+	} else {
 		// TODO(3A): 检查 candidate 的 log 是否至少和自己一样新
 	}
 
@@ -100,7 +96,6 @@ func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *Reques
 }
 
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
-	// 更新 heartbeat 
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 
@@ -109,14 +104,11 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 
 	term := args.Term
 	if term < rf.currentTerm {
-		// 过时 RPC
 		reply.Success = false
 		return
 	} else if term > rf.currentTerm {
 		rf.ChangeRoleWithoutLock(Follower, term)
-		// 发现自己已经过期，变为 follower
 	} else { // term == rf.currentTerm
-		// 收到同任期 leader 的心跳，变为 follower
 		if rf.state == Candidate {
 			rf.ChangeRoleWithoutLock(Follower, term)
 		}
@@ -134,8 +126,7 @@ func (rf *Raft) ChangeRoleWithoutLock(role int, term int) {
 	rf.currentTerm = term
 	if role == Follower {
 		rf.votedFor = Nobody
-	}
-	if role == Candidate {
+	} else if role == Candidate {
 		rf.votedFor = rf.me
 		rf.voteCount = 1
 	}
