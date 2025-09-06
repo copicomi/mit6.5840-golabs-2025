@@ -59,7 +59,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 		if rf.votedFor != Nobody && rf.votedFor != args.CandidateId {
 			return
 		}
-		// TODO: 检查 candidate 的 log 是否至少和自己一样新
+		// TODO(3A): 检查 candidate 的 log 是否至少和自己一样新
 	}
 
 	rf.votedFor = args.CandidateId

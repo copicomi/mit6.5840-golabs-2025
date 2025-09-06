@@ -40,10 +40,12 @@ type Raft struct {
 	nextIndex  []int
 	matchIndex []int
 
+	// 3A election
 	state 	 int // Follower, Candidate, Leader
 	electionTimeout int 
 	lastHeartbeatTime time.Time
 	heartbeatInterval int
+	voteCount int
 }
 
 const (

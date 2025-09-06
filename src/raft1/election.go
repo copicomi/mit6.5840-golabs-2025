@@ -23,18 +23,45 @@ func (rf *Raft) SendHeartbeat() {
 }
 
 func (rf *Raft) StartElection() {
+	rf.incTermWithoutLock()
+	rf.ChangeRoleWithoutLock(Candidate, rf.currentTerm)
 	args := &RequestVoteArgs{ 
 		Term: rf.currentTerm,
 		CandidateId: rf.me,
 	}
+	winningElection := false
 	for i := range rf.peers {
 		if i == rf.me {
 			continue
 		}
-		reply := &RequestVoteReply{}
-		go rf.sendRequestVote(i, args, reply)
+		go func (server int) {
+			reply := &RequestVoteReply{}
+			rf.sendRequestVote(server, args, reply)
+			if reply.VoteGranted {
+				rf.mu.Lock()
+				rf.incVoteCountWithoutLock()
+				if rf.voteCount > len(rf.peers) / 2 {
+					winningElection = true
+					rf.ChangeRoleWithoutLock(Leader, rf.currentTerm)
+					go rf.SendHeartbeat()
+				}
+				rf.mu.Unlock()
+			}
+		}(i)
+		if winningElection {
+			break
+		}
 	}
 }
+
+func (rf *Raft) incVoteCountWithoutLock() {
+	rf.voteCount ++
+}
+
+func (rf *Raft) incTermWithoutLock() {
+	rf.currentTerm ++
+}
+
 
 func (rf *Raft) CheckNewLeader(term int) bool {
 	rf.mu.Lock()
