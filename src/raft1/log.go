@@ -39,7 +39,6 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 }
 
 func (rf *Raft) IsNewerThan(lastLogIndex int, lastLogTerm int) bool {
-	return false
 	if rf.lastLogterm > lastLogTerm {
 		return true
 	} else if rf.lastLogterm == lastLogTerm && rf.lastLogIndex >= lastLogIndex {

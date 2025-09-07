@@ -51,7 +51,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 		rf.ChangeRoleWithoutLock(Follower, term)
 	}
 
-	if 	term < rf.currentTerm ||
+	if term < rf.currentTerm ||
 		rf.IsVotedForOthers(args.CandidateId) || 
 		rf.IsNewerThan(args.LastLogIndex, args.LastLogTerm) {
 		return
@@ -65,21 +65,21 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 
-	reply.Term = rf.currentTerm
-	reply.Success = true
-
 	term := args.Term
+	reply.Term = rf.currentTerm
+	reply.Success = false
+
 	if term < rf.currentTerm {
-		reply.Success = false
 		return
-	} else if term > rf.currentTerm {
-		rf.ChangeRoleWithoutLock(Follower, term)
-	} else { // term == rf.currentTerm
-		if rf.state == Candidate {
-			rf.ChangeRoleWithoutLock(Follower, term)
-		}
-	}
+	} 
+
 	rf.lastHeartbeatTime = time.Now()
+
+	if rf.IsFoundAnotherLeader(term) {
+		rf.ChangeRoleWithoutLock(Follower, term)
+	} 
+
+	
 }
 
 // example code to send a RequestVote RPC to a server.

@@ -83,3 +83,13 @@ func (rf *Raft) ticker() {
 func (rf *Raft) IsVotedForOthers(server int) bool {
 	return rf.votedFor != server && rf.votedFor != Nobody
 }
+
+func (rf *Raft) IsFoundAnotherLeader(term int) bool {
+	if term > rf.currentTerm {
+		return true
+	}
+	if term == rf.currentTerm && rf.state == Candidate {
+		return true
+	}
+	return false
+}
