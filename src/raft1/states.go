@@ -1,6 +1,10 @@
 package raft
 
-import "sync/atomic"
+import (
+	"math/rand"
+	"sync/atomic"
+	"time"
+)
 
 // return currentTerm and whether this server
 // believes it is the leader.
@@ -63,4 +67,28 @@ func (rf *Raft) Kill() {
 func (rf *Raft) killed() bool {
 	z := atomic.LoadInt32(&rf.dead)
 	return z == 1
+}
+
+func (rf *Raft) InitElectionState() {
+	// 3A election
+	rf.state = Follower
+	rf.votedFor = -1
+	rf.currentTerm = 0
+	rf.electionTimeout = 300 + int(rand.Int63()%200) // timeout between 300 and 500 ms
+	rf.heartbeatInterval = 100 // heartbeat every 100 ms
+	rf.lastHeartbeatTime = time.Now()
+}
+
+func (rf *Raft) InitLogState() { 
+	// 3B log
+	rf.logIndex = 0
+	rf.log = make([]LogEntry, 0)
+	rf.commitIndex = 0
+	rf.lastApplied = 0
+	rf.nextIndex = make([]int, len(rf.peers))
+	rf.matchIndex = make([]int, len(rf.peers))
+}
+
+func (rf *Raft) InitPersistState() {
+	// 3C persist
 }

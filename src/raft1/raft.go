@@ -8,7 +8,6 @@ package raft
 
 import (
 	//	"bytes"
-	"math/rand"
 	"sync"
 	"time"
 
@@ -135,14 +134,9 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.me = me
 
 	// Your initialization code here (3A, 3B, 3C).
-
-	// 3A election
-	rf.state = Follower
-	rf.votedFor = -1
-	rf.currentTerm = 0
-	rf.electionTimeout = 300 + int(rand.Int63()%200) // timeout between 300 and 500 ms
-	rf.heartbeatInterval = 100 // heartbeat every 100 ms
-	rf.lastHeartbeatTime = time.Now()
+	rf.InitElectionState()
+	rf.InitLogState()
+	rf.InitPersistState()
 
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
