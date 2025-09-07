@@ -47,7 +47,7 @@ type Raft struct {
 
 	// 3B log 
 	lastLogIndex int 
-	lastLogterm int
+	lastLogTerm int
 }
 
 

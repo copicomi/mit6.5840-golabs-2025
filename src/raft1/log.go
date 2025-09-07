@@ -17,23 +17,47 @@ type LogEntry struct {
 // term. the third return value is true if this server believes it is
 // the leader.
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
-	index := -1
-	term := -1
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+
+	index := rf.lastLogIndex + 1
+	term := rf.currentTerm
 	isLeader := rf.state == Leader
-
 	// Your code here (3B).
-	if !isLeader {
-		return index, term, isLeader
+	if isLeader {
+		rf.AppendAndReplicationSingleCommand(command)
 	}  
+	return index, term, isLeader
+}
 
-	index = rf.lastLogIndex + 1
-	term = rf.currentTerm
-	log := LogEntry {
-		Term: term,
+func (rf *Raft) AppendAndReplicationSingleCommand(command interface{}) {
+	log := LogEntry{
 		Command: command,
+		Term: rf.currentTerm,
 	}
+	args := &AppendEntriesArgs{
+		Term: rf.currentTerm,
+		LeaderId: rf.me,
+		Entries: []LogEntry{log},
+		PrevLogIndex: rf.lastLogIndex,
+		PrevLogTerm: rf.lastLogTerm,
+		LeaderCommit: rf.commitIndex,
+	}
+	rf.AppendSingleLogWithoutLock(log)
+	for i := range rf.peers {
+		if i == rf.me {
+			continue
+		}
+		go func(server int) {
+			reply := &AppendEntriesReply{}
+			rf.sendAppendEntries(server, args, reply)
+		}(i)
+	}
+}
+
+func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {
 	rf.log = append(rf.log, log)
 	rf.lastLogIndex ++
-
-	return index, term, isLeader
+	rf.lastLogTerm = log.Term
+	rf.persist()
 }
