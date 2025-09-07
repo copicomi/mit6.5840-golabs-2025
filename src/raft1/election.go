@@ -55,21 +55,6 @@ func (rf *Raft) StartElection() {
 	}
 }
 
-func (rf *Raft) incVoteCountWithoutLock() {
-	rf.voteCount ++
-}
-
-func (rf *Raft) incTermWithoutLock() {
-	rf.currentTerm ++
-	rf.votedFor = Nobody
-	rf.voteCount = 0
-}
-func (rf *Raft) incTerm() {
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
-	rf.incTermWithoutLock()
-}
-
 func (rf *Raft) ticker() {
 	for rf.killed() == false {
 		// Your code here (3A)

@@ -120,20 +120,3 @@ func (rf *Raft) sendAppendEntries(server int, args *AppendEntriesArgs, reply *Ap
 	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
 	return ok
 }
-
-func (rf *Raft) ChangeRoleWithoutLock(role int, term int) { 
-	rf.state = role
-	rf.currentTerm = term
-	if role == Follower {
-		rf.votedFor = Nobody
-	} else if role == Candidate {
-		rf.votedFor = rf.me
-		rf.voteCount = 1
-	}
-}
-
-func (rf *Raft) ChangeRole(role int, term int) { 
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
-	rf.ChangeRoleWithoutLock(role, term)
-}
