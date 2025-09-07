@@ -44,23 +44,42 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 	term := args.Term
-
 	reply.Term = rf.currentTerm
 	reply.VoteGranted = false
 
-	if term < rf.currentTerm {
-		return
-	} else if term > rf.currentTerm {
+	if term > rf.currentTerm {
 		rf.ChangeRoleWithoutLock(Follower, term)
-	} else if rf.votedFor != Nobody && rf.votedFor != args.CandidateId {
+	}
+
+	if 	term < rf.currentTerm ||
+		rf.IsVotedForOthers(args.CandidateId) || 
+		rf.IsNewerThan(args.LastLogIndex, args.LastLogTerm) {
 		return
-	} else {
-		// TODO(3A): 检查 candidate 的 log 是否至少和自己一样新
 	}
 
 	rf.votedFor = args.CandidateId
 	reply.VoteGranted = true
+}
 
+func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+
+	reply.Term = rf.currentTerm
+	reply.Success = true
+
+	term := args.Term
+	if term < rf.currentTerm {
+		reply.Success = false
+		return
+	} else if term > rf.currentTerm {
+		rf.ChangeRoleWithoutLock(Follower, term)
+	} else { // term == rf.currentTerm
+		if rf.state == Candidate {
+			rf.ChangeRoleWithoutLock(Follower, term)
+		}
+	}
+	rf.lastHeartbeatTime = time.Now()
 }
 
 // example code to send a RequestVote RPC to a server.
@@ -93,27 +112,6 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *RequestVoteReply) bool {
 	ok := rf.peers[server].Call("Raft.RequestVote", args, reply)
 	return ok
-}
-
-func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
-
-	reply.Term = rf.currentTerm
-	reply.Success = true
-
-	term := args.Term
-	if term < rf.currentTerm {
-		reply.Success = false
-		return
-	} else if term > rf.currentTerm {
-		rf.ChangeRoleWithoutLock(Follower, term)
-	} else { // term == rf.currentTerm
-		if rf.state == Candidate {
-			rf.ChangeRoleWithoutLock(Follower, term)
-		}
-	}
-	rf.lastHeartbeatTime = time.Now()
 }
 
 func (rf *Raft) sendAppendEntries(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) bool { 

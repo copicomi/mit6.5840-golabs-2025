@@ -1,5 +1,9 @@
 package raft
 
+type LogEntry struct {
+	Term    int
+	Command interface{}
+}
 // the service using Raft (e.g. a k/v server) wants to start
 // agreement on the next command to be appended to Raft's log. if this
 // server isn't the leader, returns false. otherwise start the
@@ -29,7 +33,17 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 		Term: term,
 		Command: command,
 	})
-	rf.logIndex ++
+	rf.lastLogIndex ++
 
 	return index, term, isLeader
+}
+
+func (rf *Raft) IsNewerThan(lastLogIndex int, lastLogTerm int) bool {
+	return false
+	if rf.lastLogterm > lastLogTerm {
+		return true
+	} else if rf.lastLogterm == lastLogTerm && rf.lastLogIndex >= lastLogIndex {
+		return true
+	}
+	return false
 }

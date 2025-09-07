@@ -5,6 +5,8 @@ import (
 )
 
 func (rf *Raft) SendHeartbeat() {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
 	args := &AppendEntriesArgs{
 		Term: rf.currentTerm,
 		LeaderId: rf.me,
@@ -18,8 +20,6 @@ func (rf *Raft) SendHeartbeat() {
 			rf.sendAppendEntries(server, args, reply)
 		}(i)
 	}
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
 	rf.lastHeartbeatTime = time.Now()
 }
 
@@ -40,8 +40,11 @@ func (rf *Raft) AskForVote(server int, args *RequestVoteArgs, reply *RequestVote
 }
 
 func (rf *Raft) StartElection() {
-	rf.incTerm()
-	rf.ChangeRole(Candidate, rf.currentTerm)
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+
+	rf.incTermWithoutLock()
+	rf.ChangeRoleWithoutLock(Candidate, rf.currentTerm)
 	args := &RequestVoteArgs{ 
 		Term: rf.currentTerm,
 		CandidateId: rf.me,
@@ -75,4 +78,8 @@ func (rf *Raft) ticker() {
 		rf.mu.Unlock()
 		time.Sleep(time.Duration(sleepMs) * time.Millisecond)
 	}
+}
+
+func (rf *Raft) IsVotedForOthers(server int) bool {
+	return rf.votedFor != server && rf.votedFor != Nobody
 }

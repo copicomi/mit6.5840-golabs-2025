@@ -46,19 +46,10 @@ type Raft struct {
 	voteCount int
 
 	// 3B log 
-	logIndex int 
+	lastLogIndex int 
+	lastLogterm int
 }
 
-const (
-	Follower  int = iota
-	Candidate 
-	Leader    
-)
-
-type LogEntry struct {
-	Term    int
-	Command interface{}
-}
 
 // save Raft's persistent state to stable storage,
 // where it can later be retrieved after a crash and restart.
@@ -143,7 +134,6 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// start ticker goroutine to start elections
 	go rf.ticker()
-
 
 	return rf
 }

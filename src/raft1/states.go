@@ -6,6 +6,12 @@ import (
 	"time"
 )
 
+const (
+	Follower  int = iota
+	Candidate 
+	Leader    
+)
+
 // return currentTerm and whether this server
 // believes it is the leader.
 func (rf *Raft) GetState() (int, bool) {
@@ -81,12 +87,13 @@ func (rf *Raft) InitElectionState() {
 
 func (rf *Raft) InitLogState() { 
 	// 3B log
-	rf.logIndex = 0
 	rf.log = make([]LogEntry, 0)
 	rf.commitIndex = 0
 	rf.lastApplied = 0
 	rf.nextIndex = make([]int, len(rf.peers))
 	rf.matchIndex = make([]int, len(rf.peers))
+	rf.lastLogIndex = 0
+	rf.lastLogterm = 0
 }
 
 func (rf *Raft) InitPersistState() {
