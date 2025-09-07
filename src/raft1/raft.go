@@ -46,6 +46,9 @@ type Raft struct {
 	lastHeartbeatTime time.Time
 	heartbeatInterval int
 	voteCount int
+
+	// 3B log 
+	logIndex int 
 }
 
 const (
@@ -142,10 +145,21 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	index := -1
 	term := -1
-	isLeader := true
+	isLeader := false
 
 	// Your code here (3B).
+	if rf.state != Leader {
+		return index, term, isLeader
+	}  
 
+	index = len(rf.log) + 1
+	term = rf.currentTerm
+	isLeader = true
+	rf.log = append(rf.log, LogEntry{
+		Term: term,
+		Command: command,
+	})
+	rf.logIndex ++
 
 	return index, term, isLeader
 }

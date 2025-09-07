@@ -23,6 +23,22 @@ func (rf *Raft) SendHeartbeat() {
 	rf.lastHeartbeatTime = time.Now()
 }
 
+func (rf *Raft) AskForVote(server int, args *RequestVoteArgs, reply *RequestVoteReply) {
+	rf.sendRequestVote(server, args, reply)
+	if reply.VoteGranted {
+		rf.mu.Lock()
+		defer rf.mu.Unlock()
+		if rf.state != Candidate || rf.currentTerm != args.Term {
+			return
+		}
+		rf.incVoteCountWithoutLock()
+		if rf.voteCount > len(rf.peers) / 2 {
+			rf.ChangeRoleWithoutLock(Leader, rf.currentTerm)
+			go rf.SendHeartbeat()
+		}
+	}
+}
+
 func (rf *Raft) StartElection() {
 	rf.incTerm()
 	rf.ChangeRole(Candidate, rf.currentTerm)
@@ -34,22 +50,8 @@ func (rf *Raft) StartElection() {
 		if i == rf.me {
 			continue
 		}
-		go func (server int) {
-			reply := &RequestVoteReply{}
-			rf.sendRequestVote(server, args, reply)
-			if reply.VoteGranted {
-				rf.mu.Lock()
-				defer rf.mu.Unlock()
-				if rf.state != Candidate || rf.currentTerm != args.Term {
-					return
-				}
-				rf.incVoteCountWithoutLock()
-				if rf.voteCount > len(rf.peers) / 2 {
-					rf.ChangeRoleWithoutLock(Leader, rf.currentTerm)
-					go rf.SendHeartbeat()
-				}
-			}
-		}(i)
+		reply := &RequestVoteReply{}
+		go rf.AskForVote(i, args, reply)
 	}
 }
 
