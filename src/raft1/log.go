@@ -19,30 +19,21 @@ type LogEntry struct {
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	index := -1
 	term := -1
-	isLeader := false
+	isLeader := rf.state == Leader
 
 	// Your code here (3B).
-	if rf.state != Leader {
+	if !isLeader {
 		return index, term, isLeader
 	}  
 
-	index = len(rf.log) + 1
+	index = rf.lastLogIndex + 1
 	term = rf.currentTerm
-	isLeader = true
-	rf.log = append(rf.log, LogEntry{
+	log := LogEntry {
 		Term: term,
 		Command: command,
-	})
+	}
+	rf.log = append(rf.log, log)
 	rf.lastLogIndex ++
 
 	return index, term, isLeader
-}
-
-func (rf *Raft) IsNewerThan(lastLogIndex int, lastLogTerm int) bool {
-	if rf.lastLogterm > lastLogTerm {
-		return true
-	} else if rf.lastLogterm == lastLogTerm && rf.lastLogIndex >= lastLogIndex {
-		return true
-	}
-	return false
 }
