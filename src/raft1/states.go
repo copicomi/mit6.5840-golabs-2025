@@ -99,3 +99,24 @@ func (rf *Raft) InitLogState() {
 func (rf *Raft) InitPersistState() {
 	// 3C persist
 }
+func (rf *Raft) IsNewerThan(lastLogIndex int, lastLogTerm int) bool {
+	if rf.lastLogterm > lastLogTerm {
+		return true
+	} else if rf.lastLogterm == lastLogTerm && rf.lastLogIndex >= lastLogIndex {
+		return true
+	}
+	return false
+}
+func (rf *Raft) IsVotedForOthers(server int) bool {
+	return rf.votedFor != server && rf.votedFor != Nobody
+}
+
+func (rf *Raft) IsFoundAnotherLeader(term int) bool {
+	if term > rf.currentTerm {
+		return true
+	}
+	if term == rf.currentTerm && rf.state == Candidate {
+		return true
+	}
+	return false
+}

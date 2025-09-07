@@ -72,7 +72,6 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	if term < rf.currentTerm {
 		return
 	} 
-
 	rf.lastHeartbeatTime = time.Now()
 
 	if rf.IsFoundAnotherLeader(term) {
