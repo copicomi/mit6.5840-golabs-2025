@@ -38,21 +38,9 @@ func (rf *Raft) AppendAndReplicationSingleCommand(command interface{}) {
 		Command: command,
 		Term: rf.currentTerm,
 	}
-	args := &AppendEntriesArgs{
-		Term: rf.currentTerm,
-		LeaderId: rf.me,
-		Entries: []LogEntry{log},
-		PrevLogIndex: rf.lastLogIndex,
-		PrevLogTerm: rf.lastLogTerm,
-		LeaderCommit: rf.commitIndex,
-	}
+	logs:= []LogEntry{log}
 	rf.AppendSingleLogWithoutLock(log)
-	rf.Boardcast(
-		rf.MakeArgsFactoryFunction(RPCAppendEntries, args),
-		rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
-		rf.MakeSendFunction(RPCAppendEntries),
-		nil,
-	)
+	rf.BoardcastAppendEntries(logs)
 }
 
 func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {

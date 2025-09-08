@@ -7,45 +7,18 @@ import (
 func (rf *Raft) SendHeartbeat() {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-
-	term := rf.currentTerm
-	me := rf.me
 	rf.lastHeartbeatTime = time.Now()
-
-	args := &AppendEntriesArgs{
-		Term: term,
-		LeaderId: me,
-	}
-
-	rf.Boardcast(
-		rf.MakeArgsFactoryFunction(RPCAppendEntries, args),
-		rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
-		rf.MakeSendFunction(RPCAppendEntries),
-		nil,
-	)
+	rf.BoardcastHeartbeat()
 }
 
 func (rf *Raft) StartElection() {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-
 	//DPrintf("%d StartElection", rf.me)
 	rf.incTermWithoutLock()
 	rf.ChangeRoleWithoutLock(Candidate, rf.currentTerm)
 	rf.lastHeartbeatTime = time.Now()
-
-	term := rf.currentTerm
-	me := rf.me
-	args := &RequestVoteArgs{
-		Term: term,
-		CandidateId: me,
-	}
-	rf.Boardcast(
-		rf.MakeArgsFactoryFunction(RPCRequestVote, args),
-		rf.MakeEmptyReplyFactoryFunction(RPCRequestVote),
-		rf.MakeSendFunction(RPCRequestVote),
-		rf.MakeHandleFunction(RPCRequestVote),
-	)
+	rf.BoardcastRequestVote()
 }
 
 func (rf *Raft) ticker() {
