@@ -47,6 +47,13 @@ func (rf *Raft) ChangeRoleWithoutLock(role int, term int) {
 	} else if role == Candidate {
 		rf.votedFor = rf.me
 		rf.voteCount = 1
+	} else if role == Leader {
+		rf.nextIndex = make([]int, len(rf.peers))
+		rf.matchIndex = make([]int, len(rf.peers))
+		for i := 0; i < len(rf.peers); i++ {
+			rf.nextIndex[i] = rf.lastLogIndex + 1
+			rf.matchIndex[i] = 0
+		}
 	}
 }
 

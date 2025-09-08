@@ -109,6 +109,17 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 		rf.ChangeRoleWithoutLock(Follower, reply.Term)
 		return
 	} 
+	for !reply.Success {
+		rf.nextIndex[server] --;
+		args.PrevLogIndex = rf.nextIndex[server];
+		args.PrevLogTerm = rf.log[args.PrevLogIndex].Term
+		rf.sendAppendEntries(server, args, reply)
+		// 直到 success 才会结束，否则一直重试
+	}
+	if reply.Success { 
+		rf.matchIndex[server] = args.PrevLogIndex + len(args.Entries)
+		rf.nextIndex[server] = max(rf.nextIndex[server], args.PrevLogIndex + len(args.Entries) + 1)
+	} 
 }
 func (rf *Raft) HandleVoteReply(server int, args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
