@@ -7,36 +7,22 @@ import (
 func (rf *Raft) SendHeartbeat() {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	args := &AppendEntriesArgs{
-		Term: rf.currentTerm,
-		LeaderId: rf.me,
-	}
-	for i := range rf.peers {
-		if i == rf.me {
-			continue
-		}
-		go func(server int) {
-			reply := &AppendEntriesReply{}
-			rf.sendAppendEntries(server, args, reply)
-		}(i)
-	}
-	rf.lastHeartbeatTime = time.Now()
-}
 
-func (rf *Raft) AskForVote(server int, args *RequestVoteArgs, reply *RequestVoteReply) {
-	rf.sendRequestVote(server, args, reply)
-	if reply.VoteGranted {
-		rf.mu.Lock()
-		defer rf.mu.Unlock()
-		if rf.state != Candidate || rf.currentTerm != args.Term {
-			return
-		}
-		rf.incVoteCountWithoutLock()
-		if rf.voteCount > len(rf.peers) / 2 {
-			rf.ChangeRoleWithoutLock(Leader, rf.currentTerm)
-			go rf.SendHeartbeat()
-		}
+	term := rf.currentTerm
+	me := rf.me
+	rf.lastHeartbeatTime = time.Now()
+
+	args := &AppendEntriesArgs{
+		Term: term,
+		LeaderId: me,
 	}
+
+	rf.Boardcast(
+		rf.MakeArgsFactoryFunction(RPCAppendEntries, args),
+		rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
+		rf.MakeSendFunction(RPCAppendEntries),
+		nil,
+	)
 }
 
 func (rf *Raft) StartElection() {
@@ -45,17 +31,19 @@ func (rf *Raft) StartElection() {
 
 	rf.incTermWithoutLock()
 	rf.ChangeRoleWithoutLock(Candidate, rf.currentTerm)
-	args := &RequestVoteArgs{ 
-		Term: rf.currentTerm,
-		CandidateId: rf.me,
+
+	term := rf.currentTerm
+	me := rf.me
+	args := &RequestVoteArgs{
+		Term: term,
+		CandidateId: me,
 	}
-	for i := range rf.peers {
-		if i == rf.me {
-			continue
-		}
-		reply := &RequestVoteReply{}
-		go rf.AskForVote(i, args, reply)
-	}
+	rf.Boardcast(
+		rf.MakeArgsFactoryFunction(RPCRequestVote, args),
+		rf.MakeEmptyReplyFactoryFunction(RPCRequestVote),
+		rf.MakeSendFunction(RPCRequestVote),
+		rf.MakeHandleFunction(RPCRequestVote),
+	)
 }
 
 func (rf *Raft) ticker() {

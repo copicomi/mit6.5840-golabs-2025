@@ -2,6 +2,16 @@ package raft
 
 import "time"
 
+type RPCType int
+type RPCSendFunc func(int, interface{}, interface{}) bool
+type RPCHandleFunc func(int, interface{}, interface{})
+type RPCFactoryFunc func() interface{}
+
+const (
+	RPCRequestVote RPCType = iota
+	RPCAppendEntries
+)
+
 // example RequestVote RPC arguments structure.
 // field names must start with capital letters!
 type RequestVoteArgs struct {
@@ -81,7 +91,27 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	
 }
 
+func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) {
+	// TODO(3B)
+}
+func (rf *Raft) HandleVoteReply(server int, args *RequestVoteArgs, reply *RequestVoteReply) {
+	if reply.VoteGranted {
+		rf.mu.Lock()
+		defer rf.mu.Unlock()
+		if rf.state != Candidate || rf.currentTerm != args.Term {
+			return
+		}
+		rf.incVoteCountWithoutLock()
+		if rf.voteCount > len(rf.peers) / 2 {
+			rf.ChangeRoleWithoutLock(Leader, rf.currentTerm)
+			go rf.SendHeartbeat()
+		}
+	}
+}
+
+
 // example code to send a RequestVote RPC to a server.
+
 // server is the index of the target server in rf.peers[].
 // expects RPC arguments in args.
 // fills in *reply with RPC reply, so caller should

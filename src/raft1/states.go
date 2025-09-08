@@ -93,16 +93,18 @@ func (rf *Raft) InitLogState() {
 	rf.nextIndex = make([]int, len(rf.peers))
 	rf.matchIndex = make([]int, len(rf.peers))
 	rf.lastLogIndex = 0
-	rf.lastLogterm = 0
+	rf.lastLogTerm = 0
 }
 
 func (rf *Raft) InitPersistState() {
 	// 3C persist
 }
 func (rf *Raft) IsNewerThan(lastLogIndex int, lastLogTerm int) bool {
-	if rf.lastLogterm > lastLogTerm {
+	return false
+	// TODO(3B): Delete this line when complete 3B
+	if rf.lastLogTerm > lastLogTerm {
 		return true
-	} else if rf.lastLogterm == lastLogTerm && rf.lastLogIndex >= lastLogIndex {
+	} else if rf.lastLogTerm == lastLogTerm && rf.lastLogIndex >= lastLogIndex {
 		return true
 	}
 	return false
