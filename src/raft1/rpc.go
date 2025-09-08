@@ -80,13 +80,14 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	reply.Term = rf.currentTerm
 	reply.Success = false
 
+	if rf.IsFoundAnotherLeader(term) {
+		rf.ChangeRoleWithoutLock(Follower, term)
+	} 
+
 	if term < rf.currentTerm {
 		return
 	} 
 
-	if rf.IsFoundAnotherLeader(term) {
-		rf.ChangeRoleWithoutLock(Follower, term)
-	} 
 	rf.lastHeartbeatTime = time.Now()
 	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
 		return
