@@ -176,12 +176,6 @@ func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *Reques
 }
 
 func (rf *Raft) sendAppendEntries(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) bool { 
-	if rf.lastLogIndex < rf.nextIndex[server] {
-		// 不需要更新 log，欺骗上层节点发送成功
-		reply.Term = rf.currentTerm
-		reply.Success = true
-		return true
-	}
 	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
 	return ok
 }
