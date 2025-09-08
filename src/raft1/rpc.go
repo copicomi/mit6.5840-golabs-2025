@@ -57,7 +57,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	reply.Term = rf.currentTerm
 	reply.VoteGranted = false
 
-	if term > rf.currentTerm {
+	if rf.IsFoundAnotherLeader(term) {
 		rf.ChangeRoleWithoutLock(Follower, term)
 	}
 
@@ -103,11 +103,21 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 
 func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	// TODO(3B)
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	if rf.IsFoundAnotherLeader(reply.Term) { 
+		rf.ChangeRoleWithoutLock(Follower, reply.Term)
+		return
+	} 
 }
 func (rf *Raft) HandleVoteReply(server int, args *RequestVoteArgs, reply *RequestVoteReply) {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	if rf.IsFoundAnotherLeader(reply.Term) { 
+		rf.ChangeRoleWithoutLock(Follower, reply.Term)
+		return
+	} 
 	if reply.VoteGranted {
-		rf.mu.Lock()
-		defer rf.mu.Unlock()
 		if rf.state != Candidate || rf.currentTerm != args.Term {
 			return
 		}

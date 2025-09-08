@@ -32,6 +32,7 @@ func (rf *Raft) StartElection() {
 	//DPrintf("%d StartElection", rf.me)
 	rf.incTermWithoutLock()
 	rf.ChangeRoleWithoutLock(Candidate, rf.currentTerm)
+	rf.lastHeartbeatTime = time.Now()
 
 	term := rf.currentTerm
 	me := rf.me

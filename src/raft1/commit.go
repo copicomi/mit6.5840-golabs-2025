@@ -12,19 +12,23 @@ func (rf *Raft) applier() {
 		rf.mu.Lock()
 		rf.UpdateCommitIndex()
 		if rf.commitIndex > rf.lastApplied {
-			for i := rf.lastApplied + 1; i <= rf.commitIndex; i++ {
-				entry := rf.log[i]
-				rf.applyCh <- raftapi.ApplyMsg{
-					CommandValid: true,
-					Command:      entry.Command,
-					CommandIndex: i,
-				}
-			}
-			rf.lastApplied = rf.commitIndex
+			rf.ApplyCommittedLogs()
 		}
 		rf.mu.Unlock()
 		time.Sleep(time.Duration(sleepMs) * time.Millisecond)
 	}
+}
+
+func (rf *Raft) ApplyCommittedLogs() {
+	for i := rf.lastApplied + 1; i <= rf.commitIndex; i++ {
+		entry := rf.log[i]
+		rf.applyCh <- raftapi.ApplyMsg{
+			CommandValid: true,
+			Command:      entry.Command,
+			CommandIndex: i,
+		}
+	}
+	rf.lastApplied = rf.commitIndex
 }
 
 func (rf *Raft) UpdateCommitIndex() {
