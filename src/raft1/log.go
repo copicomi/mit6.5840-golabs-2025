@@ -25,12 +25,15 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	isLeader := rf.state == Leader
 	// Your code here (3B).
 	if isLeader {
-		rf.AppendAndReplicationSingleCommand(command)
+		go rf.AppendAndReplicationSingleCommand(command)
 	}  
+	// TODO(3B): 注意，这里需要等到成功 Apply 之后才能返回 client
 	return index, term, isLeader
 }
 
 func (rf *Raft) AppendAndReplicationSingleCommand(command interface{}) {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
 	log := LogEntry{
 		Command: command,
 		Term: rf.currentTerm,
@@ -44,15 +47,12 @@ func (rf *Raft) AppendAndReplicationSingleCommand(command interface{}) {
 		LeaderCommit: rf.commitIndex,
 	}
 	rf.AppendSingleLogWithoutLock(log)
-	for i := range rf.peers {
-		if i == rf.me {
-			continue
-		}
-		go func(server int) {
-			reply := &AppendEntriesReply{}
-			rf.sendAppendEntries(server, args, reply)
-		}(i)
-	}
+	rf.Boardcast(
+		rf.MakeArgsFactoryFunction(RPCAppendEntries, args),
+		rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
+		rf.MakeSendFunction(RPCAppendEntries),
+		nil,
+	)
 }
 
 func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {
@@ -60,4 +60,27 @@ func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {
 	rf.lastLogIndex ++
 	rf.lastLogTerm = log.Term
 	rf.persist()
+}
+
+func (rf *Raft) CutLogListWithoutLock(index int) {
+	if index < rf.lastLogIndex {
+		rf.log = rf.log[:index]
+		rf.lastLogIndex = index
+		if index == 0 {
+			rf.lastLogTerm = 0
+		}
+	}
+	rf.persist()
+}
+
+func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
+	for i, entry := range logs {
+		logIndex := prevLogIndex + 1 + i
+		if logIndex <= rf.lastLogIndex {
+			if rf.log[logIndex].Term != entry.Term {
+				rf.CutLogListWithoutLock(logIndex)
+			}
+		}
+		rf.AppendSingleLogWithoutLock(entry)
+	}
 }

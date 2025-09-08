@@ -67,6 +67,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 		return
 	}
 
+	rf.lastHeartbeatTime = time.Now()
 	rf.votedFor = args.CandidateId
 	reply.VoteGranted = true
 }
@@ -82,13 +83,21 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	if term < rf.currentTerm {
 		return
 	} 
-	rf.lastHeartbeatTime = time.Now()
 
 	if rf.IsFoundAnotherLeader(term) {
 		rf.ChangeRoleWithoutLock(Follower, term)
 	} 
+	rf.lastHeartbeatTime = time.Now()
+	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
+		return
+	}
 
-	
+	rf.AppendLogListWithoutLock(args.Entries, args.PrevLogIndex)
+
+	if args.LeaderCommit > rf.commitIndex {
+		rf.commitIndex = min(args.LeaderCommit, rf.lastLogIndex)
+	}
+	reply.Success = true
 }
 
 func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) {
@@ -103,6 +112,7 @@ func (rf *Raft) HandleVoteReply(server int, args *RequestVoteArgs, reply *Reques
 		}
 		rf.incVoteCountWithoutLock()
 		if rf.voteCount > len(rf.peers) / 2 {
+			// DPrintf("%d Winning Election", rf.me)
 			rf.ChangeRoleWithoutLock(Leader, rf.currentTerm)
 			go rf.SendHeartbeat()
 		}

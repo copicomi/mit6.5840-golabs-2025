@@ -48,6 +48,7 @@ type Raft struct {
 	// 3B log 
 	lastLogIndex int 
 	lastLogTerm int
+	applyCh chan raftapi.ApplyMsg
 }
 
 
@@ -123,17 +124,19 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.peers = peers
 	rf.persister = persister
 	rf.me = me
+	rf.applyCh = applyCh
 
 	// Your initialization code here (3A, 3B, 3C).
 	rf.InitElectionState()
 	rf.InitLogState()
-	rf.InitPersistState()
 
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
 
 	// start ticker goroutine to start elections
 	go rf.ticker()
+
+	go rf.applier()
 
 	return rf
 }

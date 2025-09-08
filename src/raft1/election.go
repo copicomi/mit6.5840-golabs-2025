@@ -29,6 +29,7 @@ func (rf *Raft) StartElection() {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 
+	//DPrintf("%d StartElection", rf.me)
 	rf.incTermWithoutLock()
 	rf.ChangeRoleWithoutLock(Candidate, rf.currentTerm)
 
@@ -61,7 +62,7 @@ func (rf *Raft) ticker() {
 			if time.Since(rf.lastHeartbeatTime) > heartbeatTimeout{
 				go rf.StartElection()
 			}
-			sleepMs = GetRand(50, 350)
+			sleepMs = GetRand(400, 650)
 		} 
 		rf.mu.Unlock()
 		time.Sleep(time.Duration(sleepMs) * time.Millisecond)

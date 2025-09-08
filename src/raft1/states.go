@@ -88,16 +88,13 @@ func (rf *Raft) InitElectionState() {
 func (rf *Raft) InitLogState() { 
 	// 3B log
 	rf.log = make([]LogEntry, 0)
+	rf.AppendSingleLogWithoutLock(LogEntry{Command: nil, Term: 0})
 	rf.commitIndex = 0
 	rf.lastApplied = 0
 	rf.nextIndex = make([]int, len(rf.peers))
 	rf.matchIndex = make([]int, len(rf.peers))
 	rf.lastLogIndex = 0
 	rf.lastLogTerm = 0
-}
-
-func (rf *Raft) InitPersistState() {
-	// 3C persist
 }
 func (rf *Raft) IsNewerThan(lastLogIndex int, lastLogTerm int) bool {
 	return false
@@ -121,4 +118,14 @@ func (rf *Raft) IsFoundAnotherLeader(term int) bool {
 		return true
 	}
 	return false
+}
+
+func (rf *Raft) IsMatchPrevLog(index int, term int) bool {
+	if rf.lastLogIndex < index {
+		return false
+	}
+	if rf.log[index].Term != term {
+		return false
+	}
+	return true
 }
