@@ -28,6 +28,7 @@ func (rf *Raft) ApplyCommittedLogs() {
 	}
 	// mDebug(rf, "Apply %d logs", rf.commitIndex - rf.lastApplied)
 	rf.lastApplied = rf.commitIndex
+	rf.applyCond.Broadcast()
 }
 
 func (rf *Raft) UpdateCommitIndex() {
@@ -61,4 +62,21 @@ func (rf *Raft) IsReadyToCommit(index int) bool {
 		}
 	}
 	return count > len(rf.peers)/2
+}
+
+func (rf *Raft) WaitUntilApplyed(index int) {
+	done := make(chan bool, 1)
+	go func() {
+		rf.mu.Lock()
+		defer rf.mu.Unlock()
+		for rf.killed() == false && rf.lastApplied < index {
+			rf.applyCond.Wait()
+		}
+		done <- true
+	}()
+	select {
+		case <-done:
+		case <-time.After(1000 * time.Millisecond):
+			return
+	}
 }

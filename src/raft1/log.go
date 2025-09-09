@@ -18,30 +18,26 @@ type LogEntry struct {
 // the leader.
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	rf.mu.Lock()
-	defer rf.mu.Unlock()
-
 	index := rf.lastLogIndex + 1
 	term := rf.currentTerm
 	isLeader := rf.state == Leader
 	// Your code here (3B).
 	if isLeader {
-		go rf.AppendAndReplicationSingleCommand(command)
+		mDebug(rf, "start begin")
+		log := LogEntry{
+			Command: command,
+			Term: rf.currentTerm,
+		}
+		logs := []LogEntry{log}
+		rf.AppendSingleLogWithoutLock(log)
+		rf.BoardcastAppendEntries(logs)
 	}  
-	// TODO(3B): 注意，这里需要等到成功 Apply 之后才能返回 client
-	return index, term, isLeader
-}
-
-func (rf *Raft) AppendAndReplicationSingleCommand(command interface{}) {
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
-	log := LogEntry{
-		Command: command,
-		Term: rf.currentTerm,
+	rf.mu.Unlock()
+	if isLeader {
+		rf.WaitUntilApplyed(index)
+		mDebug(rf, "start end")
 	}
-	logs:= []LogEntry{log}
-	rf.AppendSingleLogWithoutLock(log)
-	mDebug(rf, "replicate 1 log to all servers")
-	rf.BoardcastAppendEntries(logs)
+	return index, term, isLeader
 }
 
 func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {
@@ -49,7 +45,7 @@ func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {
 	rf.lastLogIndex ++
 	rf.lastLogTerm = log.Term
 	rf.persist()
-	// mDebug(rf, "Append 1 log, len = %d, lastLogIndex = %d", len(rf.log), rf.lastLogIndex)
+	mDebug(rf, "Append 1 log, len = %d, lastLogIndex = %d", len(rf.log), rf.lastLogIndex)
 }
 
 func (rf *Raft) CutLogListWithoutLock(index int) {
