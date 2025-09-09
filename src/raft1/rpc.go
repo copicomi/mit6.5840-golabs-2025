@@ -76,6 +76,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 
+	// mDebug(rf, "Got append RPC with leaderCommit %d ", args.LeaderCommit)
 	term := args.Term
 	reply.Term = rf.currentTerm
 	reply.Success = false
@@ -97,29 +98,33 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 
 	if args.LeaderCommit > rf.commitIndex {
 		rf.commitIndex = min(args.LeaderCommit, rf.lastLogIndex)
+		mDebug(rf, "Update commit index to %d", rf.commitIndex)
 	}
 	reply.Success = true
 }
 
 func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) {
-	// TODO(3B)
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 	if rf.IsFoundAnotherLeader(reply.Term) { 
 		rf.ChangeRoleWithoutLock(Follower, reply.Term)
 		return
 	} 
+	mDebug(rf, "Before Retry <nextIndex>=%d, <lastIndex>=%d", rf.nextIndex[server], rf.lastLogIndex)
 	for !reply.Success {
 		rf.nextIndex[server] --;
 		args.PrevLogIndex = rf.nextIndex[server];
 		args.PrevLogTerm = rf.log[args.PrevLogIndex].Term
 		rf.sendAppendEntries(server, args, reply)
 		// 直到 success 才会结束，否则一直重试
+		time.Sleep(10 * time.Millisecond)
+		mDebug(rf, "Retry append RPC")
 	}
 	if reply.Success { 
 		rf.matchIndex[server] = args.PrevLogIndex + len(args.Entries)
 		rf.nextIndex[server] = max(rf.nextIndex[server], args.PrevLogIndex + len(args.Entries) + 1)
 	} 
+	mDebug(rf, "After Retry <nextIndex>=%d, <lastIndex>=%d", rf.nextIndex[server], rf.lastLogIndex)
 }
 func (rf *Raft) HandleVoteReply(server int, args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()

@@ -1,15 +1,13 @@
 package raft
 
-func (rf *Raft) Boardcast(
+func (rf *Raft) BoardcastWithPeersIndex(
 	argsFactory RPCFactoryFunc,
 	replyFactory RPCFactoryFunc,
 	sendFunction RPCSendFunc,
 	handleFunction RPCHandleFunc,
+	peersIndex []int,
 ) {
-	for i := range rf.peers {
-		if i == rf.me {
-			continue
-		}
+	for _, i := range peersIndex {
 		go func(server int) {
 			args := argsFactory()
 			reply := replyFactory()
@@ -20,9 +18,40 @@ func (rf *Raft) Boardcast(
 		}(i)
 	}
 }
+func (rf *Raft) Boardcast(
+	argsFactory RPCFactoryFunc,
+	replyFactory RPCFactoryFunc,
+	sendFunction RPCSendFunc,
+	handleFunction RPCHandleFunc,
+) {
+	peersIndex := []int{}
+	for i := range rf.peers {
+		if i == rf.me {
+			continue
+		}
+		peersIndex = append(peersIndex, i)
+	}
+	rf.BoardcastWithPeersIndex(
+		argsFactory,
+		replyFactory,
+		sendFunction,
+		handleFunction,
+		peersIndex,
+	)
+}
 
 func (rf *Raft) BoardcastAppendEntries(logs []LogEntry) {
-	rf.Boardcast(
+	peersIndex := []int{}
+	for i := range rf.peers {
+		if i == rf.me {
+			continue
+		}
+		if rf.lastLogIndex >= rf.nextIndex[i] {
+			peersIndex = append(peersIndex, i)
+		}
+	}
+	mDebug(rf, "Boardcast Append RPC with leaderCommit %d", rf.commitIndex)
+	rf.BoardcastWithPeersIndex(
 		rf.MakeArgsFactoryFunction(RPCAppendEntries, &AppendEntriesArgs{
 			Entries: logs,
 			LeaderId: rf.me,
@@ -34,10 +63,12 @@ func (rf *Raft) BoardcastAppendEntries(logs []LogEntry) {
 		rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
 		rf.MakeSendFunction(RPCAppendEntries),
 		rf.MakeHandleFunction(RPCAppendEntries),
+		peersIndex,
 	)
 }
 
 func (rf *Raft) BoardcastRequestVote() {
+	mDebug(rf, "Boardcast RequestVote RPC")
 	rf.Boardcast(
 		rf.MakeArgsFactoryFunction(RPCRequestVote, &RequestVoteArgs{
 			Term: rf.currentTerm,
@@ -50,10 +81,14 @@ func (rf *Raft) BoardcastRequestVote() {
 }
 
 func (rf *Raft) BoardcastHeartbeat() {
+	// mDebug(rf, "Boardcast Heartbeat RPC")
 	rf.Boardcast(
 		rf.MakeArgsFactoryFunction(RPCAppendEntries, &AppendEntriesArgs{
 			Term: rf.currentTerm,
 			LeaderId: rf.me,
+			LeaderCommit: rf.commitIndex,
+			PrevLogIndex: rf.lastLogIndex,
+			PrevLogTerm: rf.lastLogTerm,
 		}),
 		rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
 		rf.MakeSendFunction(RPCAppendEntries),

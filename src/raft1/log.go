@@ -48,6 +48,7 @@ func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {
 	rf.lastLogIndex ++
 	rf.lastLogTerm = log.Term
 	rf.persist()
+	// mDebug(rf, "Append 1 log, len = %d, lastLogIndex = %d", len(rf.log), rf.lastLogIndex)
 }
 
 func (rf *Raft) CutLogListWithoutLock(index int) {

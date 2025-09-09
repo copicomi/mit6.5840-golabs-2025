@@ -1,7 +1,6 @@
 package raft
 
 import (
-	"math/rand"
 	"sync/atomic"
 	"time"
 )
@@ -48,6 +47,7 @@ func (rf *Raft) ChangeRoleWithoutLock(role int, term int) {
 		rf.votedFor = rf.me
 		rf.voteCount = 1
 	} else if role == Leader {
+		mDebug(rf, "Change to leader")
 		rf.nextIndex = make([]int, len(rf.peers))
 		rf.matchIndex = make([]int, len(rf.peers))
 		for i := 0; i < len(rf.peers); i++ {
@@ -87,7 +87,7 @@ func (rf *Raft) InitElectionState() {
 	rf.state = Follower
 	rf.votedFor = -1
 	rf.currentTerm = 0
-	rf.electionTimeout = 300 + int(rand.Int63()%200) // timeout between 300 and 500 ms
+	rf.electionTimeout = GetRand(500, 900)
 	rf.heartbeatInterval = 100 // heartbeat every 100 ms
 	rf.lastHeartbeatTime = time.Now()
 }
@@ -95,7 +95,7 @@ func (rf *Raft) InitElectionState() {
 func (rf *Raft) InitLogState() { 
 	// 3B log
 	rf.log = make([]LogEntry, 0)
-	rf.AppendSingleLogWithoutLock(LogEntry{Command: nil, Term: 0})
+	rf.log = append(rf.log, LogEntry{Command: nil, Term: 0})
 	rf.commitIndex = 0
 	rf.lastApplied = 0
 	rf.nextIndex = make([]int, len(rf.peers))

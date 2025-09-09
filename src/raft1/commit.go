@@ -8,14 +8,12 @@ import (
 
 func (rf *Raft) applier() {
 	for rf.killed() == false { 
-		sleepMs := 10
 		rf.mu.Lock()
-		rf.UpdateCommitIndex()
 		if rf.commitIndex > rf.lastApplied {
 			rf.ApplyCommittedLogs()
 		}
 		rf.mu.Unlock()
-		time.Sleep(time.Duration(sleepMs) * time.Millisecond)
+		time.Sleep(10 * time.Millisecond)
 	}
 }
 
@@ -28,6 +26,7 @@ func (rf *Raft) ApplyCommittedLogs() {
 			CommandIndex: i,
 		}
 	}
+	mDebug(rf, "Apply %d logs", rf.commitIndex - rf.lastApplied)
 	rf.lastApplied = rf.commitIndex
 }
 
@@ -42,7 +41,11 @@ func (rf *Raft) UpdateCommitIndex() {
 			r = mid - 1
 		}
 	}
+	if l == rf.commitIndex {
+		return
+	}
 	if rf.log[l].Term == rf.currentTerm {
+		mDebug(rf, "Update commit index to %d", l)
 		rf.commitIndex = l
 	}
 }

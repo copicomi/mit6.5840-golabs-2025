@@ -8,6 +8,7 @@ func (rf *Raft) SendHeartbeat() {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 	rf.lastHeartbeatTime = time.Now()
+	rf.UpdateCommitIndex()
 	rf.BoardcastHeartbeat()
 }
 
