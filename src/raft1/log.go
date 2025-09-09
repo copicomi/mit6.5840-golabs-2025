@@ -55,10 +55,7 @@ func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {
 func (rf *Raft) CutLogListWithoutLock(index int) {
 	if index < rf.lastLogIndex {
 		rf.log = rf.log[:index]
-		rf.lastLogIndex = index
-		if index == 0 {
-			rf.lastLogTerm = 0
-		}
+		rf.lastLogIndex = index-1
 	}
 	rf.persist()
 }
@@ -67,9 +64,7 @@ func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 	for i, entry := range logs {
 		logIndex := prevLogIndex + 1 + i
 		if logIndex <= rf.lastLogIndex {
-			if rf.log[logIndex].Term != entry.Term {
-				rf.CutLogListWithoutLock(logIndex)
-			}
+			rf.CutLogListWithoutLock(logIndex)
 		}
 		rf.AppendSingleLogWithoutLock(entry)
 	}

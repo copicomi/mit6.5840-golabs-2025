@@ -88,17 +88,19 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	} 
 
 	if term < rf.currentTerm {
-		mDebug(rf, "Reject append RPC, term %d, current %d", term, rf.currentTerm)
+		// mDebug(rf, "Reject append RPC, term %d, current %d", term, rf.currentTerm)
 		return
 	} 
 
 	rf.lastHeartbeatTime = time.Now()
 	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
-		mDebug(rf, "Reject append RPC, prevLogIndex %d, rf.lastLogIndex %d", args.PrevLogIndex, rf.lastLogIndex)
 		return
 	}
 
-	rf.AppendLogListWithoutLock(args.Entries, args.PrevLogIndex)
+	if args.Entries != nil || len(args.Entries) > 0 {
+		rf.AppendLogListWithoutLock(args.Entries, args.PrevLogIndex)
+		mDebug(rf, "Accept append RPC, prevLogIndex %d, rf.lastLogIndex %d", args.PrevLogIndex, rf.lastLogIndex)
+	}
 
 	if args.LeaderCommit > rf.commitIndex {
 		rf.commitIndex = min(args.LeaderCommit, rf.lastLogIndex)
