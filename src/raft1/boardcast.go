@@ -1,5 +1,7 @@
 package raft
 
+import "time"
+
 func (rf *Raft) SendAndHandleRPC(
 	server int, 
 	argsFactory RPCFactoryFunc,
@@ -9,7 +11,13 @@ func (rf *Raft) SendAndHandleRPC(
 ) {
 	args := argsFactory()
 	reply := replyFactory()
-	sendFunction(server, args, reply)
+	for true {
+		ok := sendFunction(server, args, reply)
+		if ok {
+			break
+		}
+		time.Sleep(10 * time.Millisecond)
+	}
 	if handleFunction != nil {
 		handleFunction(server, args, reply)
 	}
@@ -59,7 +67,7 @@ func (rf *Raft) BoardcastAppendEntries(logs []LogEntry) {
 			continue
 		}
 		if rf.lastLogIndex >= rf.nextIndex[i] {
-			mDebug(rf, "Send Append RPC to server %d", i)
+			// mDebug(rf, "Send Append RPC to server %d", i)
 			go rf.SendAndHandleRPC(
 				i,
 				rf.MakeArgsFactoryFunction(RPCAppendEntries, &AppendEntriesArgs{
@@ -79,11 +87,13 @@ func (rf *Raft) BoardcastAppendEntries(logs []LogEntry) {
 }
 
 func (rf *Raft) BoardcastRequestVote() {
-	mDebug(rf, "Boardcast RequestVote RPC")
+	// mDebug(rf, "Boardcast RequestVote RPC")
 	rf.Boardcast(
 		rf.MakeArgsFactoryFunction(RPCRequestVote, &RequestVoteArgs{
 			Term: rf.currentTerm,
 			CandidateId: rf.me,
+			LastLogIndex: rf.lastLogIndex,
+			LastLogTerm: rf.log[rf.lastLogIndex].Term,
 		}),
 		rf.MakeEmptyReplyFactoryFunction(RPCRequestVote),
 		rf.MakeSendFunction(RPCRequestVote),
@@ -92,12 +102,15 @@ func (rf *Raft) BoardcastRequestVote() {
 }
 
 func (rf *Raft) BoardcastHeartbeat() {
-	mDebug(rf, "Boardcast Heartbeat RPC")
+	// mDebug(rf, "Boardcast Heartbeat RPC")
 	rf.Boardcast(
 		rf.MakeArgsFactoryFunction(RPCAppendEntries, &AppendEntriesArgs{
 			Term: rf.currentTerm,
 			LeaderId: rf.me,
 			LeaderCommit: rf.commitIndex,
+			Entries: []LogEntry{},
+			PrevLogIndex: rf.lastLogIndex,
+			PrevLogTerm: rf.log[rf.lastLogIndex].Term,
 		}),
 		rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
 		rf.MakeSendFunction(RPCAppendEntries),

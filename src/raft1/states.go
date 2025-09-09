@@ -48,8 +48,6 @@ func (rf *Raft) ChangeRoleWithoutLock(role int, term int) {
 		rf.voteCount = 1
 	} else if role == Leader {
 		mDebug(rf, "Change to leader")
-		rf.nextIndex = make([]int, len(rf.peers))
-		rf.matchIndex = make([]int, len(rf.peers))
 		for i := 0; i < len(rf.peers); i++ {
 			rf.nextIndex[i] = rf.lastLogIndex + 1
 			rf.matchIndex[i] = 0
@@ -87,7 +85,6 @@ func (rf *Raft) InitElectionState() {
 	rf.state = Follower
 	rf.votedFor = -1
 	rf.currentTerm = 0
-	rf.electionTimeout = GetRand(500, 900)
 	rf.heartbeatInterval = 100 // heartbeat every 100 ms
 	rf.lastHeartbeatTime = time.Now()
 }
@@ -100,10 +97,6 @@ func (rf *Raft) InitLogState() {
 	rf.lastApplied = 0
 	rf.nextIndex = make([]int, len(rf.peers))
 	rf.matchIndex = make([]int, len(rf.peers))
-	for i := 0; i < len(rf.peers); i++ {
-		rf.nextIndex[i] = 1
-		rf.matchIndex[i] = 0
-	}
 	rf.lastLogIndex = 0
 	rf.lastLogTerm = 0
 }

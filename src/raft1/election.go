@@ -15,10 +15,10 @@ func (rf *Raft) SendHeartbeat() {
 func (rf *Raft) StartElection() {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	//DPrintf("%d StartElection", rf.me)
 	rf.incTermWithoutLock()
 	rf.ChangeRoleWithoutLock(Candidate, rf.currentTerm)
 	rf.lastHeartbeatTime = time.Now()
+	mDebug(rf, "start election...")
 	rf.BoardcastRequestVote()
 }
 
@@ -29,7 +29,8 @@ func (rf *Raft) ticker() {
 		rf.mu.Lock()
 		var sleepMs int
 		state := rf.state
-		heartbeatTimeout := time.Duration(rf.electionTimeout)*time.Millisecond 
+		electionTimeout := GetRand(500, 900)
+		heartbeatTimeout := time.Duration(electionTimeout)*time.Millisecond 
 		if state == Leader { // 发送心跳
 			go rf.SendHeartbeat();
 			sleepMs = rf.heartbeatInterval
@@ -37,7 +38,7 @@ func (rf *Raft) ticker() {
 			if time.Since(rf.lastHeartbeatTime) > heartbeatTimeout{
 				go rf.StartElection()
 			}
-			sleepMs = GetRand(400, 650)
+			sleepMs = 100
 		} 
 		rf.mu.Unlock()
 		time.Sleep(time.Duration(sleepMs) * time.Millisecond)
