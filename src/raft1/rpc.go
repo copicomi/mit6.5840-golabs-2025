@@ -65,7 +65,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	if term < rf.currentTerm ||
 		rf.IsVotedForOthers(args.CandidateId) || 
 		rf.IsNewerThan(args.LastLogIndex, args.LastLogTerm) {
-			mDebug(rf, "Reject vote RPC, lastLogIndex %d-%d, lastLogTerm %d-%d", args.LastLogIndex,rf.lastLogIndex, args.LastLogTerm,rf.lastLogTerm)
+			//mDebug(rf, "Reject vote RPC, lastLogIndex %d-%d, lastLogTerm %d-%d", args.LastLogIndex,rf.lastLogIndex, args.LastLogTerm,rf.lastLogTerm)
 		return
 	}
 
@@ -88,6 +88,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	} 
 
 	if term < rf.currentTerm {
+		mDebug(rf, "Reject append RPC, term %d, current %d", term, rf.currentTerm)
 		return
 	} 
 
@@ -112,10 +113,11 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 		rf.ChangeRoleWithoutLock(Follower, reply.Term)
 		return
 	} 
-	for !reply.Success {
+	for !reply.Success && reply.Term == args.Term {
 		rf.nextIndex[server] --;
 		args.PrevLogIndex = rf.nextIndex[server];
 		args.PrevLogTerm = rf.log[args.PrevLogIndex].Term
+		args.Entries = rf.log[args.PrevLogIndex + 1:]
 		rf.sendAppendEntries(server, args, reply)
 		// 直到 success 才会结束，否则一直重试
 		time.Sleep(10 * time.Millisecond)
