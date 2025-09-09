@@ -100,6 +100,10 @@ func (rf *Raft) InitLogState() {
 	rf.lastApplied = 0
 	rf.nextIndex = make([]int, len(rf.peers))
 	rf.matchIndex = make([]int, len(rf.peers))
+	for i := 0; i < len(rf.peers); i++ {
+		rf.nextIndex[i] = 1
+		rf.matchIndex[i] = 0
+	}
 	rf.lastLogIndex = 0
 	rf.lastLogTerm = 0
 }

@@ -59,12 +59,14 @@ func (rf *Raft) BoardcastAppendEntries(logs []LogEntry) {
 			continue
 		}
 		if rf.lastLogIndex >= rf.nextIndex[i] {
-			rf.SendAndHandleRPC(
+			mDebug(rf, "Send Append RPC to server %d", i)
+			go rf.SendAndHandleRPC(
 				i,
 				rf.MakeArgsFactoryFunction(RPCAppendEntries, &AppendEntriesArgs{
 					Entries: logs,
 					LeaderId: rf.me,
 					LeaderCommit: rf.commitIndex,
+					Term: rf.currentTerm,
 					PrevLogIndex: rf.nextIndex[i] - 1,
 					PrevLogTerm: rf.log[rf.nextIndex[i] - 1].Term,
 				}),
@@ -72,7 +74,7 @@ func (rf *Raft) BoardcastAppendEntries(logs []LogEntry) {
 				rf.MakeSendFunction(RPCAppendEntries),
 				rf.MakeHandleFunction(RPCAppendEntries),
 			)
-		}
+		} 
 	}
 }
 
@@ -90,7 +92,7 @@ func (rf *Raft) BoardcastRequestVote() {
 }
 
 func (rf *Raft) BoardcastHeartbeat() {
-	// mDebug(rf, "Boardcast Heartbeat RPC")
+	mDebug(rf, "Boardcast Heartbeat RPC")
 	rf.Boardcast(
 		rf.MakeArgsFactoryFunction(RPCAppendEntries, &AppendEntriesArgs{
 			Term: rf.currentTerm,

@@ -40,6 +40,7 @@ func (rf *Raft) AppendAndReplicationSingleCommand(command interface{}) {
 	}
 	logs:= []LogEntry{log}
 	rf.AppendSingleLogWithoutLock(log)
+	mDebug(rf, "replicate 1 log to all servers")
 	rf.BoardcastAppendEntries(logs)
 }
 
