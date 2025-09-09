@@ -1,5 +1,19 @@
 package raft
 
+func (rf *Raft) SendAndHandleRPC(
+	server int, 
+	argsFactory RPCFactoryFunc,
+	replyFactory RPCFactoryFunc,
+	sendFunction RPCSendFunc,
+	handleFunction RPCHandleFunc,
+) {
+	args := argsFactory()
+	reply := replyFactory()
+	sendFunction(server, args, reply)
+	if handleFunction != nil {
+		handleFunction(server, args, reply)
+	}
+}
 func (rf *Raft) BoardcastWithPeersIndex(
 	argsFactory RPCFactoryFunc,
 	replyFactory RPCFactoryFunc,
@@ -8,14 +22,13 @@ func (rf *Raft) BoardcastWithPeersIndex(
 	peersIndex []int,
 ) {
 	for _, i := range peersIndex {
-		go func(server int) {
-			args := argsFactory()
-			reply := replyFactory()
-			sendFunction(server, args, reply)
-			if (handleFunction != nil) {
-				handleFunction(server, args, reply)
-			}
-		}(i)
+		go rf.SendAndHandleRPC(
+			i, 
+			argsFactory, 
+			replyFactory, 
+			sendFunction, 
+			handleFunction,
+		)
 	}
 }
 func (rf *Raft) Boardcast(
@@ -41,30 +54,26 @@ func (rf *Raft) Boardcast(
 }
 
 func (rf *Raft) BoardcastAppendEntries(logs []LogEntry) {
-	peersIndex := []int{}
 	for i := range rf.peers {
 		if i == rf.me {
 			continue
 		}
 		if rf.lastLogIndex >= rf.nextIndex[i] {
-			peersIndex = append(peersIndex, i)
+			rf.SendAndHandleRPC(
+				i,
+				rf.MakeArgsFactoryFunction(RPCAppendEntries, &AppendEntriesArgs{
+					Entries: logs,
+					LeaderId: rf.me,
+					LeaderCommit: rf.commitIndex,
+					PrevLogIndex: rf.nextIndex[i] - 1,
+					PrevLogTerm: rf.log[rf.nextIndex[i] - 1].Term,
+				}),
+				rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
+				rf.MakeSendFunction(RPCAppendEntries),
+				rf.MakeHandleFunction(RPCAppendEntries),
+			)
 		}
 	}
-	mDebug(rf, "Boardcast Append RPC with leaderCommit %d", rf.commitIndex)
-	rf.BoardcastWithPeersIndex(
-		rf.MakeArgsFactoryFunction(RPCAppendEntries, &AppendEntriesArgs{
-			Entries: logs,
-			LeaderId: rf.me,
-			Term: rf.currentTerm,
-			LeaderCommit: rf.commitIndex,
-			PrevLogIndex: rf.lastLogIndex,
-			PrevLogTerm: rf.lastLogTerm,
-		}),
-		rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
-		rf.MakeSendFunction(RPCAppendEntries),
-		rf.MakeHandleFunction(RPCAppendEntries),
-		peersIndex,
-	)
 }
 
 func (rf *Raft) BoardcastRequestVote() {
@@ -87,8 +96,6 @@ func (rf *Raft) BoardcastHeartbeat() {
 			Term: rf.currentTerm,
 			LeaderId: rf.me,
 			LeaderCommit: rf.commitIndex,
-			PrevLogIndex: rf.lastLogIndex,
-			PrevLogTerm: rf.lastLogTerm,
 		}),
 		rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
 		rf.MakeSendFunction(RPCAppendEntries),

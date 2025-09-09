@@ -91,6 +91,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 
 	rf.lastHeartbeatTime = time.Now()
 	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
+		mDebug(rf, "Reject append RPC, prevLogIndex %d, rf.lastLogIndex %d", args.PrevLogIndex, rf.lastLogIndex)
 		return
 	}
 
