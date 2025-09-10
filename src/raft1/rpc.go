@@ -100,11 +100,12 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 
 	if args.Entries != nil || len(args.Entries) > 0 {
 		rf.AppendLogListWithoutLock(args.Entries, args.PrevLogIndex)
-		// mDebug(rf, "Accept append RPC, prevLogIndex %d, rf.lastLogIndex %d", args.PrevLogIndex, rf.lastLogIndex)
+		mDebug(rf, "Accept append RPC, prevLogIndex %d, term %d, rf.lastLogIndex %d", args.PrevLogIndex, args.Term, rf.lastLogIndex)
 	}
 
 	if args.LeaderCommit > rf.commitIndex {
 		rf.commitIndex = min(args.LeaderCommit, rf.lastLogIndex)
+		mDebug(rf, "Update commit index to %d", rf.commitIndex)
 	}
 	reply.Success = true
 }

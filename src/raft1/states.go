@@ -130,9 +130,6 @@ func (rf *Raft) IsFoundAnotherLeader(term int) bool {
 }
 
 func (rf *Raft) IsMatchPrevLog(index int, term int) bool {
-	if index == 0 {
-		return true
-	}
 	if rf.lastLogIndex < index {
 		return false
 	}

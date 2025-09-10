@@ -27,7 +27,7 @@ func (rf *Raft) replicateOneRound(server int) {
 			Entries:      rf.log[rf.nextIndex[server]:],
 			LeaderCommit: rf.commitIndex,
 		}
-		//  mDebug(rf, "replicate %d at %d", server, args.PrevLogIndex)
+		// mDebug(rf, "replicate %d at %d", server, args.PrevLogIndex)
 		go rf.SendAndHandleRPC(
 			server,
 			rf.MakeArgsFactoryFunction(RPCAppendEntries, args),

@@ -32,9 +32,6 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 		rf.WakeupAllReplicators()
 	}  
 	rf.mu.Unlock()
-	if isLeader {
-		mDebug(rf, "start end")
-	}
 	return index, term, isLeader
 }
 
@@ -47,10 +44,9 @@ func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {
 }
 
 func (rf *Raft) CutLogListWithoutLock(index int) {
-	if index < rf.lastLogIndex {
-		rf.log = rf.log[:index]
-		rf.lastLogIndex = index-1
-	}
+	// panic(index > len(rf.log))
+	rf.log = rf.log[:index]
+	rf.lastLogIndex = index-1
 	rf.persist()
 }
 
@@ -66,5 +62,5 @@ func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 		}
 		rf.AppendSingleLogWithoutLock(entry)
 	}
-	// mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.lastLogIndex, rf.lastLogIndex)
+	mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.lastLogIndex, rf.lastLogIndex)
 }
