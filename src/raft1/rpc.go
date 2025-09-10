@@ -121,7 +121,7 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 		return
 	}
 	if reply.Success { 
-		rf.matchIndex[server] = args.PrevLogIndex + len(args.Entries)
+		rf.matchIndex[server] = max(rf.matchIndex[server], args.PrevLogIndex + len(args.Entries))
 		rf.nextIndex[server] = max(rf.nextIndex[server], args.PrevLogIndex + len(args.Entries) + 1)
 		mDebug(rf, "Update matchIndex %d to %d", server, rf.matchIndex[server])
 	} else {

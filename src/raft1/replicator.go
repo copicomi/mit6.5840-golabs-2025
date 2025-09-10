@@ -41,7 +41,7 @@ func (rf *Raft) replicateOneRound(server int) {
 func (rf *Raft) BackforwardsNextIndex(server int) {
 	i := rf.nextIndex[server] - 1
 	conflictTerm := rf.log[i].Term
-	for ; i >= 0; i-- {
+	for ; i > 0; i-- {
 		if rf.log[i].Term != conflictTerm {
 			break
 		}
