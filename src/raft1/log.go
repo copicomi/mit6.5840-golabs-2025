@@ -28,7 +28,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 			Command: command,
 			Term: rf.currentTerm,
 		}
-		rf.AppendSingleLogWithoutLock(log)
+		rf.AppendLogListWithoutLock([]LogEntry{log}, rf.lastLogIndex)
 		rf.WakeupAllReplicators()
 	}  
 	rf.mu.Unlock()
@@ -58,9 +58,13 @@ func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 	for i, entry := range logs {
 		logIndex := prevLogIndex + 1 + i
 		if logIndex <= rf.lastLogIndex {
-			rf.CutLogListWithoutLock(logIndex)
+			if rf.log[logIndex].Term != entry.Term {
+				rf.CutLogListWithoutLock(logIndex)
+			} else {
+				continue
+			}
 		}
 		rf.AppendSingleLogWithoutLock(entry)
 	}
-	mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.lastLogIndex, rf.lastLogIndex)
+	// mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.lastLogIndex, rf.lastLogIndex)
 }
