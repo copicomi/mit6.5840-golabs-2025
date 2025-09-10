@@ -33,7 +33,6 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	}  
 	rf.mu.Unlock()
 	if isLeader {
-		rf.WaitUntilApplyed(index)
 		mDebug(rf, "start end")
 	}
 	return index, term, isLeader
@@ -44,7 +43,7 @@ func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {
 	rf.lastLogIndex ++
 	rf.lastLogTerm = log.Term
 	rf.persist()
-	mDebug(rf, "Append 1 log, len = %d, lastLogIndex = %d", len(rf.log), rf.lastLogIndex)
+	// mDebug(rf, "Append 1 log, len = %d, lastLogIndex = %d", len(rf.log), rf.lastLogIndex)
 }
 
 func (rf *Raft) CutLogListWithoutLock(index int) {
@@ -63,4 +62,5 @@ func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 		}
 		rf.AppendSingleLogWithoutLock(entry)
 	}
+	mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.lastLogIndex, rf.lastLogIndex)
 }

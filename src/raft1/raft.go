@@ -48,7 +48,6 @@ type Raft struct {
 	lastLogIndex int 
 	lastLogTerm int
 	applyCh chan raftapi.ApplyMsg
-	applyCond *sync.Cond
 	replicateCond []*sync.Cond
 }
 
@@ -72,7 +71,6 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.persister = persister
 	rf.me = me
 	rf.applyCh = applyCh
-	rf.applyCond = sync.NewCond(&rf.mu)
 
 	// Your initialization code here (3A, 3B, 3C).
 	rf.InitElectionState()

@@ -53,6 +53,7 @@ func (rf *Raft) ChangeRoleWithoutLock(role int, term int) {
 			rf.nextIndex[i] = rf.lastLogIndex + 1
 			rf.matchIndex[i] = 0
 		}
+		rf.WakeupAllReplicators()
 	}
 }
 
@@ -129,6 +130,9 @@ func (rf *Raft) IsFoundAnotherLeader(term int) bool {
 }
 
 func (rf *Raft) IsMatchPrevLog(index int, term int) bool {
+	if index == 0 {
+		return true
+	}
 	if rf.lastLogIndex < index {
 		return false
 	}

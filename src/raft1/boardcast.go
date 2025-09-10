@@ -14,12 +14,12 @@ func (rf *Raft) SendAndHandleRPC(
 	for true {
 		ok := sendFunction(server, args, reply)
 		if ok {
+			if handleFunction != nil {
+				handleFunction(server, args, reply)
+			}		
 			break
 		}
 		time.Sleep(10 * time.Millisecond)
-	}
-	if handleFunction != nil {
-		handleFunction(server, args, reply)
 	}
 }
 func (rf *Raft) BoardcastWithPeersIndex(
@@ -59,31 +59,6 @@ func (rf *Raft) Boardcast(
 		handleFunction,
 		peersIndex,
 	)
-}
-
-func (rf *Raft) BoardcastAppendEntries(logs []LogEntry) {
-	for i := range rf.peers {
-		if i == rf.me {
-			continue
-		}
-		if rf.lastLogIndex >= rf.nextIndex[i] {
-			mDebug(rf, "Send Append RPC to server %d, prevIndex= %d", i, rf.nextIndex[i] - 1)
-			go rf.SendAndHandleRPC(
-				i,
-				rf.MakeArgsFactoryFunction(RPCAppendEntries, &AppendEntriesArgs{
-					Entries: logs,
-					LeaderId: rf.me,
-					LeaderCommit: rf.commitIndex,
-					Term: rf.currentTerm,
-					PrevLogIndex: rf.nextIndex[i] - 1,
-					PrevLogTerm: rf.log[rf.nextIndex[i] - 1].Term,
-				}),
-				rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
-				rf.MakeSendFunction(RPCAppendEntries),
-				rf.MakeHandleFunction(RPCAppendEntries),
-			)
-		} 
-	}
 }
 
 func (rf *Raft) BoardcastRequestVote() {

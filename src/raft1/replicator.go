@@ -4,11 +4,11 @@ func (rf *Raft) replicator(server int) {
 	for !rf.killed() { 
 		rf.replicateCond[server].L.Lock()
 		rf.replicateCond[server].Wait()
-		rf.replicateCond[server].L.Unlock()
 		if rf.killed() {
 			return
 		}
 		rf.replicateOneRound(server)
+		rf.replicateCond[server].L.Unlock()
 	}
 }
 
@@ -27,6 +27,7 @@ func (rf *Raft) replicateOneRound(server int) {
 			Entries:      rf.log[rf.nextIndex[server]:],
 			LeaderCommit: rf.commitIndex,
 		}
+		//  mDebug(rf, "replicate %d at %d", server, args.PrevLogIndex)
 		go rf.SendAndHandleRPC(
 			server,
 			rf.MakeArgsFactoryFunction(RPCAppendEntries, args),
@@ -39,6 +40,6 @@ func (rf *Raft) replicateOneRound(server int) {
 
 func (rf *Raft) WakeupAllReplicators() { 
 	for i := 0; i < len(rf.peers); i++ {
-		rf.replicateCond[i].Broadcast()
+		go rf.replicateCond[i].Signal()
 	}
 }

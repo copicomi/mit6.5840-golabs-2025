@@ -19,7 +19,7 @@ func (rf *Raft) StartElection() {
 	rf.incTermWithoutLock()
 	rf.ChangeRoleWithoutLock(Candidate, rf.currentTerm)
 	rf.lastHeartbeatTime = time.Now()
-	mDebug(rf, "start election...")
+	 // mDebug(rf, "start election...")
 	rf.BoardcastRequestVote()
 }
 

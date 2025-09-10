@@ -83,17 +83,18 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	reply.Term = rf.currentTerm
 	reply.Success = false
 
-	if rf.IsFoundAnotherLeader(term) {
-		rf.ChangeRoleWithoutLock(Follower, term)
-	} 
-
 	if term < rf.currentTerm {
 		// mDebug(rf, "Reject append RPC, term %d, current %d", term, rf.currentTerm)
 		return
 	} 
 
+	if rf.IsFoundAnotherLeader(term) {
+		rf.ChangeRoleWithoutLock(Follower, term)
+	} 
+
 	rf.lastHeartbeatTime = time.Now()
 	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
+		// mDebug(rf, "Reject append RPC, prevLogIndex %d-%d, prevLogTerm %d-%d", args.PrevLogIndex,rf.lastLogIndex, args.PrevLogTerm,rf.lastLogTerm)
 		return
 	}
 
@@ -115,7 +116,7 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 		rf.ChangeRoleWithoutLock(Follower, reply.Term)
 		return
 	} 
-	if reply.Term < rf.currentTerm {
+	if reply.Term > args.Term {
 		return
 	}
 	if reply.Success { 
@@ -137,7 +138,7 @@ func (rf *Raft) HandleVoteReply(server int, args *RequestVoteArgs, reply *Reques
 		return
 	} 
 	if reply.VoteGranted {
-		if rf.state != Candidate || rf.currentTerm > args.Term {
+		if rf.state != Candidate {
 			return
 		}
 		rf.incVoteCountWithoutLock()
