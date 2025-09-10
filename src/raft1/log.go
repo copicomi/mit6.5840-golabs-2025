@@ -47,7 +47,9 @@ func (rf *Raft) CutLogListWithoutLock(index int) {
 	// panic(index > len(rf.log))
 	rf.log = rf.log[:index]
 	rf.lastLogIndex = index-1
+	rf.lastLogTerm = rf.log[rf.lastLogIndex].Term
 	rf.persist()
+	// TODO(3B): Delete this line when complete 3B
 }
 
 func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
@@ -62,5 +64,5 @@ func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 		}
 		rf.AppendSingleLogWithoutLock(entry)
 	}
-	mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.lastLogIndex, rf.lastLogIndex)
+	// mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.lastLogIndex, rf.lastLogIndex)
 }

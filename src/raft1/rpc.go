@@ -72,6 +72,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.lastHeartbeatTime = time.Now()
 	rf.votedFor = args.CandidateId
 	reply.VoteGranted = true
+	rf.persist()
 }
 
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
@@ -108,6 +109,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		mDebug(rf, "Update commit index to %d", rf.commitIndex)
 	}
 	reply.Success = true
+	rf.persist()
 }
 
 func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) {
@@ -117,16 +119,16 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 		rf.ChangeRoleWithoutLock(Follower, reply.Term)
 		return
 	} 
-	if reply.Term > args.Term {
-		return
-	}
 	if reply.Success { 
 		rf.matchIndex[server] = max(rf.matchIndex[server], args.PrevLogIndex + len(args.Entries))
 		rf.nextIndex[server] = max(rf.nextIndex[server], args.PrevLogIndex + len(args.Entries) + 1)
 		mDebug(rf, "Update matchIndex %d to %d", server, rf.matchIndex[server])
 	} else {
+		if args.PrevLogIndex == 0 {
+			return
+		}
 		rf.BackforwardsNextIndex(server)
-		mDebug(rf, "Retry append with prevLogIndex %d", rf.nextIndex[server])
+		// mDebug(rf, "Retry append with prevLogIndex %d", rf.nextIndex[server])
 		go func() {
 			rf.replicateCond[server].Signal()
 		}()

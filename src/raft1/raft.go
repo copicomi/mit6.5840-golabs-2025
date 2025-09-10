@@ -88,6 +88,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 			go rf.replicator(i)
 		}
 	}
+	mDebug(rf, "restart!!")
 
 	return rf
 }

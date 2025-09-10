@@ -107,7 +107,6 @@ func (rf *Raft) InitLogState() {
 	}
 }
 func (rf *Raft) IsNewerThan(lastLogIndex int, lastLogTerm int) bool {
-	// TODO(3B): Delete this line when complete 3B
 	if rf.lastLogTerm > lastLogTerm {
 		return true
 	} else if rf.lastLogTerm == lastLogTerm && rf.lastLogIndex > lastLogIndex {
@@ -130,6 +129,9 @@ func (rf *Raft) IsFoundAnotherLeader(term int) bool {
 }
 
 func (rf *Raft) IsMatchPrevLog(index int, term int) bool {
+	if index == 0 {
+		return true
+	}
 	if rf.lastLogIndex < index {
 		return false
 	}

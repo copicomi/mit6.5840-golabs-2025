@@ -1,0 +1,345 @@
+2025/09/10 23:30:37 [0] S0 restart!!
+2025/09/10 23:30:37 [0] S1 restart!!
+2025/09/10 23:30:37 [0] S2 restart!!
+Test (3C): basic persistence (reliable network)...
+2025/09/10 23:30:38 [1] S1 start election...
+2025/09/10 23:30:38 [1] S1 Change to leader
+2025/09/10 23:30:38 [1] S1 start begin
+2025/09/10 23:30:38 [1] S2 Accept append RPC, prevLogIndex 0, term 1, rf.lastLogIndex 1
+2025/09/10 23:30:38 [1] S1 Update matchIndex 2 to 1
+2025/09/10 23:30:38 [1] S0 Accept append RPC, prevLogIndex 0, term 1, rf.lastLogIndex 1
+2025/09/10 23:30:38 [1] S1 Update matchIndex 0 to 1
+2025/09/10 23:30:38 [1] S1 Update commit index to 1
+2025/09/10 23:30:38 [1] S0 Update commit index to 1
+2025/09/10 23:30:38 [1] S2 Update commit index to 1
+2025/09/10 23:30:38 [1] S0 restart!!
+2025/09/10 23:30:38 [1] S1 restart!!
+2025/09/10 23:30:38 [1] S2 restart!!
+2025/09/10 23:30:38 [2] S0 start election...
+2025/09/10 23:30:38 [2] S0 Change to leader
+2025/09/10 23:30:38 [2] S0 start begin
+2025/09/10 23:30:38 [2] S2 Accept append RPC, prevLogIndex 1, term 2, rf.lastLogIndex 2
+2025/09/10 23:30:38 [2] S0 Update matchIndex 2 to 2
+2025/09/10 23:30:38 [2] S1 Accept append RPC, prevLogIndex 1, term 2, rf.lastLogIndex 2
+2025/09/10 23:30:38 [2] S0 Update matchIndex 1 to 2
+2025/09/10 23:30:39 [2] S0 Update commit index to 2
+2025/09/10 23:30:39 [2] S1 Update commit index to 2
+2025/09/10 23:30:39 [2] S2 Update commit index to 2
+2025/09/10 23:30:39 [2] S0 restart!!
+2025/09/10 23:30:40 [3] S1 start election...
+2025/09/10 23:30:40 [3] S1 Change to leader
+2025/09/10 23:30:40 [3] S0 Update commit index to 2
+2025/09/10 23:30:40 [3] S1 start begin
+2025/09/10 23:30:40 [3] S0 Accept append RPC, prevLogIndex 2, term 3, rf.lastLogIndex 3
+2025/09/10 23:30:40 [3] S1 Update matchIndex 0 to 3
+2025/09/10 23:30:40 [3] S2 Accept append RPC, prevLogIndex 2, term 3, rf.lastLogIndex 3
+2025/09/10 23:30:40 [3] S1 Update matchIndex 2 to 3
+2025/09/10 23:30:40 [3] S1 Update commit index to 3
+2025/09/10 23:30:40 [3] S0 Update commit index to 3
+2025/09/10 23:30:40 [3] S2 Update commit index to 3
+2025/09/10 23:30:41 [4] S2 start election...
+2025/09/10 23:30:41 [4] S2 Change to leader
+2025/09/10 23:30:41 [4] S2 start begin
+2025/09/10 23:30:41 [4] S0 Accept append RPC, prevLogIndex 3, term 4, rf.lastLogIndex 4
+2025/09/10 23:30:41 [4] S2 Update matchIndex 0 to 4
+2025/09/10 23:30:41 [4] S2 Update commit index to 4
+2025/09/10 23:30:41 [4] S0 Update commit index to 4
+2025/09/10 23:30:41 [3] S1 restart!!
+2025/09/10 23:30:41 [4] S1 Accept append RPC, prevLogIndex 3, term 4, rf.lastLogIndex 4
+2025/09/10 23:30:41 [4] S1 Update commit index to 4
+2025/09/10 23:30:41 [4] S2 Update matchIndex 1 to 4
+2025/09/10 23:30:41 [4] S1 Accept append RPC, prevLogIndex 3, term 4, rf.lastLogIndex 4
+2025/09/10 23:30:41 [4] S2 Update matchIndex 1 to 4
+2025/09/10 23:30:42 [4] S2 start begin
+2025/09/10 23:30:42 [4] S1 Accept append RPC, prevLogIndex 4, term 4, rf.lastLogIndex 5
+2025/09/10 23:30:42 [4] S2 Update matchIndex 1 to 5
+2025/09/10 23:30:42 [4] S2 Update commit index to 5
+2025/09/10 23:30:42 [4] S1 Update commit index to 5
+2025/09/10 23:30:42 [4] S0 restart!!
+2025/09/10 23:30:42 [4] S2 start begin
+2025/09/10 23:30:42 [4] S0 Accept append RPC, prevLogIndex 4, term 4, rf.lastLogIndex 6
+2025/09/10 23:30:42 [4] S0 Update commit index to 5
+2025/09/10 23:30:42 [4] S2 Update matchIndex 0 to 6
+2025/09/10 23:30:42 [4] S1 Accept append RPC, prevLogIndex 5, term 4, rf.lastLogIndex 6
+2025/09/10 23:30:42 [4] S2 Update matchIndex 1 to 6
+2025/09/10 23:30:42 [4] S2 Update commit index to 6
+2025/09/10 23:30:42 [4] S0 Update commit index to 6
+2025/09/10 23:30:42 [4] S1 Update commit index to 6
+  ... Passed --  time  5.2s #peers 3 #RPCs    77 #Ops    0
+2025/09/10 23:30:42 [0] S0 restart!!
+2025/09/10 23:30:42 [0] S1 restart!!
+2025/09/10 23:30:42 [0] S2 restart!!
+2025/09/10 23:30:42 [0] S3 restart!!
+2025/09/10 23:30:42 [0] S4 restart!!
+Test (3C): more persistence (reliable network)...
+2025/09/10 23:30:43 [1] S3 start election...
+2025/09/10 23:30:43 [1] S3 Change to leader
+2025/09/10 23:30:43 [1] S3 start begin
+2025/09/10 23:30:43 [1] S4 Accept append RPC, prevLogIndex 0, term 1, rf.lastLogIndex 1
+2025/09/10 23:30:43 [1] S3 Update matchIndex 4 to 1
+2025/09/10 23:30:43 [1] S1 Accept append RPC, prevLogIndex 0, term 1, rf.lastLogIndex 1
+2025/09/10 23:30:43 [1] S2 Accept append RPC, prevLogIndex 0, term 1, rf.lastLogIndex 1
+2025/09/10 23:30:43 [1] S3 Update matchIndex 1 to 1
+2025/09/10 23:30:43 [1] S3 Update matchIndex 2 to 1
+2025/09/10 23:30:43 [1] S0 Accept append RPC, prevLogIndex 0, term 1, rf.lastLogIndex 1
+2025/09/10 23:30:43 [1] S3 Update matchIndex 0 to 1
+2025/09/10 23:30:43 [1] S3 Update commit index to 1
+2025/09/10 23:30:43 [1] S0 Update commit index to 1
+2025/09/10 23:30:43 [1] S1 Update commit index to 1
+2025/09/10 23:30:43 [1] S2 Update commit index to 1
+2025/09/10 23:30:43 [1] S4 Update commit index to 1
+2025/09/10 23:30:44 [1] S3 start begin
+2025/09/10 23:30:44 [1] S1 Accept append RPC, prevLogIndex 1, term 1, rf.lastLogIndex 2
+2025/09/10 23:30:44 [1] S3 Update matchIndex 1 to 2
+2025/09/10 23:30:44 [1] S2 Accept append RPC, prevLogIndex 1, term 1, rf.lastLogIndex 2
+2025/09/10 23:30:44 [1] S3 Update matchIndex 2 to 2
+2025/09/10 23:30:44 [1] S3 Update commit index to 2
+2025/09/10 23:30:44 [1] S1 Update commit index to 2
+2025/09/10 23:30:44 [1] S2 Update commit index to 2
+2025/09/10 23:30:44 [1] S4 restart!!
+2025/09/10 23:30:44 [1] S0 restart!!
+2025/09/10 23:30:44 [1] S0 Accept append RPC, prevLogIndex 1, term 1, rf.lastLogIndex 2
+2025/09/10 23:30:44 [1] S0 Update commit index to 2
+2025/09/10 23:30:44 [1] S3 Update matchIndex 0 to 2
+2025/09/10 23:30:44 [2] S4 start election...
+2025/09/10 23:30:45 [1] S1 restart!!
+2025/09/10 23:30:45 [3] S0 start election...
+2025/09/10 23:30:45 [3] S0 Change to leader
+2025/09/10 23:30:45 [3] S1 Update commit index to 2
+2025/09/10 23:30:45 [3] S0 start begin
+2025/09/10 23:30:45 [3] S0 BackforwardsNextIndex 1
+2025/09/10 23:30:45 [3] S4 Accept append RPC, prevLogIndex 0, term 3, rf.lastLogIndex 3
+2025/09/10 23:30:45 [3] S4 Update commit index to 2
+2025/09/10 23:30:45 [3] S0 Update matchIndex 4 to 3
+2025/09/10 23:30:45 [3] S1 Accept append RPC, prevLogIndex 2, term 3, rf.lastLogIndex 3
+2025/09/10 23:30:45 [3] S0 Update matchIndex 1 to 3
+2025/09/10 23:30:45 [3] S0 Update commit index to 3
+2025/09/10 23:30:45 [3] S1 Update commit index to 3
+2025/09/10 23:30:45 [3] S4 Update commit index to 3
+2025/09/10 23:30:45 [1] S2 restart!!
+2025/09/10 23:30:45 [1] S3 restart!!
+2025/09/10 23:30:45 [3] S0 start begin
+2025/09/10 23:30:45 [3] S4 Accept append RPC, prevLogIndex 3, term 3, rf.lastLogIndex 4
+2025/09/10 23:30:45 [3] S0 Update matchIndex 4 to 4
+2025/09/10 23:30:45 [3] S1 Accept append RPC, prevLogIndex 3, term 3, rf.lastLogIndex 4
+2025/09/10 23:30:45 [3] S0 Update matchIndex 1 to 4
+2025/09/10 23:30:45 [3] S2 Accept append RPC, prevLogIndex 2, term 3, rf.lastLogIndex 4
+2025/09/10 23:30:45 [3] S2 Update commit index to 3
+2025/09/10 23:30:45 [3] S3 Accept append RPC, prevLogIndex 2, term 3, rf.lastLogIndex 4
+2025/09/10 23:30:45 [3] S3 Update commit index to 3
+2025/09/10 23:30:45 [3] S0 Update matchIndex 3 to 4
+2025/09/10 23:30:45 [3] S0 Update matchIndex 2 to 4
+2025/09/10 23:30:45 [3] S0 Update commit index to 4
+2025/09/10 23:30:45 [3] S1 Update commit index to 4
+2025/09/10 23:30:45 [3] S2 Update commit index to 4
+2025/09/10 23:30:45 [3] S3 Update commit index to 4
+2025/09/10 23:30:45 [3] S4 Update commit index to 4
+2025/09/10 23:30:45 [3] S3 Accept append RPC, prevLogIndex 2, term 3, rf.lastLogIndex 4
+2025/09/10 23:30:45 [3] S0 Update matchIndex 3 to 4
+2025/09/10 23:30:45 [3] S0 start begin
+2025/09/10 23:30:45 [3] S4 Accept append RPC, prevLogIndex 4, term 3, rf.lastLogIndex 5
+2025/09/10 23:30:45 [3] S0 Update matchIndex 4 to 5
+2025/09/10 23:30:45 [3] S3 Accept append RPC, prevLogIndex 4, term 3, rf.lastLogIndex 5
+2025/09/10 23:30:45 [3] S0 Update matchIndex 3 to 5
+2025/09/10 23:30:45 [3] S0 Update commit index to 5
+2025/09/10 23:30:45 [3] S3 Update commit index to 5
+2025/09/10 23:30:45 [3] S4 Update commit index to 5
+2025/09/10 23:30:45 [3] S1 restart!!
+2025/09/10 23:30:45 [3] S2 restart!!
+2025/09/10 23:30:46 [3] S2 Update commit index to 2
+2025/09/10 23:30:46 [4] S1 start election...
+2025/09/10 23:30:46 [3] S3 restart!!
+2025/09/10 23:30:47 [5] S1 start election...
+2025/09/10 23:30:47 [6] S3 start election...
+2025/09/10 23:30:47 [6] S3 Change to leader
+2025/09/10 23:30:47 [6] S3 start begin
+2025/09/10 23:30:47 [6] S3 BackforwardsNextIndex 3
+2025/09/10 23:30:47 [6] S2 Accept append RPC, prevLogIndex 2, term 6, rf.lastLogIndex 6
+2025/09/10 23:30:47 [6] S3 Update matchIndex 2 to 6
+2025/09/10 23:30:47 [6] S3 BackforwardsNextIndex 3
+2025/09/10 23:30:47 [6] S1 Accept append RPC, prevLogIndex 2, term 6, rf.lastLogIndex 6
+2025/09/10 23:30:47 [6] S3 Update matchIndex 1 to 6
+2025/09/10 23:30:47 [6] S3 Update commit index to 6
+2025/09/10 23:30:47 [6] S1 Update commit index to 6
+2025/09/10 23:30:47 [6] S2 Update commit index to 6
+2025/09/10 23:30:47 [3] S4 restart!!
+2025/09/10 23:30:47 [3] S0 restart!!
+2025/09/10 23:30:47 [6] S3 start begin
+2025/09/10 23:30:47 [6] S0 Accept append RPC, prevLogIndex 5, term 6, rf.lastLogIndex 7
+2025/09/10 23:30:47 [6] S0 Update commit index to 6
+2025/09/10 23:30:47 [6] S3 Update matchIndex 0 to 7
+2025/09/10 23:30:47 [6] S1 Accept append RPC, prevLogIndex 6, term 6, rf.lastLogIndex 7
+2025/09/10 23:30:47 [6] S3 Update matchIndex 1 to 7
+2025/09/10 23:30:47 [6] S2 Accept append RPC, prevLogIndex 6, term 6, rf.lastLogIndex 7
+2025/09/10 23:30:47 [6] S3 Update matchIndex 2 to 7
+2025/09/10 23:30:47 [6] S4 Accept append RPC, prevLogIndex 5, term 6, rf.lastLogIndex 7
+2025/09/10 23:30:47 [6] S4 Update commit index to 6
+2025/09/10 23:30:47 [6] S3 Update matchIndex 4 to 7
+2025/09/10 23:30:47 [6] S3 Update commit index to 7
+2025/09/10 23:30:47 [6] S0 Update commit index to 7
+2025/09/10 23:30:47 [6] S1 Update commit index to 7
+2025/09/10 23:30:47 [6] S2 Update commit index to 7
+2025/09/10 23:30:47 [6] S4 Update commit index to 7
+2025/09/10 23:30:48 [6] S3 start begin
+2025/09/10 23:30:48 [6] S2 Accept append RPC, prevLogIndex 7, term 6, rf.lastLogIndex 8
+2025/09/10 23:30:48 [6] S1 Accept append RPC, prevLogIndex 7, term 6, rf.lastLogIndex 8
+2025/09/10 23:30:48 [6] S3 Update matchIndex 2 to 8
+2025/09/10 23:30:48 [6] S3 Update matchIndex 1 to 8
+2025/09/10 23:30:48 [6] S3 Update commit index to 8
+2025/09/10 23:30:48 [6] S1 Update commit index to 8
+2025/09/10 23:30:48 [6] S2 Update commit index to 8
+2025/09/10 23:30:48 [6] S4 restart!!
+2025/09/10 23:30:48 [6] S0 restart!!
+2025/09/10 23:30:48 [6] S0 Accept append RPC, prevLogIndex 7, term 6, rf.lastLogIndex 8
+2025/09/10 23:30:48 [6] S0 Update commit index to 8
+2025/09/10 23:30:48 [6] S3 Update matchIndex 0 to 8
+2025/09/10 23:30:49 [6] S3 BackforwardsNextIndex 1
+2025/09/10 23:30:49 [7] S4 start election...
+2025/09/10 23:30:49 [6] S1 restart!!
+2025/09/10 23:30:49 [8] S0 start election...
+2025/09/10 23:30:49 [8] S0 Change to leader
+2025/09/10 23:30:49 [8] S1 Update commit index to 8
+2025/09/10 23:30:49 [8] S0 start begin
+2025/09/10 23:30:49 [8] S0 BackforwardsNextIndex 6
+2025/09/10 23:30:49 [8] S4 Accept append RPC, prevLogIndex 5, term 8, rf.lastLogIndex 9
+2025/09/10 23:30:49 [8] S4 Update commit index to 8
+2025/09/10 23:30:49 [8] S0 Update matchIndex 4 to 9
+2025/09/10 23:30:49 [8] S1 Accept append RPC, prevLogIndex 8, term 8, rf.lastLogIndex 9
+2025/09/10 23:30:49 [8] S0 Update matchIndex 1 to 9
+2025/09/10 23:30:49 [8] S0 Update commit index to 9
+2025/09/10 23:30:49 [8] S1 Update commit index to 9
+2025/09/10 23:30:49 [8] S4 Update commit index to 9
+2025/09/10 23:30:49 [6] S2 restart!!
+2025/09/10 23:30:49 [6] S3 restart!!
+2025/09/10 23:30:49 [8] S0 start begin
+2025/09/10 23:30:49 [8] S1 Accept append RPC, prevLogIndex 9, term 8, rf.lastLogIndex 10
+2025/09/10 23:30:49 [8] S0 Update matchIndex 1 to 10
+2025/09/10 23:30:49 [8] S4 Accept append RPC, prevLogIndex 9, term 8, rf.lastLogIndex 10
+2025/09/10 23:30:49 [8] S2 Accept append RPC, prevLogIndex 8, term 8, rf.lastLogIndex 10
+2025/09/10 23:30:49 [8] S2 Update commit index to 9
+2025/09/10 23:30:49 [8] S3 Accept append RPC, prevLogIndex 8, term 8, rf.lastLogIndex 10
+2025/09/10 23:30:49 [8] S3 Update commit index to 9
+2025/09/10 23:30:49 [8] S0 Update matchIndex 3 to 10
+2025/09/10 23:30:49 [8] S0 Update matchIndex 4 to 10
+2025/09/10 23:30:49 [8] S0 Update matchIndex 2 to 10
+2025/09/10 23:30:49 [8] S0 Update commit index to 10
+2025/09/10 23:30:49 [8] S1 Update commit index to 10
+2025/09/10 23:30:49 [8] S2 Update commit index to 10
+2025/09/10 23:30:49 [8] S3 Update commit index to 10
+2025/09/10 23:30:49 [8] S4 Update commit index to 10
+2025/09/10 23:30:50 [8] S0 BackforwardsNextIndex 3
+2025/09/10 23:30:50 [8] S0 start begin
+2025/09/10 23:30:50 [8] S3 Accept append RPC, prevLogIndex 10, term 8, rf.lastLogIndex 11
+2025/09/10 23:30:50 [8] S0 Update matchIndex 3 to 11
+2025/09/10 23:30:50 [8] S4 Accept append RPC, prevLogIndex 10, term 8, rf.lastLogIndex 11
+2025/09/10 23:30:50 [8] S0 Update matchIndex 4 to 11
+2025/09/10 23:30:50 [8] S0 Update commit index to 11
+2025/09/10 23:30:50 [8] S3 Update commit index to 11
+2025/09/10 23:30:50 [8] S4 Update commit index to 11
+2025/09/10 23:30:50 [8] S1 restart!!
+2025/09/10 23:30:50 [8] S2 restart!!
+2025/09/10 23:30:50 [8] S2 Update commit index to 9
+2025/09/10 23:30:50 [8] S0 BackforwardsNextIndex 1
+2025/09/10 23:30:51 [9] S1 start election...
+2025/09/10 23:30:51 [8] S3 restart!!
+2025/09/10 23:30:51 [10] S1 start election...
+2025/09/10 23:30:52 [11] S3 start election...
+2025/09/10 23:30:52 [11] S3 Change to leader
+2025/09/10 23:30:52 [11] S3 start begin
+2025/09/10 23:30:52 [11] S3 BackforwardsNextIndex 9
+2025/09/10 23:30:52 [11] S1 Accept append RPC, prevLogIndex 8, term 11, rf.lastLogIndex 12
+2025/09/10 23:30:52 [11] S3 Update matchIndex 1 to 12
+2025/09/10 23:30:52 [11] S3 BackforwardsNextIndex 9
+2025/09/10 23:30:52 [11] S2 Accept append RPC, prevLogIndex 8, term 11, rf.lastLogIndex 12
+2025/09/10 23:30:52 [11] S3 Update matchIndex 2 to 12
+2025/09/10 23:30:52 [11] S3 Update commit index to 12
+2025/09/10 23:30:52 [11] S2 Update commit index to 12
+2025/09/10 23:30:52 [11] S1 Update commit index to 12
+2025/09/10 23:30:52 [8] S4 restart!!
+2025/09/10 23:30:52 [8] S0 restart!!
+2025/09/10 23:30:52 [11] S3 start begin
+2025/09/10 23:30:52 [11] S1 Accept append RPC, prevLogIndex 12, term 11, rf.lastLogIndex 13
+2025/09/10 23:30:52 [11] S4 Accept append RPC, prevLogIndex 11, term 11, rf.lastLogIndex 13
+2025/09/10 23:30:52 [11] S4 Update commit index to 12
+2025/09/10 23:30:52 [11] S3 Update matchIndex 1 to 13
+2025/09/10 23:30:52 [11] S3 Update matchIndex 4 to 13
+2025/09/10 23:30:52 [11] S0 Accept append RPC, prevLogIndex 11, term 11, rf.lastLogIndex 13
+2025/09/10 23:30:52 [11] S0 Update commit index to 12
+2025/09/10 23:30:52 [11] S2 Accept append RPC, prevLogIndex 12, term 11, rf.lastLogIndex 13
+2025/09/10 23:30:52 [11] S3 Update matchIndex 2 to 13
+2025/09/10 23:30:52 [11] S3 Update matchIndex 0 to 13
+2025/09/10 23:30:52 [11] S3 Update commit index to 13
+2025/09/10 23:30:52 [11] S0 Update commit index to 13
+2025/09/10 23:30:52 [11] S1 Update commit index to 13
+2025/09/10 23:30:52 [11] S4 Update commit index to 13
+2025/09/10 23:30:52 [11] S2 Update commit index to 13
+2025/09/10 23:30:52 [11] S0 BackforwardsNextIndex 3
+2025/09/10 23:30:52 [11] S0 BackforwardsNextIndex 9
+2025/09/10 23:30:52 [11] S3 start begin
+2025/09/10 23:30:52 [11] S1 Accept append RPC, prevLogIndex 13, term 11, rf.lastLogIndex 14
+2025/09/10 23:30:52 [11] S3 Update matchIndex 1 to 14
+2025/09/10 23:30:52 [11] S2 Accept append RPC, prevLogIndex 13, term 11, rf.lastLogIndex 14
+2025/09/10 23:30:52 [11] S3 Update matchIndex 2 to 14
+2025/09/10 23:30:52 [11] S3 Update commit index to 14
+2025/09/10 23:30:52 [11] S1 Update commit index to 14
+2025/09/10 23:30:52 [11] S2 Update commit index to 14
+2025/09/10 23:30:52 [11] S4 restart!!
+2025/09/10 23:30:52 [11] S0 restart!!
+2025/09/10 23:30:53 [11] S4 Accept append RPC, prevLogIndex 13, term 11, rf.lastLogIndex 14
+2025/09/10 23:30:53 [11] S4 Update commit index to 14
+2025/09/10 23:30:53 [11] S3 Update matchIndex 4 to 14
+2025/09/10 23:30:53 [11] S0 Update commit index to 12
+2025/09/10 23:30:53 [11] S1 restart!!
+2025/09/10 23:30:53 [11] S0 Accept append RPC, prevLogIndex 11, term 11, rf.lastLogIndex 13
+2025/09/10 23:30:53 [11] S3 Update matchIndex 0 to 13
+2025/09/10 23:30:54 [11] S3 BackforwardsNextIndex 6
+2025/09/10 23:30:54 [11] S3 BackforwardsNextIndex 3
+2025/09/10 23:30:54 [12] S1 start election...
+2025/09/10 23:30:54 [12] S1 Change to leader
+2025/09/10 23:30:54 [12] S1 start begin
+2025/09/10 23:30:54 [12] S4 Accept append RPC, prevLogIndex 14, term 12, rf.lastLogIndex 15
+2025/09/10 23:30:54 [12] S1 Update matchIndex 4 to 15
+2025/09/10 23:30:54 [12] S1 BackforwardsNextIndex 12
+2025/09/10 23:30:54 [12] S0 Accept append RPC, prevLogIndex 11, term 12, rf.lastLogIndex 15
+2025/09/10 23:30:54 [12] S1 Update matchIndex 0 to 15
+2025/09/10 23:30:54 [12] S1 Update commit index to 15
+2025/09/10 23:30:54 [12] S0 Update commit index to 15
+2025/09/10 23:30:54 [12] S4 Update commit index to 15
+2025/09/10 23:30:54 [11] S2 restart!!
+2025/09/10 23:30:54 [11] S3 restart!!
+2025/09/10 23:30:54 [12] S1 start begin
+2025/09/10 23:30:54 [12] S2 Accept append RPC, prevLogIndex 14, term 12, rf.lastLogIndex 16
+2025/09/10 23:30:54 [12] S2 Update commit index to 15
+2025/09/10 23:30:54 [12] S0 Accept append RPC, prevLogIndex 15, term 12, rf.lastLogIndex 16
+2025/09/10 23:30:54 [12] S3 Accept append RPC, prevLogIndex 14, term 12, rf.lastLogIndex 16
+2025/09/10 23:30:54 [12] S3 Update commit index to 15
+2025/09/10 23:30:54 [12] S1 Update matchIndex 0 to 16
+2025/09/10 23:30:54 [12] S4 Accept append RPC, prevLogIndex 15, term 12, rf.lastLogIndex 16
+2025/09/10 23:30:54 [12] S1 Update matchIndex 2 to 16
+2025/09/10 23:30:54 [12] S1 Update matchIndex 3 to 16
+2025/09/10 23:30:54 [12] S1 Update matchIndex 4 to 16
+2025/09/10 23:30:54 [12] S1 Update commit index to 16
+2025/09/10 23:30:54 [12] S3 Update commit index to 16
+2025/09/10 23:30:54 [12] S4 Update commit index to 16
+2025/09/10 23:30:54 [12] S2 Update commit index to 16
+2025/09/10 23:30:54 [12] S0 Update commit index to 16
+  ... Passed --  time 12.2s #peers 5 #RPCs   404 #Ops    0
+2025/09/10 23:30:54 [0] S0 restart!!
+2025/09/10 23:30:54 [0] S1 restart!!
+2025/09/10 23:30:54 [0] S2 restart!!
+Test (3C): partitioned leader and one follower crash, leader restarts (reliable network)...
+2025/09/10 23:30:55 [1] S1 start election...
+2025/09/10 23:30:55 [1] S2 start election...
+2025/09/10 23:30:55 [1] S0 start election...
+2025/09/10 23:30:56 [2] S0 start election...
+2025/09/10 23:30:56 [2] S1 start election...
+2025/09/10 23:30:56 [3] S2 start election...
+2025/09/10 23:30:56 [3] S2 Change to leader
+2025/09/10 23:30:56 [3] S2 start begin
+2025/09/10 23:30:56 [3] S1 Accept append RPC, prevLogIndex 0, term 3, rf.lastLogIndex 1
+2025/09/10 23:30:56 [3] S0 Accept append RPC, prevLogIndex 0, term 3, rf.lastLogIndex 1
+2025/09/10 23:30:56 [3] S2 Update matchIndex 1 to 1
+2025/09/10 23:30:56 [3] S2 Update matchIndex 0 to 1
+info: wrote visualization to /tmp/porcupine-2716300153.html
+exit status 1
+FAIL	6.5840/raft1	19.549s
