@@ -10,6 +10,7 @@ func (rf *Raft) SendHeartbeat() {
 	rf.lastHeartbeatTime = time.Now()
 	rf.UpdateCommitIndex()
 	rf.BoardcastHeartbeat()
+	rf.WakeupAllReplicators()
 }
 
 func (rf *Raft) StartElection() {

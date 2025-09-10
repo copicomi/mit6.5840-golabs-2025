@@ -67,7 +67,7 @@ func (rf *Raft) BoardcastAppendEntries(logs []LogEntry) {
 			continue
 		}
 		if rf.lastLogIndex >= rf.nextIndex[i] {
-			// mDebug(rf, "Send Append RPC to server %d", i)
+			mDebug(rf, "Send Append RPC to server %d, prevIndex= %d", i, rf.nextIndex[i] - 1)
 			go rf.SendAndHandleRPC(
 				i,
 				rf.MakeArgsFactoryFunction(RPCAppendEntries, &AppendEntriesArgs{

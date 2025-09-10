@@ -115,20 +115,19 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 		rf.ChangeRoleWithoutLock(Follower, reply.Term)
 		return
 	} 
-	for !reply.Success && reply.Term == args.Term {
-		rf.nextIndex[server] --;
-		args.PrevLogIndex = rf.nextIndex[server];
-		args.PrevLogTerm = rf.log[args.PrevLogIndex].Term
-		args.Entries = rf.log[args.PrevLogIndex + 1:]
-		rf.sendAppendEntries(server, args, reply)
-		// 直到 success 才会结束，否则一直重试
-		time.Sleep(10 * time.Millisecond)
-		mDebug(rf, "Retry append RPC")
+	if reply.Term < rf.currentTerm {
+		return
 	}
 	if reply.Success { 
 		rf.matchIndex[server] = args.PrevLogIndex + len(args.Entries)
 		rf.nextIndex[server] = max(rf.nextIndex[server], args.PrevLogIndex + len(args.Entries) + 1)
-	} 
+	} else {
+		rf.nextIndex[server] --
+		mDebug(rf, "Retry append with prevLogIndex %d", rf.nextIndex[server])
+		go func() {
+			rf.replicateCond[server].Signal()
+		}()
+	}
 }
 func (rf *Raft) HandleVoteReply(server int, args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()

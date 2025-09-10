@@ -1,6 +1,7 @@
 package raft
 
 import (
+	"sync"
 	"sync/atomic"
 	"time"
 )
@@ -99,6 +100,10 @@ func (rf *Raft) InitLogState() {
 	rf.matchIndex = make([]int, len(rf.peers))
 	rf.lastLogIndex = 0
 	rf.lastLogTerm = 0
+	rf.replicateCond = make([]*sync.Cond, len(rf.peers))
+	for i := range rf.peers {
+		rf.replicateCond[i] = sync.NewCond(&sync.Mutex{})
+	}
 }
 func (rf *Raft) IsNewerThan(lastLogIndex int, lastLogTerm int) bool {
 	// TODO(3B): Delete this line when complete 3B

@@ -28,9 +28,8 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 			Command: command,
 			Term: rf.currentTerm,
 		}
-		logs := []LogEntry{log}
 		rf.AppendSingleLogWithoutLock(log)
-		rf.BoardcastAppendEntries(logs)
+		rf.WakeupAllReplicators()
 	}  
 	rf.mu.Unlock()
 	if isLeader {
