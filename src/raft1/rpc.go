@@ -123,8 +123,9 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 	if reply.Success { 
 		rf.matchIndex[server] = args.PrevLogIndex + len(args.Entries)
 		rf.nextIndex[server] = max(rf.nextIndex[server], args.PrevLogIndex + len(args.Entries) + 1)
+		mDebug(rf, "Update matchIndex %d to %d", server, rf.matchIndex[server])
 	} else {
-		rf.nextIndex[server] --
+		rf.BackforwardsNextIndex(server)
 		mDebug(rf, "Retry append with prevLogIndex %d", rf.nextIndex[server])
 		go func() {
 			rf.replicateCond[server].Signal()

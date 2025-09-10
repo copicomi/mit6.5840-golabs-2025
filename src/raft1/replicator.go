@@ -38,6 +38,18 @@ func (rf *Raft) replicateOneRound(server int) {
 	} 
 }
 
+func (rf *Raft) BackforwardsNextIndex(server int) {
+	i := rf.nextIndex[server] - 1
+	conflictTerm := rf.log[i].Term
+	for ; i >= 0; i-- {
+		if rf.log[i].Term != conflictTerm {
+			break
+		}
+	}
+	rf.nextIndex[server] = i + 1
+	mDebug(rf, "BackforwardsNextIndex %d", rf.nextIndex[server])
+}
+
 func (rf *Raft) WakeupAllReplicators() { 
 	for i := 0; i < len(rf.peers); i++ {
 		go rf.replicateCond[i].Signal()
