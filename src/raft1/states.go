@@ -50,7 +50,7 @@ func (rf *Raft) ChangeRoleWithoutLock(role int, term int) {
 	} else if role == Leader {
 		mDebug(rf, "Change to leader")
 		for i := 0; i < len(rf.peers); i++ {
-			rf.nextIndex[i] = rf.lastLogIndex + 1
+			rf.nextIndex[i] = rf.GetLastLogIndexWithoutLock() + 1
 			rf.matchIndex[i] = 0
 		}
 		rf.WakeupAllReplicators()
@@ -99,17 +99,17 @@ func (rf *Raft) InitLogState() {
 	rf.lastApplied = 0
 	rf.nextIndex = make([]int, len(rf.peers))
 	rf.matchIndex = make([]int, len(rf.peers))
-	rf.lastLogIndex = 0
-	rf.lastLogTerm = 0
+	rf.firstLogIndex = 0
 	rf.replicateCond = make([]*sync.Cond, len(rf.peers))
 	for i := range rf.peers {
 		rf.replicateCond[i] = sync.NewCond(&sync.Mutex{})
 	}
 }
-func (rf *Raft) IsNewerThan(lastLogIndex int, lastLogTerm int) bool {
-	if rf.lastLogTerm > lastLogTerm {
+func (rf *Raft) IsNewerThan(index int, term int) bool {
+	lastLogIndex, lastLogTerm := rf.GetLastLogIndexAndTermWithoutLock()
+	if lastLogTerm > term {
 		return true
-	} else if rf.lastLogTerm == lastLogTerm && rf.lastLogIndex > lastLogIndex {
+	} else if lastLogTerm == term && lastLogIndex > index {
 		return true
 	}
 	return false
@@ -132,7 +132,7 @@ func (rf *Raft) IsMatchPrevLog(index int, term int) bool {
 	if index == 0 {
 		return true
 	}
-	if rf.lastLogIndex < index {
+	if rf.GetLastLogIndexWithoutLock() < index {
 		return false
 	}
 	if rf.log[index].Term != term {

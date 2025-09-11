@@ -32,7 +32,7 @@ func (rf *Raft) ApplyCommittedLogs() {
 
 func (rf *Raft) UpdateCommitIndex() {
 	l := rf.commitIndex
-	r := rf.lastLogIndex
+	r := rf.GetLastLogIndexWithoutLock()
 	for l < r {
 		mid := (l + r + 1) / 2
 		if rf.IsReadyToCommit(mid) {

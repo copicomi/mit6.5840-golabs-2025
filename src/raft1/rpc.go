@@ -98,17 +98,17 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 
 	rf.lastHeartbeatTime = time.Now()
 	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
-		mDebug(rf, "Reject append RPC, prevLogIndex %d-%d, prevLogTerm %d-%d", args.PrevLogIndex,rf.lastLogIndex, args.PrevLogTerm,rf.lastLogTerm)
+		mDebug(rf, "Reject append RPC, prevLogIndex %d-%d, prevLogTerm %d-%d", args.PrevLogIndex,rf.GetLastLogIndexWithoutLock(), args.PrevLogTerm,rf.GetLastLogTermWithoutLock())
 		return
 	}
 
 	if args.Entries != nil || len(args.Entries) > 0 {
 		rf.AppendLogListWithoutLock(args.Entries, args.PrevLogIndex)
-		mDebug(rf, "Accept append RPC, prevLogIndex %d, term %d, rf.lastLogIndex %d", args.PrevLogIndex, args.Term, rf.lastLogIndex)
+		mDebug(rf, "Accept append RPC, prevLogIndex %d, term %d, rf.lastLogIndex %d", args.PrevLogIndex, args.Term, rf.GetLastLogIndexWithoutLock())
 	}
 
 	if args.LeaderCommit > rf.commitIndex {
-		rf.commitIndex = min(args.LeaderCommit, rf.lastLogIndex)
+		rf.commitIndex = min(args.LeaderCommit, rf.GetLastLogIndexWithoutLock())
 		mDebug(rf, "Update commit index to %d", rf.commitIndex)
 	}
 	reply.Success = true

@@ -18,7 +18,7 @@ func (rf *Raft) replicateOneRound(server int) {
 	if rf.state != Leader {
 		return
 	}
-	if rf.lastLogIndex >= rf.nextIndex[server] {
+	if rf.GetLastLogIndexWithoutLock() >= rf.nextIndex[server] {
 		args := &AppendEntriesArgs{
 			Term:         rf.currentTerm,
 			LeaderId:     rf.me,

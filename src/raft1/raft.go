@@ -45,15 +45,21 @@ type Raft struct {
 	voteCount int
 
 	// 3B log 
-	lastLogIndex int 
-	lastLogTerm int
 	applyCh chan raftapi.ApplyMsg
 	replicateCond []*sync.Cond
+
+	// 3D snapshot
+	firstLogIndex int
 }
 
 func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	// Your code here (3D).
-
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	cutIndex := index - rf.firstLogIndex
+	rf.log = rf.log[cutIndex:]
+	rf.firstLogIndex = index
+	rf.persist()
 }
 // the service or tester wants to create a Raft server. the ports
 // of all the Raft servers (including this one) are in peers[]. this

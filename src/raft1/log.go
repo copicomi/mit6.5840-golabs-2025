@@ -4,6 +4,7 @@ type LogEntry struct {
 	Term    int
 	Command interface{}
 }
+
 // the service using Raft (e.g. a k/v server) wants to start
 // agreement on the next command to be appended to Raft's log. if this
 // server isn't the leader, returns false. otherwise start the
@@ -18,7 +19,7 @@ type LogEntry struct {
 // the leader.
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	rf.mu.Lock()
-	index := rf.lastLogIndex + 1
+	index := rf.GetLastLogIndexWithoutLock() + 1
 	term := rf.currentTerm
 	isLeader := rf.state == Leader
 	// Your code here (3B).
@@ -27,7 +28,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 			Command: command,
 			Term: rf.currentTerm,
 		}
-		rf.AppendLogListWithoutLock([]LogEntry{log}, rf.lastLogIndex)
+		rf.AppendLogListWithoutLock([]LogEntry{log}, rf.GetLastLogIndexWithoutLock())
 		rf.WakeupAllReplicators()
 		mDebug(rf, "wakeup Start...")
 	}  
@@ -37,26 +38,23 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 
 func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {
 	rf.log = append(rf.log, log)
-	rf.lastLogIndex ++
-	rf.lastLogTerm = log.Term
 	rf.persist()
 	// mDebug(rf, "Append 1 log, len = %d, lastLogIndex = %d", len(rf.log), rf.lastLogIndex)
 }
 
 func (rf *Raft) CutLogListWithoutLock(index int) {
 	// panic(index > len(rf.log))
+	index = index - rf.firstLogIndex
 	rf.log = rf.log[:index]
-	rf.lastLogIndex = index-1
-	rf.lastLogTerm = rf.log[rf.lastLogIndex].Term
 	rf.persist()
-	mDebug(rf, "Cut log list, len = %d, lastLogIndex = %d", len(rf.log), rf.lastLogIndex)
+	mDebug(rf, "Cut log list, len = %d, lastLogIndex = %d", len(rf.log), rf.GetLastLogIndexWithoutLock())
 }
 
 func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 	for i, entry := range logs {
 		logIndex := prevLogIndex + 1 + i
-		if logIndex <= rf.lastLogIndex {
-			if rf.log[logIndex].Term != entry.Term {
+		if logIndex <= rf.GetLastLogIndexWithoutLock(){
+			if rf.GetLogTermAtIndexWithoutLock(logIndex) != entry.Term {
 				rf.CutLogListWithoutLock(logIndex)
 			} else {
 				continue
@@ -64,5 +62,35 @@ func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 		}
 		rf.AppendSingleLogWithoutLock(entry)
 	}
-	mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.lastLogIndex, rf.lastLogIndex)
+	mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.GetLastLogIndexWithoutLock())
+}
+
+func (rf *Raft) GetLastLogIndexAndTermWithoutLock() (int, int){
+	lastLogIndex := rf.GetLastLogIndexWithoutLock()
+	lastLog, _ := rf.GetLogAtIndexWithoutLock(lastLogIndex)
+	return lastLogIndex, lastLog.Term
+}
+
+func (rf *Raft) GetLastLogTermWithoutLock() int {
+	lastLogIndex := rf.GetLastLogIndexWithoutLock()
+	lastLog, _ := rf.GetLogAtIndexWithoutLock(lastLogIndex)
+	return lastLog.Term
+}
+func (rf *Raft) GetLastLogIndexWithoutLock() int {
+	return len(rf.log) + rf.firstLogIndex - 1
+}
+
+func (rf *Raft) GetLogAtIndexWithoutLock(index int) (LogEntry, bool) {
+	index = index - rf.firstLogIndex
+	if index >= len(rf.log) {
+		return LogEntry{}, false
+	}
+	return rf.log[index], true
+}
+func (rf *Raft) GetLogTermAtIndexWithoutLock(index int) int {
+	log, ok := rf.GetLogAtIndexWithoutLock(index)
+	if !ok {
+		return -1
+	}
+	return log.Term
 }
