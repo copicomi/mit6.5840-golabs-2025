@@ -11,7 +11,7 @@ func (rf *Raft) SendAndHandleRPC(
 ) {
 	args := argsFactory()
 	reply := replyFactory()
-	for true {
+	for !rf.killed() {
 		ok := sendFunction(server, args, reply)
 		if ok || handleFunction == nil {
 			break
