@@ -49,19 +49,37 @@ type Raft struct {
 	replicateCond []*sync.Cond
 
 	// 3D snapshot
-	firstLogIndex int
+	snapshotEndIndex int
 	snapshot []byte
 }
-
+// the service says it has created a snapshot that has
+// all info up to and including index. this means the
+// service no longer needs the log through (and including)
+// that index. Raft should now trim its log as much as possible.
 func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	// Your code here (3D).
 	// 不要锁，上层通过 apply 定期调用 snapshot，而 apply 过程本身就持有锁，否则会死锁
-	cutIndex := index - rf.firstLogIndex
-	rf.log = rf.log[cutIndex:]
-	rf.firstLogIndex = index
+	rf.SnapShotWithoutLock(index, snapshot)
+}
+
+func (rf *Raft) SnapShotWithLock(index int, snapshot []byte) {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	rf.SnapShotWithoutLock(index, snapshot)
+}
+func (rf *Raft) SnapShotWithoutLock(index int, snapshot []byte) {
+	mDebug(rf, "SNAPSHOT at %d", index)
+	mDebugLogs(rf, "snapshot")
+	if rf.GetLastLogIndexWithoutLock() >= index {
+		cutIndex := index - rf.snapshotEndIndex
+		rf.log = rf.log[cutIndex:]
+	} else {
+		rf.log = []LogEntry{{Command: nil, Term: 0}}
+	}
+	rf.snapshotEndIndex = index
 	rf.snapshot = snapshot
+	mDebugLogs(rf, "snapshot")
 	rf.persist()
-	mDebug(rf, "SNAPSHOT end at %d", index)
 }
 // the service or tester wants to create a Raft server. the ports
 // of all the Raft servers (including this one) are in peers[]. this

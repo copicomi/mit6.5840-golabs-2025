@@ -10,6 +10,7 @@ type RPCFactoryFunc func() interface{}
 const (
 	RPCRequestVote RPCType = iota
 	RPCAppendEntries
+	RPCInstallSnapshot
 )
 
 // example RequestVote RPC arguments structure.
@@ -92,24 +93,23 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	} 
 
 	if term < rf.currentTerm {
-		mDebug(rf, "Reject append RPC, term %d, current %d", term, rf.currentTerm)
+		// mDebug(rf, "Reject append RPC, term %d, current %d", term, rf.currentTerm)
 		return
 	} 
 
 	rf.lastHeartbeatTime = time.Now()
 	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
-		mDebug(rf, "Reject append RPC, prevLogIndex %d-%d, prevLogTerm %d-%d", args.PrevLogIndex,rf.GetLastLogIndexWithoutLock(), args.PrevLogTerm,rf.GetLastLogTermWithoutLock())
 		return
 	}
 
 	if args.Entries != nil || len(args.Entries) > 0 {
 		rf.AppendLogListWithoutLock(args.Entries, args.PrevLogIndex)
-		mDebug(rf, "Accept append RPC, prevLogIndex %d, term %d, rf.lastLogIndex %d", args.PrevLogIndex, args.Term, rf.GetLastLogIndexWithoutLock())
+		// mDebug(rf, "Accept append RPC, prevLogIndex %d, term %d, rf.lastLogIndex %d", args.PrevLogIndex, args.Term, rf.GetLastLogIndexWithoutLock())
 	}
 
 	if args.LeaderCommit > rf.commitIndex {
 		rf.commitIndex = min(args.LeaderCommit, rf.GetLastLogIndexWithoutLock())
-		mDebug(rf, "Update commit index to %d", rf.commitIndex)
+		// mDebug(rf, "Update commit index to %d", rf.commitIndex)
 	}
 	reply.Success = true
 	rf.persist()
@@ -118,9 +118,9 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	// mDebug(rf, "Got append reply from %d, term %d", server, reply.Term)
+	mDebug(rf, "Got append reply from %d, term %d", server, reply.Term)
 	if reply.Term < rf.currentTerm || rf.state != Leader {
-		mDebug(rf, "Reject Append reply from %d, term %d", server, reply.Term)
+		//  mDebug(rf, "Reject Append reply from %d, term %d", server, reply.Term)
 		return
 	}
 	if rf.IsFoundAnotherLeader(reply.Term) { 
@@ -130,7 +130,7 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 	if reply.Success { 
 		rf.matchIndex[server] = max(rf.matchIndex[server], args.PrevLogIndex + len(args.Entries))
 		rf.nextIndex[server] = max(rf.nextIndex[server], args.PrevLogIndex + len(args.Entries) + 1)
-		mDebug(rf, "Update matchIndex %d to %d", server, rf.matchIndex[server])
+		mDebug(rf, "[APP]Update matchIndex %d to %d", server, rf.matchIndex[server])
 	} else {
 		if args.PrevLogIndex == 0 {
 			// mDebug(rf, "Reject append RPC without Backforwards")

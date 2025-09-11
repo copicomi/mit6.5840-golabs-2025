@@ -1,0 +1,33 @@
+Test (3D): snapshots basic (reliable network)...
+Fatal: one(1962614104573959391) failed to reach agreement
+        /home/akane/learning/6.5840/src/raft1/test.go:283
+        /home/akane/learning/6.5840/src/raft1/raft_test.go:1272
+        /home/akane/learning/6.5840/src/raft1/raft_test.go:1298
+info: wrote visualization to /tmp/porcupine-2960903326.html
+--- FAIL: TestSnapshotBasic3D (14.20s)
+Test (3D): install snapshots (disconnect) (reliable network)...
+panic: runtime error: index out of range [-8]
+
+goroutine 2861 [running]:
+6.5840/raft1.(*Raft).GetLogAtIndexWithoutLock(...)
+	/home/akane/learning/6.5840/src/raft1/states.go:126
+6.5840/raft1.(*Raft).GetLogTermAtIndexWithoutLock(...)
+	/home/akane/learning/6.5840/src/raft1/states.go:129
+6.5840/raft1.(*Raft).IsMatchPrevLog(...)
+	/home/akane/learning/6.5840/src/raft1/states.go:174
+6.5840/raft1.(*Raft).AppendEntries(0xc000216900, 0xc000310500, 0xc0002f9d10)
+	/home/akane/learning/6.5840/src/raft1/rpc.go:101 +0x206
+reflect.Value.call({0xc000162690?, 0xc00040a1d0?, 0xc0005f5b18?}, {0x66be38, 0x4}, {0xc0005f5d20, 0x3, 0xc0005f5b48?})
+	/usr/lib/go-1.22/src/reflect/value.go:596 +0xca6
+reflect.Value.Call({0xc000162690?, 0xc00040a1d0?, 0xc000119848?}, {0xc0005f5d20?, 0xc0001c53b0?, 0x41a345?})
+	/usr/lib/go-1.22/src/reflect/value.go:380 +0xb9
+6.5840/labrpc.(*Service).dispatch(0xc00041e6c0, {0x66f8f1, 0xd}, {{0x61d9a0, 0xc00041a200}, {0x66f8ec, 0x12}, {0x6d08c0, 0x6154c0}, {0xc0005cc600, ...}, ...})
+	/home/akane/learning/6.5840/src/labrpc/labrpc.go:526 +0x36e
+6.5840/labrpc.(*Server).dispatch(0xc0003441c8, {{0x61d9a0, 0xc00041a200}, {0x66f8ec, 0x12}, {0x6d08c0, 0x6154c0}, {0xc0005cc600, 0x1c3, 0x200}, ...})
+	/home/akane/learning/6.5840/src/labrpc/labrpc.go:450 +0x1e5
+6.5840/labrpc.(*Network).processReq.func1()
+	/home/akane/learning/6.5840/src/labrpc/labrpc.go:260 +0x3f
+created by 6.5840/labrpc.(*Network).processReq in goroutine 2860
+	/home/akane/learning/6.5840/src/labrpc/labrpc.go:259 +0x1d0
+exit status 2
+FAIL	6.5840/raft1	16.447s

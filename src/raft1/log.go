@@ -31,7 +31,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 		}
 		rf.AppendLogListWithoutLock([]LogEntry{log}, rf.GetLastLogIndexWithoutLock())
 		go rf.WakeupAllReplicators()
-		mDebug(rf, "wakeup Start...")
+		// mDebug(rf, "wakeup Start...")
 	}  
 	return index, term, isLeader
 }
@@ -44,10 +44,10 @@ func (rf *Raft) AppendSingleLogWithoutLock(log LogEntry) {
 
 func (rf *Raft) CutLogListWithoutLock(index int) {
 	// panic(index > len(rf.log))
-	index = index - rf.firstLogIndex
+	index = index - rf.snapshotEndIndex
 	rf.log = rf.log[:index]
 	rf.persist()
-	mDebug(rf, "Cut log list, len = %d, lastLogIndex = %d", len(rf.log), rf.GetLastLogIndexWithoutLock())
+	// mDebug(rf, "Cut log list, len = %d, lastLogIndex = %d", len(rf.log), rf.GetLastLogIndexWithoutLock())
 }
 
 func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
@@ -65,34 +65,3 @@ func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 	mDebug(rf, "Append %d logs, lastLogIndex = %d", len(logs), rf.GetLastLogIndexWithoutLock())
 }
 
-func (rf *Raft) GetLastLogIndexAndTermWithoutLock() (int, int){
-	lastLogIndex := rf.GetLastLogIndexWithoutLock()
-	lastLog, _ := rf.GetLogAtIndexWithoutLock(lastLogIndex)
-	return lastLogIndex, lastLog.Term
-}
-
-func (rf *Raft) GetLastLogTermWithoutLock() int {
-	lastLogIndex := rf.GetLastLogIndexWithoutLock()
-	lastLog, _ := rf.GetLogAtIndexWithoutLock(lastLogIndex)
-	return lastLog.Term
-}
-func (rf *Raft) GetLastLogIndexWithoutLock() int {
-	return len(rf.log) + rf.firstLogIndex - 1
-}
-
-func (rf *Raft) GetLogAtIndexWithoutLock(index int) (LogEntry, bool) {
-	index = index - rf.firstLogIndex
-	return rf.log[index], true
-}
-func (rf *Raft) GetLogTermAtIndexWithoutLock(index int) int {
-	log, ok := rf.GetLogAtIndexWithoutLock(index)
-	if !ok {
-		return -1
-	}
-	return log.Term
-}
-
-func (rf *Raft) GetLogListBeginAtIndexWithoutLock(index int) []LogEntry {
-	index = index - rf.firstLogIndex
-    return rf.log[index:]
-}

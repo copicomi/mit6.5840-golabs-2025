@@ -27,6 +27,10 @@ func mDebugLock(rf *Raft, funcName string)  {
 	mDebug(rf, "%s() Have lock", funcName)
 }
 
+func mDebugLogs(rf *Raft, msg string) {
+	mDebug(rf, "%s, snapshotIndex %d, loglength %d, total %d", msg, rf.snapshotEndIndex, len(rf.log), rf.snapshotEndIndex + len(rf.log))
+}
+
 func GetRand(min int, max int) int {
 	return rand.Intn(max-min) + min
 }

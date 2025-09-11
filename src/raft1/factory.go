@@ -11,6 +11,11 @@ func (rf *Raft) MakeSendFunction(rpcType RPCType) RPCSendFunc {
 			return rf.sendRequestVote(server, args.(*RequestVoteArgs), reply.(*RequestVoteReply))
 		}
 	}
+	if rpcType == RPCInstallSnapshot {
+		return func (server int, args interface{}, reply interface{}) bool {
+			return rf.sendInstallSnapshot(server, args.(*InstallSnapshotArgs), reply.(*InstallSnapshotReply))
+		}
+	}
 	return nil
 }
 
@@ -35,6 +40,16 @@ func (rf *Raft) MakeHandleFunction(rpcType RPCType) RPCHandleFunc {
 			rf.HandleVoteReply(server, voteArgs, voteReply)
 		}
 	}
+	if rpcType == RPCInstallSnapshot { 
+		return func (server int, args interface{}, reply interface{}) {
+			installReply, ok := reply.(*InstallSnapshotReply)
+			installArgs, okArgs := args.(*InstallSnapshotArgs)
+			if !ok || !okArgs {
+				return;
+			}
+			rf.HandleInstallReply(server, installArgs, installReply)
+		}
+	}
 	return nil
 }
 
@@ -49,6 +64,11 @@ func (rf *Raft) MakeEmptyReplyFactoryFunction(rpcType RPCType) RPCFactoryFunc {
 			return &RequestVoteReply{}
 		}
 	}
+	if rpcType == RPCInstallSnapshot {
+		return func() interface{} {
+			return &InstallSnapshotReply{}
+		}
+	}
 	return nil
 }
 
@@ -61,6 +81,11 @@ func (rf *Raft) MakeArgsFactoryFunction(rpcType RPCType, args interface{}) RPCFa
 	if rpcType == RPCRequestVote {
 		return func() interface{} {
 			return args.(*RequestVoteArgs)
+		}
+	}
+	if rpcType == RPCInstallSnapshot {
+		return func() interface{} {
+			return args.(*InstallSnapshotArgs)
 		}
 	}
 	return nil

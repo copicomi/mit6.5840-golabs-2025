@@ -15,34 +15,60 @@ func (rf *Raft) replicator(server int) {
 func (rf *Raft) replicateOneRound(server int) { 
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	mDebugLock(rf, "replicateOneRound")
 	if rf.state != Leader {
 		return
 	}
 	if rf.GetLastLogIndexWithoutLock() >= rf.nextIndex[server] {
-		args := &AppendEntriesArgs{
-			Term:         rf.currentTerm,
-			LeaderId:     rf.me,
-			PrevLogIndex: rf.nextIndex[server] - 1,
-			PrevLogTerm:  rf.GetLogTermAtIndexWithoutLock(rf.nextIndex[server] - 1),
-			Entries:      rf.GetLogListBeginAtIndexWithoutLock(rf.nextIndex[server]),
-			LeaderCommit: rf.commitIndex,
+		if rf.IsExistedInSnapshot(rf.nextIndex[server]) {
+			rf.replicateInstallSnapshot(server)
+		} else {
+			rf.replicateAppendEntries(server)
 		}
-		// mDebug(rf, "replicate %d at %d", server, args.PrevLogIndex)
-		go rf.SendAndHandleRPC(
-			server,
-			rf.MakeArgsFactoryFunction(RPCAppendEntries, args),
-			rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
-			rf.MakeSendFunction(RPCAppendEntries),
-			rf.MakeHandleFunction(RPCAppendEntries),
-		)
 	} 
 }
 
+func (rf *Raft) replicateAppendEntries(server int) {
+	mDebug(rf, "send APPEND ENTRIES RPC to server %d", server)
+	args := &AppendEntriesArgs{
+		Term:         rf.currentTerm,
+		LeaderId:     rf.me,
+		PrevLogIndex: rf.nextIndex[server] - 1,
+		PrevLogTerm:  rf.GetLogTermAtIndexWithoutLock(rf.nextIndex[server] - 1),
+		Entries:      rf.GetLogListBeginAtIndexWithoutLock(rf.nextIndex[server]),
+		LeaderCommit: rf.commitIndex,
+	}
+	// mDebug(rf, "replicate %d at %d", server, args.PrevLogIndex)
+	go rf.SendAndHandleRPC(
+		server,
+		rf.MakeArgsFactoryFunction(RPCAppendEntries, args),
+		rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
+		rf.MakeSendFunction(RPCAppendEntries),
+		rf.MakeHandleFunction(RPCAppendEntries),
+	)
+}
+
+func (rf *Raft) replicateInstallSnapshot(server int) { 
+	mDebugLock(rf, "send InstallSnapshot ")
+	args := &InstallSnapshotArgs{
+		Data: rf.persister.ReadSnapshot(),
+		LastIncludedIndex: rf.snapshotEndIndex,
+		LastIncludedTerm: rf.GetSnapshotEndTermWithoutLock(),
+		LeaderId: rf.me,
+		Term: rf.currentTerm,
+	}
+	go rf.SendAndHandleRPC(
+		server,
+		rf.MakeArgsFactoryFunction(RPCInstallSnapshot, args),
+		rf.MakeEmptyReplyFactoryFunction(RPCInstallSnapshot),
+		rf.MakeSendFunction(RPCInstallSnapshot),
+		rf.MakeHandleFunction(RPCInstallSnapshot),
+	)
+}
 func (rf *Raft) BackforwardsNextIndex(server int) {
 	i := rf.nextIndex[server] - 1
+	mDebug(rf, "BackforwardsNextIndex with i %d", i)
 	conflictTerm := rf.GetLogTermAtIndexWithoutLock(i)
-	for ; i > rf.firstLogIndex; i-- {
+	for ; i > rf.snapshotEndIndex; i -- {
 		if rf.GetLogTermAtIndexWithoutLock(i) != conflictTerm {
 			break
 		}

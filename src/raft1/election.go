@@ -7,7 +7,7 @@ import (
 func (rf *Raft) SendHeartbeat() {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	mDebug(rf, "Send heartbeat...")
+	// mDebug(rf, "Send heartbeat...")
 	rf.lastHeartbeatTime = time.Now()
 	rf.UpdateCommitIndex()
 	rf.BoardcastHeartbeat()
@@ -19,7 +19,7 @@ func (rf *Raft) StartElection() {
 	rf.incTermWithoutLock()
 	rf.ChangeRoleWithoutLock(Candidate, rf.currentTerm)
 	rf.lastHeartbeatTime = time.Now()
-	  mDebug(rf, "start election...")
+	  // mDebug(rf, "start election...")
 	rf.BoardcastRequestVote()
 	rf.persist()
 }

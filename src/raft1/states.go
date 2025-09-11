@@ -99,11 +99,47 @@ func (rf *Raft) InitLogState() {
 	rf.lastApplied = 0
 	rf.nextIndex = make([]int, len(rf.peers))
 	rf.matchIndex = make([]int, len(rf.peers))
-	rf.firstLogIndex = 0
+	rf.snapshotEndIndex = 0
 	rf.replicateCond = make([]*sync.Cond, len(rf.peers))
 	for i := range rf.peers {
 		rf.replicateCond[i] = sync.NewCond(&sync.Mutex{})
 	}
+}
+
+func (rf *Raft) GetLastLogIndexAndTermWithoutLock() (int, int){
+	lastLogIndex := rf.GetLastLogIndexWithoutLock()
+	lastLog, _ := rf.GetLogAtIndexWithoutLock(lastLogIndex)
+	return lastLogIndex, lastLog.Term
+}
+
+func (rf *Raft) GetLastLogTermWithoutLock() int {
+	lastLogIndex := rf.GetLastLogIndexWithoutLock()
+	lastLog, _ := rf.GetLogAtIndexWithoutLock(lastLogIndex)
+	return lastLog.Term
+}
+func (rf *Raft) GetLastLogIndexWithoutLock() int {
+	return len(rf.log) + rf.snapshotEndIndex - 1
+}
+
+func (rf *Raft) GetLogAtIndexWithoutLock(index int) (LogEntry, bool) {
+	index = index - rf.snapshotEndIndex
+	return rf.log[index], true
+}
+func (rf *Raft) GetLogTermAtIndexWithoutLock(index int) int {
+	log, ok := rf.GetLogAtIndexWithoutLock(index)
+	if !ok {
+		return -1
+	}
+	return log.Term
+}
+
+func (rf *Raft) GetLogListBeginAtIndexWithoutLock(index int) []LogEntry {
+	index = index - rf.snapshotEndIndex
+    return rf.log[index:]
+}
+
+func (rf *Raft) GetSnapshotEndTermWithoutLock() int {
+	return rf.log[0].Term
 }
 func (rf *Raft) IsNewerThan(index int, term int) bool {
 	lastLogIndex, lastLogTerm := rf.GetLastLogIndexAndTermWithoutLock()
@@ -139,4 +175,13 @@ func (rf *Raft) IsMatchPrevLog(index int, term int) bool {
 		return false
 	}
 	return true
+}
+
+func (rf *Raft) IsExistedInLogList(index int) bool {
+	return index <= rf.GetLastLogIndexWithoutLock() &&
+			index > rf.snapshotEndIndex
+}
+
+func (rf *Raft) IsExistedInSnapshot(index int) bool {
+	return index <= rf.snapshotEndIndex
 }
