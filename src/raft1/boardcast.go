@@ -13,14 +13,14 @@ func (rf *Raft) SendAndHandleRPC(
 	reply := replyFactory()
 	for true {
 		ok := sendFunction(server, args, reply)
-		if ok {
-			if handleFunction != nil {
-				handleFunction(server, args, reply)
-			}		
+		if ok || handleFunction == nil {
 			break
 		}
 		time.Sleep(100 * time.Millisecond)
 	}
+	if handleFunction != nil {
+		handleFunction(server, args, reply)
+	}		
 }
 func (rf *Raft) BoardcastWithPeersIndex(
 	argsFactory RPCFactoryFunc,
@@ -89,6 +89,6 @@ func (rf *Raft) BoardcastHeartbeat() {
 		}),
 		rf.MakeEmptyReplyFactoryFunction(RPCAppendEntries),
 		rf.MakeSendFunction(RPCAppendEntries),
-		nil,
+		rf.MakeHandleFunction(RPCAppendEntries),
 	)
 }

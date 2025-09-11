@@ -7,10 +7,10 @@ import (
 func (rf *Raft) SendHeartbeat() {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	mDebug(rf, "Send heartbeat...")
 	rf.lastHeartbeatTime = time.Now()
 	rf.UpdateCommitIndex()
 	rf.BoardcastHeartbeat()
-	rf.WakeupAllReplicators()
 }
 
 func (rf *Raft) StartElection() {

@@ -54,13 +54,14 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 	term := args.Term
-
-	reply.Term = rf.currentTerm
-	reply.VoteGranted = false
+	// mDebug(rf, "Got Vote RPC from %d, term %d", args.CandidateId, args.Term)
 
 	if rf.IsFoundAnotherLeader(term) {
 		rf.ChangeRoleWithoutLock(Follower, term)
 	}
+
+	reply.Term = rf.currentTerm
+	reply.VoteGranted = false
 
 	if term < rf.currentTerm ||
 		rf.IsVotedForOthers(args.CandidateId) || 
@@ -73,29 +74,31 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.votedFor = args.CandidateId
 	reply.VoteGranted = true
 	rf.persist()
+	// mDebug(rf, "Grand vote to %d", args.CandidateId)
 }
 
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 
-	// mDebug(rf, "Got append RPC with leaderCommit %d ", args.LeaderCommit)
+	mDebug(rf, "Got append RPC with pervLogIndex %d loglen %d term %d", args.PrevLogIndex, len(args.Entries), args.Term)
+
 	term := args.Term
 	reply.Term = rf.currentTerm
 	reply.Success = false
-
-	if term < rf.currentTerm {
-		// mDebug(rf, "Reject append RPC, term %d, current %d", term, rf.currentTerm)
-		return
-	} 
 
 	if rf.IsFoundAnotherLeader(term) {
 		rf.ChangeRoleWithoutLock(Follower, term)
 	} 
 
+	if term < rf.currentTerm {
+		mDebug(rf, "Reject append RPC, term %d, current %d", term, rf.currentTerm)
+		return
+	} 
+
 	rf.lastHeartbeatTime = time.Now()
 	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
-		// mDebug(rf, "Reject append RPC, prevLogIndex %d-%d, prevLogTerm %d-%d", args.PrevLogIndex,rf.lastLogIndex, args.PrevLogTerm,rf.lastLogTerm)
+		mDebug(rf, "Reject append RPC, prevLogIndex %d-%d, prevLogTerm %d-%d", args.PrevLogIndex,rf.lastLogIndex, args.PrevLogTerm,rf.lastLogTerm)
 		return
 	}
 
@@ -115,6 +118,11 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	// mDebug(rf, "Got append reply from %d, term %d", server, reply.Term)
+	if reply.Term < rf.currentTerm || rf.state != Leader {
+		mDebug(rf, "Reject Append reply from %d, term %d", server, reply.Term)
+		return
+	}
 	if rf.IsFoundAnotherLeader(reply.Term) { 
 		rf.ChangeRoleWithoutLock(Follower, reply.Term)
 		return
@@ -125,20 +133,26 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 		mDebug(rf, "Update matchIndex %d to %d", server, rf.matchIndex[server])
 	} else {
 		if args.PrevLogIndex == 0 {
+			// mDebug(rf, "Reject append RPC without Backforwards")
 			return
 		}
 		rf.BackforwardsNextIndex(server)
-		// mDebug(rf, "Retry append with prevLogIndex %d", rf.nextIndex[server])
-		go func() {
-			rf.replicateCond[server].Signal()
-		}()
+		// mDebug(rf, "Retry append with prevLogIndex %d", rf.nextIndex[server] - 1)
+		rf.replicateCond[server].Signal()
 	}
 }
 func (rf *Raft) HandleVoteReply(server int, args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	if rf.IsFoundAnotherLeader(reply.Term) { 
+	// mDebug(rf, "Got Vote reply from %d, term %d", server, reply.Term)
+	if reply.Term < rf.currentTerm {
+		// mDebug(rf, "Reject Vote reply from %d, term %d", server, reply.Term)
+		return
+	}
+	if rf.IsFoundAnotherLeader(reply.Term) && reply.Term > rf.currentTerm { 
+		// 同期的 candidate 不能改变 leader
 		rf.ChangeRoleWithoutLock(Follower, reply.Term)
+		// mDebug(rf, "Change to follower, reply from %d, term %d", server, reply.Term)
 		return
 	} 
 	if reply.VoteGranted {

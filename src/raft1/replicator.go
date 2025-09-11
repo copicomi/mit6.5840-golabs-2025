@@ -47,7 +47,7 @@ func (rf *Raft) BackforwardsNextIndex(server int) {
 		}
 	}
 	rf.nextIndex[server] = i + 1
-	mDebug(rf, "BackforwardsNextIndex %d", rf.nextIndex[server])
+	// mDebug(rf, "BackforwardsNextIndex %d", rf.nextIndex[server])
 }
 
 func (rf *Raft) WakeupAllReplicators() { 

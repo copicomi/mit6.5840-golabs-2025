@@ -23,13 +23,13 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	isLeader := rf.state == Leader
 	// Your code here (3B).
 	if isLeader {
-		mDebug(rf, "start begin")
 		log := LogEntry{
 			Command: command,
 			Term: rf.currentTerm,
 		}
 		rf.AppendLogListWithoutLock([]LogEntry{log}, rf.lastLogIndex)
 		rf.WakeupAllReplicators()
+		mDebug(rf, "wakeup Start...")
 	}  
 	rf.mu.Unlock()
 	return index, term, isLeader
@@ -49,7 +49,7 @@ func (rf *Raft) CutLogListWithoutLock(index int) {
 	rf.lastLogIndex = index-1
 	rf.lastLogTerm = rf.log[rf.lastLogIndex].Term
 	rf.persist()
-	// TODO(3B): Delete this line when complete 3B
+	mDebug(rf, "Cut log list, len = %d, lastLogIndex = %d", len(rf.log), rf.lastLogIndex)
 }
 
 func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
@@ -64,5 +64,5 @@ func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 		}
 		rf.AppendSingleLogWithoutLock(entry)
 	}
-	// mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.lastLogIndex, rf.lastLogIndex)
+	mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.lastLogIndex, rf.lastLogIndex)
 }
