@@ -135,7 +135,7 @@ func (rf *Raft) IsMatchPrevLog(index int, term int) bool {
 	if rf.GetLastLogIndexWithoutLock() < index {
 		return false
 	}
-	if rf.log[index].Term != term {
+	if rf.GetLogTermAtIndexWithoutLock(index) != term {
 		return false
 	}
 	return true

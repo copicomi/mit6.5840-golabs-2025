@@ -18,16 +18,21 @@ func (rf *Raft) applier() {
 }
 
 func (rf *Raft) ApplyCommittedLogs() {
+	mDebug(rf, "Apply Get lock")
+	commitIndex := rf.commitIndex
 	for i := rf.lastApplied + 1; i <= rf.commitIndex; i++ {
-		entry := rf.log[i]
+		entry, _ := rf.GetLogAtIndexWithoutLock(i)
+		mDebug(rf, "ApplyCommittedLogs %d", i)	
 		rf.applyCh <- raftapi.ApplyMsg{
 			CommandValid: true,
 			Command:      entry.Command,
 			CommandIndex: i,
 		}
+		mDebug(rf, "Apply End %d", i)	
 	}
 	// mDebug(rf, "Apply %d logs", rf.commitIndex - rf.lastApplied)
-	rf.lastApplied = rf.commitIndex
+	rf.lastApplied = max(rf.lastApplied, commitIndex)
+	mDebug(rf, "Apply unlock")
 }
 
 func (rf *Raft) UpdateCommitIndex() {
@@ -44,7 +49,7 @@ func (rf *Raft) UpdateCommitIndex() {
 	if l == rf.commitIndex {
 		return
 	}
-	if rf.log[l].Term == rf.currentTerm {
+	if rf.GetLogTermAtIndexWithoutLock(l) == rf.currentTerm {
 		mDebug(rf, "Update commit index to %d", l)
 		rf.commitIndex = l
 	}

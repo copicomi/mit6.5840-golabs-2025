@@ -50,16 +50,18 @@ type Raft struct {
 
 	// 3D snapshot
 	firstLogIndex int
+	snapshot []byte
 }
 
 func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	// Your code here (3D).
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
+	// 不要锁，上层通过 apply 定期调用 snapshot，而 apply 过程本身就持有锁，否则会死锁
 	cutIndex := index - rf.firstLogIndex
 	rf.log = rf.log[cutIndex:]
 	rf.firstLogIndex = index
+	rf.snapshot = snapshot
 	rf.persist()
+	mDebug(rf, "SNAPSHOT end at %d", index)
 }
 // the service or tester wants to create a Raft server. the ports
 // of all the Raft servers (including this one) are in peers[]. this
@@ -84,6 +86,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
+	rf.snapshot = persister.ReadSnapshot()
 
 	// start ticker goroutine to start elections
 	go rf.ticker()

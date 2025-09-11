@@ -15,6 +15,7 @@ func (rf *Raft) replicator(server int) {
 func (rf *Raft) replicateOneRound(server int) { 
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	mDebugLock(rf, "replicateOneRound")
 	if rf.state != Leader {
 		return
 	}
@@ -23,8 +24,8 @@ func (rf *Raft) replicateOneRound(server int) {
 			Term:         rf.currentTerm,
 			LeaderId:     rf.me,
 			PrevLogIndex: rf.nextIndex[server] - 1,
-			PrevLogTerm:  rf.log[rf.nextIndex[server]-1].Term,
-			Entries:      rf.log[rf.nextIndex[server]:],
+			PrevLogTerm:  rf.GetLogTermAtIndexWithoutLock(rf.nextIndex[server] - 1),
+			Entries:      rf.GetLogListBeginAtIndexWithoutLock(rf.nextIndex[server]),
 			LeaderCommit: rf.commitIndex,
 		}
 		// mDebug(rf, "replicate %d at %d", server, args.PrevLogIndex)
@@ -40,9 +41,9 @@ func (rf *Raft) replicateOneRound(server int) {
 
 func (rf *Raft) BackforwardsNextIndex(server int) {
 	i := rf.nextIndex[server] - 1
-	conflictTerm := rf.log[i].Term
-	for ; i > 0; i-- {
-		if rf.log[i].Term != conflictTerm {
+	conflictTerm := rf.GetLogTermAtIndexWithoutLock(i)
+	for ; i > rf.firstLogIndex; i-- {
+		if rf.GetLogTermAtIndexWithoutLock(i) != conflictTerm {
 			break
 		}
 	}

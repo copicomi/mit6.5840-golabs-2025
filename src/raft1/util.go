@@ -23,6 +23,10 @@ func mDebug(rf *Raft, format string, a ...interface{}) {
 	}
 }
 
+func mDebugLock(rf *Raft, funcName string)  {
+	mDebug(rf, "%s() Have lock", funcName)
+}
+
 func GetRand(min int, max int) int {
 	return rand.Intn(max-min) + min
 }

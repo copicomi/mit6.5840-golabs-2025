@@ -19,6 +19,7 @@ type LogEntry struct {
 // the leader.
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	rf.mu.Lock()
+	defer rf.mu.Unlock()
 	index := rf.GetLastLogIndexWithoutLock() + 1
 	term := rf.currentTerm
 	isLeader := rf.state == Leader
@@ -29,10 +30,9 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 			Term: rf.currentTerm,
 		}
 		rf.AppendLogListWithoutLock([]LogEntry{log}, rf.GetLastLogIndexWithoutLock())
-		rf.WakeupAllReplicators()
+		go rf.WakeupAllReplicators()
 		mDebug(rf, "wakeup Start...")
 	}  
-	rf.mu.Unlock()
 	return index, term, isLeader
 }
 
@@ -62,7 +62,7 @@ func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 		}
 		rf.AppendSingleLogWithoutLock(entry)
 	}
-	mDebug(rf, "Append %d logs, len = %d, lastLogIndex = %d", len(logs), rf.GetLastLogIndexWithoutLock())
+	mDebug(rf, "Append %d logs, lastLogIndex = %d", len(logs), rf.GetLastLogIndexWithoutLock())
 }
 
 func (rf *Raft) GetLastLogIndexAndTermWithoutLock() (int, int){
@@ -82,9 +82,6 @@ func (rf *Raft) GetLastLogIndexWithoutLock() int {
 
 func (rf *Raft) GetLogAtIndexWithoutLock(index int) (LogEntry, bool) {
 	index = index - rf.firstLogIndex
-	if index >= len(rf.log) {
-		return LogEntry{}, false
-	}
 	return rf.log[index], true
 }
 func (rf *Raft) GetLogTermAtIndexWithoutLock(index int) int {
@@ -93,4 +90,9 @@ func (rf *Raft) GetLogTermAtIndexWithoutLock(index int) int {
 		return -1
 	}
 	return log.Term
+}
+
+func (rf *Raft) GetLogListBeginAtIndexWithoutLock(index int) []LogEntry {
+	index = index - rf.firstLogIndex
+    return rf.log[index:]
 }
