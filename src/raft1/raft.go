@@ -50,6 +50,7 @@ type Raft struct {
 	// 3D snapshot
 	snapshotEndIndex int
 	snapshot []byte
+	snapshotMu sync.Mutex
 }
 // the service says it has created a snapshot that has
 // all info up to and including index. this means the
@@ -57,6 +58,8 @@ type Raft struct {
 // that index. Raft should now trim its log as much as possible.
 func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	// Your code here (3D).
+	rf.snapshotMu.Lock()
+	defer rf.snapshotMu.Unlock()
 	rf.SnapShotWithoutLock(index, snapshot)
 }
 
