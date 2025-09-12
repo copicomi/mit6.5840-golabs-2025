@@ -154,13 +154,17 @@ func (rf *Raft) IsVotedForOthers(server int) bool {
 }
 
 func (rf *Raft) IsFoundAnotherLeader(term int) bool {
+	if term == rf.currentTerm && rf.state == Candidate {
+		return false // 同时期候选人不能改变 state
+	}
 	if term > rf.currentTerm {
 		return true
 	}
-	if term == rf.currentTerm && rf.state == Candidate {
-		return true
-	}
 	return false
+}
+
+func (rf *Raft) IsOutofDate(term int) bool {
+	return term < rf.currentTerm
 }
 
 func (rf *Raft) IsMatchPrevLog(index int, term int) bool {
@@ -180,4 +184,9 @@ func (rf *Raft) IsExistedInLogList(index int) bool {
 
 func (rf *Raft) IsExistedInSnapshot(index int) bool {
 	return index <= rf.snapshotEndIndex && index >= 0
+}
+
+func (rf *Raft) UpdateServerMatchIndex(server int, index int) {
+	rf.nextIndex[server] = max(rf.nextIndex[server], index + 1)
+	rf.matchIndex[server] = max(rf.matchIndex[server], index)
 }

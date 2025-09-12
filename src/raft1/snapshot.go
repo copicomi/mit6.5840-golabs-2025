@@ -18,29 +18,21 @@ type InstallSnapshotReply struct {
     Term int
 }
 
-func (rf *Raft) sendInstallSnapshot(server int, args *InstallSnapshotArgs, reply *InstallSnapshotReply) bool {
-	ok := rf.peers[server].Call("Raft.InstallSnapshot", args, reply)
-	return ok
-}
-
 func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapshotReply) { 
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 	mDebug(rf, "InstallSnapshot start")
 
-	term := args.Term
-	reply.Term = rf.currentTerm
-	if term < rf.currentTerm {
+	if !rf.CheckRPCTermWithoutLock(args.Term) {
 		return
 	}
-	if rf.IsFoundAnotherLeader(term) {
-		rf.ChangeRoleWithoutLock(Follower, term)
-	}
 	rf.lastHeartbeatTime = time.Now()
+	reply.Term = rf.currentTerm
+
 	if args.LastIncludedIndex <= rf.commitIndex {
 		return
 	}
-	rf.SnapShotWithoutLock(args.LastIncludedIndex, args.Data)
+
 	rf.ApplySnapshot(args.Data, args.LastIncludedIndex, args.LastIncludedTerm)
 	mDebug(rf, "InstallSnapshot End")
 }
@@ -48,6 +40,15 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 func (rf *Raft) HandleInstallReply(server int, args *InstallSnapshotArgs, reply *InstallSnapshotReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	if !rf.CheckRPCTermWithoutLock(reply.Term) {
+		return
+	}
+	rf.UpdateServerMatchIndex(server, args.LastIncludedIndex)
+}
+
+func (rf *Raft) sendInstallSnapshot(server int, args *InstallSnapshotArgs, reply *InstallSnapshotReply) bool {
+	ok := rf.peers[server].Call("Raft.InstallSnapshot", args, reply)
+	return ok
 }
 
 func (rf *Raft) ApplySnapshot(snapshot []byte, index int, term int) {
