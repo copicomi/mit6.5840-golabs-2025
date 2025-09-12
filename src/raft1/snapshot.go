@@ -23,12 +23,14 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 	defer rf.mu.Unlock()
 	mDebugIndex(rf, "InstallSnapshot start")
 
+	reply.Term = rf.currentTerm
 	if !rf.CheckRPCTermWithoutLock(args.Term) {
 		mDebugIndex(rf, "InstallSnapshot reject Term")
 		return
 	}
-	rf.lastHeartbeatTime = time.Now()
+
 	reply.Term = rf.currentTerm
+	rf.lastHeartbeatTime = time.Now()
 
 	if args.LastIncludedIndex <= rf.commitIndex {
 		mDebugIndex(rf, "InstallSnapshot reject")
@@ -42,10 +44,15 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 func (rf *Raft) HandleInstallReply(server int, args *InstallSnapshotArgs, reply *InstallSnapshotReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	mDebug(rf, "HandleInstallReply from server %d term %d", server, reply.Term)
 	if !rf.CheckRPCTermWithoutLock(reply.Term) {
 		return
 	}
+	if rf.state != Leader {
+		return
+	}
 	rf.UpdateServerMatchIndex(server, args.LastIncludedIndex)
+	mDebug(rf, "InstallSnapshot update matchIndex %d to %d", server, args.LastIncludedIndex)
 }
 
 func (rf *Raft) sendInstallSnapshot(server int, args *InstallSnapshotArgs, reply *InstallSnapshotReply) bool {
@@ -84,7 +91,7 @@ func (rf *Raft) SnapShotWithLock(index int, snapshot []byte) {
 func (rf *Raft) SnapShotWithoutLock(index int, snapshot []byte) {
 	mDebug(rf, "SNAPSHOT at %d", index)
 	mDebugIndex(rf, "snapshot")
-	defer mDebugIndex(rf, "snapshot")
+	defer mDebugIndex(rf, "snapshot END")
 	if index <= rf.snapshotEndIndex || index > rf.commitIndex {
 		mDebug(rf, "reject SNAPSHOT")
 		return

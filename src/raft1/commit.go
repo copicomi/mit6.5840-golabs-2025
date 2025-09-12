@@ -20,6 +20,8 @@ func (rf *Raft) applier() {
 func (rf *Raft) ApplyCommittedLogs() {
 	mDebug(rf, "Apply %d logs to %d", rf.commitIndex - rf.lastApplied, rf.commitIndex)
 	for i := rf.lastApplied + 1; i <= rf.commitIndex; i++ {
+		mDebug(rf, "begin apply log %d", i)
+		mDebugIndex(rf, "APPLY ")
 		entry, _ := rf.GetLogAtIndexWithoutLock(i)
 		rf.lastApplied = i
 		rf.applyCh <- raftapi.ApplyMsg{
@@ -27,6 +29,7 @@ func (rf *Raft) ApplyCommittedLogs() {
 			Command:      entry.Command,
 			CommandIndex: i,
 		}
+		mDebug(rf, "end apply log %d", i)
 	}
 }
 

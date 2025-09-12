@@ -57,7 +57,6 @@ type Raft struct {
 // that index. Raft should now trim its log as much as possible.
 func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	// Your code here (3D).
-	// 不要锁，上层通过 apply 定期调用 snapshot，而 apply 过程本身就持有锁，否则会死锁
 	rf.SnapShotWithoutLock(index, snapshot)
 }
 

@@ -54,7 +54,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	// Your code here (3A, 3B).
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	 mDebug(rf, "Got Vote RPC from %d, term %d", args.CandidateId, args.Term)
+	 //mDebug(rf, "Got Vote RPC from %d, term %d", args.CandidateId, args.Term)
 	if !rf.CheckRPCTermWithoutLock(args.Term) {
 		return 
 	}
@@ -66,7 +66,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 
 	if rf.IsVotedForOthers(args.CandidateId) || 
 		rf.IsNewerThan(args.LastLogIndex, args.LastLogTerm) {
-			mDebug(rf, "Reject vote RPC")
+			//mDebug(rf, "Reject vote RPC")
 		return
 	}
 	rf.lastHeartbeatTime = time.Now()
@@ -74,7 +74,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.votedFor = args.CandidateId
 	reply.VoteGranted = true
 	rf.persist()
-	 mDebug(rf, "Grand vote to %d", args.CandidateId)
+	 //mDebug(rf, "Grand vote to %d", args.CandidateId)
 }
 
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
@@ -97,7 +97,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		return
 	}
 	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
-		mDebug(rf, "Reject append RPC, log is not match")
+		//mDebug(rf, "Reject append RPC, log is not match")
 		return
 	}
 	rf.AppendLogListWithoutLock(args.Entries, args.PrevLogIndex)
