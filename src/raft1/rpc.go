@@ -54,16 +54,19 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	// Your code here (3A, 3B).
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	// mDebug(rf, "Got Vote RPC from %d, term %d", args.CandidateId, args.Term)
+	 mDebug(rf, "Got Vote RPC from %d, term %d", args.CandidateId, args.Term)
 	if !rf.CheckRPCTermWithoutLock(args.Term) {
 		return 
+	}
+	if rf.IsFoundAnotherCandidateInSameTerm(args.Term) {
+		rf.ChangeRoleWithoutLock(Follower, rf.currentTerm)
 	}
 	reply.Term = rf.currentTerm
 	reply.VoteGranted = false
 
 	if rf.IsVotedForOthers(args.CandidateId) || 
 		rf.IsNewerThan(args.LastLogIndex, args.LastLogTerm) {
-			//mDebug(rf, "Reject vote RPC, lastLogIndex %d-%d, lastLogTerm %d-%d", args.LastLogIndex,rf.lastLogIndex, args.LastLogTerm,rf.lastLogTerm)
+			mDebug(rf, "Reject vote RPC")
 		return
 	}
 	rf.lastHeartbeatTime = time.Now()
@@ -71,7 +74,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.votedFor = args.CandidateId
 	reply.VoteGranted = true
 	rf.persist()
-	// mDebug(rf, "Grand vote to %d", args.CandidateId)
+	 mDebug(rf, "Grand vote to %d", args.CandidateId)
 }
 
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
@@ -128,7 +131,7 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 func (rf *Raft) HandleVoteReply(server int, args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	// mDebug(rf, "Got Vote reply from %d, term %d", server, reply.Term)
+	 mDebug(rf, "Got Vote reply from %d, term %d", server, reply.Term)
 	if !rf.CheckRPCTermWithoutLock(reply.Term) {
 		return
 	}

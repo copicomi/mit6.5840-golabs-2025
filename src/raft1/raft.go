@@ -86,10 +86,6 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.readPersist(persister.ReadRaftState())
 	rf.snapshot = persister.ReadSnapshot()
 
-	for i := range rf.peers {
-		rf.nextIndex[i] = rf.GetLastLogIndexWithoutLock() + 1
-		rf.matchIndex[i] = rf.snapshotEndIndex
-	}
 	// start ticker goroutine to start elections
 	go rf.ticker()
 	go rf.applier()

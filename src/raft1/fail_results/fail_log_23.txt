@@ -1,0 +1,1581 @@
+2025/09/12 16:51:29 [0] S0 restart!!
+2025/09/12 16:51:29 [0] S1 restart!!
+2025/09/12 16:51:29 [0] S2 restart!!
+Test (3D): install snapshots (disconnect) (reliable network)...
+2025/09/12 16:51:30 [1] S1 start election...
+2025/09/12 16:51:30 [1] S0 start election...
+2025/09/12 16:51:30 [1] S2 start election...
+2025/09/12 16:51:30 [1] S2 Got Vote RPC from 1, term 1
+2025/09/12 16:51:30 [1] S2 Grand vote to 1
+2025/09/12 16:51:30 [1] S2 Got Vote RPC from 0, term 1
+2025/09/12 16:51:30 [1] S2 Reject vote RPC
+2025/09/12 16:51:30 [1] S0 Got Vote RPC from 1, term 1
+2025/09/12 16:51:30 [1] S0 Grand vote to 1
+2025/09/12 16:51:30 [1] S1 Got Vote reply from 2, term 1
+2025/09/12 16:51:30 [1] S1 Change to leader
+2025/09/12 16:51:30 [1] S0 Got Vote reply from 2, term 1
+2025/09/12 16:51:30 [1] S1 Got Vote RPC from 0, term 1
+2025/09/12 16:51:30 [1] S1 Reject vote RPC
+2025/09/12 16:51:30 [1] S0 Got Vote RPC from 2, term 1
+2025/09/12 16:51:30 [1] S0 Reject vote RPC
+2025/09/12 16:51:30 [1] S1 Got Vote RPC from 2, term 1
+2025/09/12 16:51:30 [1] S1 Reject vote RPC
+2025/09/12 16:51:30 [1] S0 Got Vote reply from 1, term 1
+2025/09/12 16:51:30 [1] S2 Got Vote reply from 0, term 1
+2025/09/12 16:51:30 [1] S1 Got Vote reply from 0, term 1
+2025/09/12 16:51:30 [1] S2 Got Vote reply from 1, term 1
+2025/09/12 16:51:30 [1] S1 start one(5351328707314124313)
+2025/09/12 16:51:30 [1] S1 Append 1 logs, lastLogIndex = 1
+2025/09/12 16:51:30 [1] S2 Reject append RPC, log is not match
+2025/09/12 16:51:30 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:30 [1] S1 send APPEND ENTRIES RPC to server 0, prev 0, loglen 1, term 1
+2025/09/12 16:51:30 [1] S0 Got append RPC with pervLogIndex 0 loglen 1 term 1
+2025/09/12 16:51:30 [1] S0 , apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 16:51:30 [1] S0 Append 1 logs, lastLogIndex = 1
+2025/09/12 16:51:30 [1] S1 Update commit index to 1
+2025/09/12 16:51:30 [1] S2 Reject append RPC, log is not match
+2025/09/12 16:51:30 [1] S1 send APPEND ENTRIES RPC to server 2, prev 0, loglen 1, term 1
+2025/09/12 16:51:30 [1] S2 Got append RPC with pervLogIndex 0 loglen 1 term 1
+2025/09/12 16:51:30 [1] S2 , apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 16:51:30 [1] S2 Append 1 logs, lastLogIndex = 1
+2025/09/12 16:51:30 [1] S0 Apply 1 logs to 1
+2025/09/12 16:51:30 [1] S1 Apply 1 logs to 1
+2025/09/12 16:51:30 [1] S2 Apply 1 logs to 1
+2025/09/12 16:51:31 [1] S1 start one(2849497290967771449)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 2
+2025/09/12 16:51:31 [1] S1 send APPEND ENTRIES RPC to server 2, prev 1, loglen 1, term 1
+2025/09/12 16:51:31 [1] S1 send APPEND ENTRIES RPC to server 0, prev 1, loglen 1, term 1
+2025/09/12 16:51:31 [1] S0 Got append RPC with pervLogIndex 1 loglen 1 term 1
+2025/09/12 16:51:31 [1] S0 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:31 [1] S0 Append 1 logs, lastLogIndex = 2
+2025/09/12 16:51:31 [1] S1 Update commit index to 2
+2025/09/12 16:51:31 [1] S0 Apply 1 logs to 2
+2025/09/12 16:51:31 [1] S1 Apply 1 logs to 2
+2025/09/12 16:51:31 [1] S1 start one(5002575329202523154)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 3
+2025/09/12 16:51:31 [1] S1 start one(3777850246462974041)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 4
+2025/09/12 16:51:31 [1] S1 start one(2639814130830018598)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 5
+2025/09/12 16:51:31 [1] S1 start one(8635849640115082797)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 6
+2025/09/12 16:51:31 [1] S1 start one(1817712668397932387)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 7
+2025/09/12 16:51:31 [1] S1 start one(5280435126770381864)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 8
+2025/09/12 16:51:31 [1] S1 start one(469245708862389776)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 9
+2025/09/12 16:51:31 [1] S1 start one(7764841284169073630)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 10
+2025/09/12 16:51:31 [1] S1 start one(7874005644424466485)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 11
+2025/09/12 16:51:31 [1] S1 send APPEND ENTRIES RPC to server 0, prev 2, loglen 9, term 1
+2025/09/12 16:51:31 [1] S1 start one(7065076744079463553)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 12
+2025/09/12 16:51:31 [1] S1 start one(4787609291850870257)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 13
+2025/09/12 16:51:31 [1] S1 start one(843723319823981366)
+2025/09/12 16:51:31 [1] S1 Append 1 logs, lastLogIndex = 14
+2025/09/12 16:51:31 [1] S0 Got append RPC with pervLogIndex 2 loglen 9 term 1
+2025/09/12 16:51:31 [1] S0 , apply 2, commit 2, log 2, snapshot 0, len 3
+2025/09/12 16:51:31 [1] S1 send APPEND ENTRIES RPC to server 2, prev 1, loglen 13, term 1
+2025/09/12 16:51:31 [1] S0 Append 9 logs, lastLogIndex = 11
+2025/09/12 16:51:31 [1] S1 Update commit index to 11
+2025/09/12 16:51:31 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:31 [1] S1 Apply 9 logs to 11
+2025/09/12 16:51:31 [1] S1 SNAPSHOT at 9
+2025/09/12 16:51:31 [1] S1 snapshot, apply 10, commit 11, log 14, snapshot 0, len 15
+2025/09/12 16:51:31 [1] S1 snapshot, apply 10, commit 11, log 14, snapshot 9, len 6
+2025/09/12 16:51:31 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:31 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:31 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:31 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:31 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:31 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:31 [2] S2 start election...
+2025/09/12 16:51:31 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:31 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:31 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:31 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:31 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:31 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:31 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:31 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:31 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:31 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:32 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:32 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:32 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:32 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:32 [3] S2 start election...
+2025/09/12 16:51:32 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:32 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:32 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:32 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:32 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:32 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:32 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:32 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:32 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:32 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:32 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:32 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:32 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:32 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:33 [4] S2 start election...
+2025/09/12 16:51:33 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:33 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:33 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:33 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:33 [1] S1 start one(843723319823981366)
+2025/09/12 16:51:33 [1] S1 Append 1 logs, lastLogIndex = 15
+2025/09/12 16:51:33 [1] S1 send InstallSnapshot to 2 at 9
+2025/09/12 16:51:33 [1] S1 send InstallSnapshot to 0 at 9
+2025/09/12 16:51:33 [1] S0 InstallSnapshot start, apply 2, commit 2, log 11, snapshot 0, len 12
+2025/09/12 16:51:33 [1] S0 InstallSnapshot end, apply 9, commit 9, log 11, snapshot 9, len 3
+2025/09/12 16:51:33 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:33 [1] S0 Reject append RPC, log is not match
+2025/09/12 16:51:33 [1] S1 send APPEND ENTRIES RPC to server 0, prev 9, loglen 6, term 1
+2025/09/12 16:51:33 [1] S0 Got append RPC with pervLogIndex 9 loglen 6 term 1
+2025/09/12 16:51:33 [1] S0 , apply 9, commit 9, log 11, snapshot 9, len 3
+2025/09/12 16:51:33 [1] S0 Append 6 logs, lastLogIndex = 15
+2025/09/12 16:51:33 [1] S0 Apply 2 logs to 11
+2025/09/12 16:51:33 [1] S1 Update commit index to 15
+2025/09/12 16:51:33 [1] S0 Apply 4 logs to 15
+2025/09/12 16:51:33 [1] S1 Apply 4 logs to 15
+2025/09/12 16:51:33 [1] S1 start one(6766192379812067771)
+2025/09/12 16:51:33 [1] S1 Append 1 logs, lastLogIndex = 16
+2025/09/12 16:51:33 [1] S1 send InstallSnapshot to 2 at 9
+2025/09/12 16:51:33 [1] S1 send APPEND ENTRIES RPC to server 0, prev 15, loglen 1, term 1
+2025/09/12 16:51:33 [1] S0 Got append RPC with pervLogIndex 15 loglen 1 term 1
+2025/09/12 16:51:33 [1] S0 , apply 15, commit 15, log 15, snapshot 9, len 7
+2025/09/12 16:51:33 [1] S0 Append 1 logs, lastLogIndex = 16
+2025/09/12 16:51:33 [4] S2 InstallSnapshot start, apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:33 [4] S2 InstallSnapshot reject Term, apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:33 [1] S1 Update commit index to 16
+2025/09/12 16:51:33 [4] S2 Reject append RPC, term 1, current 4
+2025/09/12 16:51:33 [4] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:33 [1] S0 Apply 1 logs to 16
+2025/09/12 16:51:33 [4] S1 Apply 1 logs to 16
+2025/09/12 16:51:33 [5] S2 start election...
+2025/09/12 16:51:33 [4] S1 Got Vote RPC from 2, term 5
+2025/09/12 16:51:33 [5] S1 Reject vote RPC
+2025/09/12 16:51:33 [5] S2 Got Vote reply from 1, term 5
+2025/09/12 16:51:33 [1] S0 Got Vote RPC from 2, term 5
+2025/09/12 16:51:33 [5] S0 Reject vote RPC
+2025/09/12 16:51:33 [5] S2 Got Vote reply from 0, term 5
+2025/09/12 16:51:34 [6] S1 start election...
+2025/09/12 16:51:34 [5] S2 Got Vote RPC from 1, term 6
+2025/09/12 16:51:34 [6] S2 Grand vote to 1
+2025/09/12 16:51:34 [6] S1 Got Vote reply from 2, term 6
+2025/09/12 16:51:34 [6] S1 Change to leader
+2025/09/12 16:51:34 [5] S0 Got Vote RPC from 1, term 6
+2025/09/12 16:51:34 [6] S0 Grand vote to 1
+2025/09/12 16:51:34 [6] S1 Got Vote reply from 0, term 6
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:34 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 7, term 6
+2025/09/12 16:51:34 [6] S2 Got append RPC with pervLogIndex 9 loglen 7 term 6
+2025/09/12 16:51:34 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:34 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 7, term 6
+2025/09/12 16:51:34 [6] S2 Got append RPC with pervLogIndex 9 loglen 7 term 6
+2025/09/12 16:51:34 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:34 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 7, term 6
+2025/09/12 16:51:34 [6] S2 Got append RPC with pervLogIndex 9 loglen 7 term 6
+2025/09/12 16:51:34 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:34 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 7, term 6
+2025/09/12 16:51:34 [6] S2 Got append RPC with pervLogIndex 9 loglen 7 term 6
+2025/09/12 16:51:34 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:34 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 7, term 6
+2025/09/12 16:51:35 [6] S2 Got append RPC with pervLogIndex 9 loglen 7 term 6
+2025/09/12 16:51:35 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 7, term 6
+2025/09/12 16:51:35 [6] S2 Got append RPC with pervLogIndex 9 loglen 7 term 6
+2025/09/12 16:51:35 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 7, term 6
+2025/09/12 16:51:35 [6] S2 Got append RPC with pervLogIndex 9 loglen 7 term 6
+2025/09/12 16:51:35 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 7, term 6
+2025/09/12 16:51:35 [6] S2 Got append RPC with pervLogIndex 9 loglen 7 term 6
+2025/09/12 16:51:35 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 7, term 6
+2025/09/12 16:51:35 [6] S2 Got append RPC with pervLogIndex 9 loglen 7 term 6
+2025/09/12 16:51:35 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 start one(6766192379812067771)
+2025/09/12 16:51:35 [6] S1 Append 1 logs, lastLogIndex = 17
+2025/09/12 16:51:35 [6] S1 send APPEND ENTRIES RPC to server 0, prev 16, loglen 1, term 6
+2025/09/12 16:51:35 [6] S0 Got append RPC with pervLogIndex 16 loglen 1 term 6
+2025/09/12 16:51:35 [6] S0 , apply 16, commit 16, log 16, snapshot 9, len 8
+2025/09/12 16:51:35 [6] S0 Append 1 logs, lastLogIndex = 17
+2025/09/12 16:51:35 [6] S1 Update commit index to 17
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:35 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:35 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 Apply 1 logs to 17
+2025/09/12 16:51:35 [6] S0 Apply 1 logs to 17
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:35 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:35 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:35 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:35 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:35 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:35 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:35 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:35 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:35 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:35 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:36 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:36 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:36 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:36 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:36 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:36 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:36 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:36 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:36 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:36 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:36 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:36 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:36 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:36 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:36 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:36 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:36 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:36 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:36 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:36 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:36 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:36 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:37 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:37 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:37 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:37 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:37 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:37 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:37 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:37 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 8, term 6
+2025/09/12 16:51:37 [6] S2 Got append RPC with pervLogIndex 9 loglen 8 term 6
+2025/09/12 16:51:37 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 start one(6766192379812067771)
+2025/09/12 16:51:37 [6] S1 Append 1 logs, lastLogIndex = 18
+2025/09/12 16:51:37 [6] S1 send APPEND ENTRIES RPC to server 0, prev 17, loglen 1, term 6
+2025/09/12 16:51:37 [6] S0 Got append RPC with pervLogIndex 17 loglen 1 term 6
+2025/09/12 16:51:37 [6] S0 , apply 17, commit 17, log 17, snapshot 9, len 9
+2025/09/12 16:51:37 [6] S0 Append 1 logs, lastLogIndex = 18
+2025/09/12 16:51:37 [6] S1 Update commit index to 18
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:37 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:37 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 Apply 1 logs to 18
+2025/09/12 16:51:37 [6] S0 Apply 1 logs to 18
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:37 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:37 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:37 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:37 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:37 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:37 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:37 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:37 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:37 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:37 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:38 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:38 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:38 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:38 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:38 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:38 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:38 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:38 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:38 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:38 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:38 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:38 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:38 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:38 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:38 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:38 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:38 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:38 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:38 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:38 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:38 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:38 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:39 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:39 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:39 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:39 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:39 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:39 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 9, term 6
+2025/09/12 16:51:39 [6] S2 Got append RPC with pervLogIndex 9 loglen 9 term 6
+2025/09/12 16:51:39 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 start one(6766192379812067771)
+2025/09/12 16:51:39 [6] S1 Append 1 logs, lastLogIndex = 19
+2025/09/12 16:51:39 [6] S1 send APPEND ENTRIES RPC to server 0, prev 18, loglen 1, term 6
+2025/09/12 16:51:39 [6] S0 Got append RPC with pervLogIndex 18 loglen 1 term 6
+2025/09/12 16:51:39 [6] S0 , apply 18, commit 18, log 18, snapshot 9, len 10
+2025/09/12 16:51:39 [6] S0 Append 1 logs, lastLogIndex = 19
+2025/09/12 16:51:39 [6] S1 Update commit index to 19
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 send APPEND ENTRIES RPC to server 2, prev 9, loglen 10, term 6
+2025/09/12 16:51:39 [6] S2 Got append RPC with pervLogIndex 9 loglen 10 term 6
+2025/09/12 16:51:39 [6] S2 , apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 Apply 1 logs to 19
+2025/09/12 16:51:39 [6] S1 SNAPSHOT at 19
+2025/09/12 16:51:39 [6] S1 snapshot, apply 19, commit 19, log 19, snapshot 9, len 11
+2025/09/12 16:51:39 [6] S1 snapshot, apply 19, commit 19, log 19, snapshot 19, len 1
+2025/09/12 16:51:39 [6] S0 Apply 1 logs to 19
+2025/09/12 16:51:39 [6] S0 SNAPSHOT at 19
+2025/09/12 16:51:39 [6] S0 snapshot, apply 19, commit 19, log 19, snapshot 9, len 11
+2025/09/12 16:51:39 [6] S0 snapshot, apply 19, commit 19, log 19, snapshot 19, len 1
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:39 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:39 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:40 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:40 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:40 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:40 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:40 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:40 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:40 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:40 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:40 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:40 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:40 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:40 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:40 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:40 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:40 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:40 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:40 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:40 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:40 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:40 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:41 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:41 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:41 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:41 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:41 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:41 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:41 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:41 [6] S1 Reject handle append RPC without Backforwards
+2025/09/12 16:51:41 [6] S1 start one(6766192379812067771)
+2025/09/12 16:51:41 [6] S1 Append 1 logs, lastLogIndex = 20
+2025/09/12 16:51:41 [6] S1 send InstallSnapshot to 2 at 19
+2025/09/12 16:51:41 [6] S1 send APPEND ENTRIES RPC to server 0, prev 19, loglen 1, term 6
+2025/09/12 16:51:41 [6] S2 InstallSnapshot start, apply 1, commit 1, log 1, snapshot 0, len 2
+2025/09/12 16:51:41 [6] S2 InstallSnapshot end, apply 19, commit 19, log 19, snapshot 19, len 1
+2025/09/12 16:51:41 [6] S0 Got append RPC with pervLogIndex 19 loglen 1 term 6
+2025/09/12 16:51:41 [6] S0 , apply 19, commit 19, log 19, snapshot 19, len 1
+2025/09/12 16:51:41 [6] S0 Append 1 logs, lastLogIndex = 20
+2025/09/12 16:51:41 [6] S1 Update commit index to 20
+2025/09/12 16:51:41 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:41 [6] S0 Apply 1 logs to 20
+2025/09/12 16:51:41 [6] S1 Apply 1 logs to 20
+2025/09/12 16:51:41 [6] S2 Reject append RPC, log is not match
+2025/09/12 16:51:41 [6] S1 send APPEND ENTRIES RPC to server 2, prev 19, loglen 1, term 6
+2025/09/12 16:51:41 [6] S2 Got append RPC with pervLogIndex 19 loglen 1 term 6
+2025/09/12 16:51:41 [6] S2 , apply 19, commit 19, log 19, snapshot 19, len 1
+2025/09/12 16:51:41 [6] S2 Append 1 logs, lastLogIndex = 20
+2025/09/12 16:51:41 [6] S2 Apply 1 logs to 20
+2025/09/12 16:51:42 [7] S2 start election...
+2025/09/12 16:51:42 [7] S0 start election...
+2025/09/12 16:51:42 [7] S0 Got Vote RPC from 2, term 7
+2025/09/12 16:51:42 [7] S2 Got Vote RPC from 0, term 7
+2025/09/12 16:51:42 [7] S0 Grand vote to 2
+2025/09/12 16:51:42 [7] S2 Grand vote to 0
+2025/09/12 16:51:42 [7] S2 Got Vote reply from 0, term 7
+2025/09/12 16:51:42 [7] S0 Got Vote reply from 2, term 7
+2025/09/12 16:51:43 [8] S0 start election...
+2025/09/12 16:51:43 [7] S2 Got Vote RPC from 0, term 8
+2025/09/12 16:51:43 [8] S2 Grand vote to 0
+2025/09/12 16:51:43 [8] S0 Got Vote reply from 2, term 8
+2025/09/12 16:51:43 [8] S0 Change to leader
+2025/09/12 16:51:43 [8] S0 start one(2908114840610432135)
+2025/09/12 16:51:43 [8] S0 Append 1 logs, lastLogIndex = 21
+2025/09/12 16:51:43 [8] S2 Reject append RPC, log is not match
+2025/09/12 16:51:43 [8] S2 Reject append RPC, log is not match
+2025/09/12 16:51:43 [8] S0 send APPEND ENTRIES RPC to server 2, prev 19, loglen 2, term 8
+2025/09/12 16:51:43 [8] S2 Got append RPC with pervLogIndex 19 loglen 2 term 8
+2025/09/12 16:51:43 [8] S2 , apply 20, commit 20, log 20, snapshot 19, len 2
+2025/09/12 16:51:43 [8] S2 Append 2 logs, lastLogIndex = 21
+2025/09/12 16:51:43 [8] S0 Update commit index to 21
+2025/09/12 16:51:43 [8] S0 Apply 1 logs to 21
+2025/09/12 16:51:43 [8] S2 Apply 1 logs to 21
+2025/09/12 16:51:43 [8] S0 start one(6485102678672680586)
+2025/09/12 16:51:43 [8] S0 Append 1 logs, lastLogIndex = 22
+2025/09/12 16:51:43 [8] S0 send APPEND ENTRIES RPC to server 2, prev 21, loglen 1, term 8
+2025/09/12 16:51:43 [8] S2 Got append RPC with pervLogIndex 21 loglen 1 term 8
+2025/09/12 16:51:43 [8] S2 , apply 21, commit 21, log 21, snapshot 19, len 3
+2025/09/12 16:51:43 [8] S2 Append 1 logs, lastLogIndex = 22
+2025/09/12 16:51:43 [8] S0 send APPEND ENTRIES RPC to server 1, prev 20, loglen 2, term 8
+2025/09/12 16:51:43 [8] S0 Update commit index to 22
+2025/09/12 16:51:43 [8] S0 Apply 1 logs to 22
+2025/09/12 16:51:43 [8] S2 Apply 1 logs to 22
+2025/09/12 16:51:43 [6] S1 start one(1171540473931346280)
+2025/09/12 16:51:43 [6] S1 Append 1 logs, lastLogIndex = 21
+2025/09/12 16:51:43 [6] S1 send APPEND ENTRIES RPC to server 2, prev 20, loglen 1, term 6
+2025/09/12 16:51:43 [6] S1 send APPEND ENTRIES RPC to server 0, prev 20, loglen 1, term 6
+2025/09/12 16:51:43 [8] S2 Got append RPC with pervLogIndex 20 loglen 1 term 6
+2025/09/12 16:51:43 [8] S2 , apply 22, commit 22, log 22, snapshot 19, len 4
+2025/09/12 16:51:43 [8] S2 Reject append RPC, term 6, current 8
+2025/09/12 16:51:43 [8] S0 Got append RPC with pervLogIndex 20 loglen 1 term 6
+2025/09/12 16:51:43 [8] S0 , apply 22, commit 22, log 22, snapshot 19, len 4
+2025/09/12 16:51:43 [8] S0 Reject append RPC, term 6, current 8
+2025/09/12 16:51:43 [8] S1 Reject append RPC, log is not match
+2025/09/12 16:51:43 [8] S0 send APPEND ENTRIES RPC to server 1, prev 19, loglen 3, term 8
+2025/09/12 16:51:43 [8] S1 Got append RPC with pervLogIndex 19 loglen 3 term 8
+2025/09/12 16:51:43 [8] S1 , apply 20, commit 20, log 21, snapshot 19, len 3
+2025/09/12 16:51:43 [8] S1 Append 3 logs, lastLogIndex = 22
+2025/09/12 16:51:43 [8] S1 Apply 2 logs to 22
+2025/09/12 16:51:45 [8] S0 start one(1171540473931346280)
+2025/09/12 16:51:45 [8] S0 Append 1 logs, lastLogIndex = 23
+2025/09/12 16:51:45 [8] S0 send APPEND ENTRIES RPC to server 2, prev 22, loglen 1, term 8
+2025/09/12 16:51:45 [8] S0 send APPEND ENTRIES RPC to server 1, prev 22, loglen 1, term 8
+2025/09/12 16:51:45 [8] S2 Got append RPC with pervLogIndex 22 loglen 1 term 8
+2025/09/12 16:51:45 [8] S2 , apply 22, commit 22, log 22, snapshot 19, len 4
+2025/09/12 16:51:45 [8] S2 Append 1 logs, lastLogIndex = 23
+2025/09/12 16:51:45 [8] S1 Got append RPC with pervLogIndex 22 loglen 1 term 8
+2025/09/12 16:51:45 [8] S1 , apply 22, commit 22, log 22, snapshot 19, len 4
+2025/09/12 16:51:45 [8] S1 Append 1 logs, lastLogIndex = 23
+2025/09/12 16:51:45 [8] S0 Update commit index to 23
+2025/09/12 16:51:45 [8] S0 Apply 1 logs to 23
+2025/09/12 16:51:45 [8] S2 Apply 1 logs to 23
+2025/09/12 16:51:45 [8] S1 Apply 1 logs to 23
+2025/09/12 16:51:46 [8] S0 start one(1597991071135842388)
+2025/09/12 16:51:46 [8] S0 Append 1 logs, lastLogIndex = 24
+2025/09/12 16:51:46 [8] S0 send APPEND ENTRIES RPC to server 2, prev 23, loglen 1, term 8
+2025/09/12 16:51:46 [8] S0 send APPEND ENTRIES RPC to server 1, prev 23, loglen 1, term 8
+2025/09/12 16:51:46 [8] S2 Got append RPC with pervLogIndex 23 loglen 1 term 8
+2025/09/12 16:51:46 [8] S2 , apply 23, commit 23, log 23, snapshot 19, len 5
+2025/09/12 16:51:46 [8] S2 Append 1 logs, lastLogIndex = 24
+2025/09/12 16:51:46 [8] S0 Update commit index to 24
+2025/09/12 16:51:46 [8] S0 Apply 1 logs to 24
+2025/09/12 16:51:46 [8] S2 Apply 1 logs to 24
+2025/09/12 16:51:46 [8] S0 start one(5895433774897954692)
+2025/09/12 16:51:46 [8] S0 Append 1 logs, lastLogIndex = 25
+2025/09/12 16:51:46 [8] S0 start one(7294349783998937180)
+2025/09/12 16:51:46 [8] S0 Append 1 logs, lastLogIndex = 26
+2025/09/12 16:51:46 [8] S0 start one(4042465441197160851)
+2025/09/12 16:51:46 [8] S0 Append 1 logs, lastLogIndex = 27
+2025/09/12 16:51:46 [8] S0 start one(6869425079539632550)
+2025/09/12 16:51:46 [8] S0 Append 1 logs, lastLogIndex = 28
+2025/09/12 16:51:46 [8] S0 start one(8209227708590705299)
+2025/09/12 16:51:46 [8] S0 Append 1 logs, lastLogIndex = 29
+2025/09/12 16:51:46 [8] S0 start one(8934854759507599738)
+2025/09/12 16:51:46 [8] S0 Append 1 logs, lastLogIndex = 30
+2025/09/12 16:51:46 [8] S0 start one(8847800233839684752)
+2025/09/12 16:51:46 [8] S0 Append 1 logs, lastLogIndex = 31
+2025/09/12 16:51:46 [8] S2 Reject append RPC, log is not match
+2025/09/12 16:51:46 [8] S0 send APPEND ENTRIES RPC to server 2, prev 20, loglen 11, term 8
+2025/09/12 16:51:46 [8] S2 Got append RPC with pervLogIndex 20 loglen 11 term 8
+2025/09/12 16:51:46 [8] S2 , apply 24, commit 24, log 24, snapshot 19, len 6
+2025/09/12 16:51:46 [8] S2 Append 11 logs, lastLogIndex = 31
+2025/09/12 16:51:46 [8] S0 Update commit index to 31
+2025/09/12 16:51:46 [8] S2 Apply 7 logs to 31
+2025/09/12 16:51:46 [8] S0 Apply 7 logs to 31
+2025/09/12 16:51:46 [8] S2 SNAPSHOT at 29
+2025/09/12 16:51:46 [8] S2 snapshot, apply 30, commit 31, log 31, snapshot 19, len 13
+2025/09/12 16:51:46 [8] S2 snapshot, apply 30, commit 31, log 31, snapshot 29, len 3
+2025/09/12 16:51:46 [8] S0 SNAPSHOT at 29
+2025/09/12 16:51:46 [8] S0 snapshot, apply 30, commit 31, log 31, snapshot 19, len 13
+2025/09/12 16:51:46 [8] S0 snapshot, apply 30, commit 31, log 31, snapshot 29, len 3
+2025/09/12 16:51:46 [8] S0 start one(545152572858372441)
+2025/09/12 16:51:46 [8] S0 Append 1 logs, lastLogIndex = 32
+2025/09/12 16:51:46 [8] S0 send APPEND ENTRIES RPC to server 2, prev 31, loglen 1, term 8
+2025/09/12 16:51:46 [8] S2 Got append RPC with pervLogIndex 31 loglen 1 term 8
+2025/09/12 16:51:46 [8] S2 , apply 31, commit 31, log 31, snapshot 29, len 3
+2025/09/12 16:51:46 [8] S2 Append 1 logs, lastLogIndex = 32
+2025/09/12 16:51:46 [8] S0 send InstallSnapshot to 1 at 29
+2025/09/12 16:51:46 [8] S1 InstallSnapshot start, apply 23, commit 23, log 23, snapshot 19, len 5
+2025/09/12 16:51:46 [8] S1 InstallSnapshot end, apply 29, commit 29, log 29, snapshot 29, len 1
+2025/09/12 16:51:46 [8] S0 Update commit index to 32
+2025/09/12 16:51:46 [8] S1 Reject append RPC, log is not match
+2025/09/12 16:51:46 [8] S2 Apply 1 logs to 32
+2025/09/12 16:51:46 [8] S0 Apply 1 logs to 32
+2025/09/12 16:51:46 [8] S1 Reject append RPC, log is not match
+2025/09/12 16:51:46 [8] S0 send APPEND ENTRIES RPC to server 1, prev 29, loglen 3, term 8
+2025/09/12 16:51:46 [8] S1 Got append RPC with pervLogIndex 29 loglen 3 term 8
+2025/09/12 16:51:46 [8] S1 , apply 29, commit 29, log 29, snapshot 29, len 1
+2025/09/12 16:51:46 [8] S1 Append 3 logs, lastLogIndex = 32
+2025/09/12 16:51:46 [8] S1 Apply 3 logs to 32
+2025/09/12 16:51:47 [8] S0 start one(1708296929241500154)
+2025/09/12 16:51:47 [8] S0 Append 1 logs, lastLogIndex = 33
+2025/09/12 16:51:47 [8] S0 send APPEND ENTRIES RPC to server 2, prev 32, loglen 1, term 8
+2025/09/12 16:51:47 [8] S0 send APPEND ENTRIES RPC to server 1, prev 32, loglen 1, term 8
+2025/09/12 16:51:47 [8] S2 Got append RPC with pervLogIndex 32 loglen 1 term 8
+2025/09/12 16:51:47 [8] S2 , apply 32, commit 32, log 32, snapshot 29, len 4
+2025/09/12 16:51:47 [8] S2 Append 1 logs, lastLogIndex = 33
+2025/09/12 16:51:47 [8] S0 Update commit index to 33
+2025/09/12 16:51:47 [8] S0 Apply 1 logs to 33
+2025/09/12 16:51:47 [8] S2 Apply 1 logs to 33
+2025/09/12 16:51:47 [8] S0 start one(6410285539553499346)
+2025/09/12 16:51:47 [8] S0 Append 1 logs, lastLogIndex = 34
+2025/09/12 16:51:47 [8] S0 start one(6953331760576504783)
+2025/09/12 16:51:47 [8] S0 Append 1 logs, lastLogIndex = 35
+2025/09/12 16:51:47 [8] S0 start one(3027707655792961666)
+2025/09/12 16:51:47 [8] S0 Append 1 logs, lastLogIndex = 36
+2025/09/12 16:51:47 [8] S0 start one(2851954103550062218)
+2025/09/12 16:51:47 [8] S0 Append 1 logs, lastLogIndex = 37
+2025/09/12 16:51:47 [8] S0 start one(4886639511338499302)
+2025/09/12 16:51:47 [8] S0 Append 1 logs, lastLogIndex = 38
+2025/09/12 16:51:47 [8] S0 start one(7822410178075594666)
+2025/09/12 16:51:47 [8] S0 Append 1 logs, lastLogIndex = 39
+2025/09/12 16:51:47 [8] S0 start one(178840141119443275)
+2025/09/12 16:51:47 [8] S0 Append 1 logs, lastLogIndex = 40
+2025/09/12 16:51:47 [8] S0 start one(281884726389676903)
+2025/09/12 16:51:47 [8] S0 Append 1 logs, lastLogIndex = 41
+2025/09/12 16:51:47 [8] S0 start one(6200608177510565765)
+2025/09/12 16:51:47 [8] S0 Append 1 logs, lastLogIndex = 42
+2025/09/12 16:51:47 [8] S2 Reject append RPC, log is not match
+2025/09/12 16:51:47 [8] S0 send APPEND ENTRIES RPC to server 2, prev 29, loglen 13, term 8
+2025/09/12 16:51:47 [8] S2 Got append RPC with pervLogIndex 29 loglen 13 term 8
+2025/09/12 16:51:47 [8] S2 , apply 33, commit 33, log 33, snapshot 29, len 5
+2025/09/12 16:51:47 [8] S2 Append 13 logs, lastLogIndex = 42
+2025/09/12 16:51:47 [8] S0 Update commit index to 42
+2025/09/12 16:51:47 [8] S0 Apply 9 logs to 42
+2025/09/12 16:51:47 [8] S2 Apply 9 logs to 42
+2025/09/12 16:51:47 [8] S0 SNAPSHOT at 39
+2025/09/12 16:51:47 [8] S0 snapshot, apply 39, commit 42, log 42, snapshot 29, len 14
+2025/09/12 16:51:47 [8] S2 SNAPSHOT at 39
+2025/09/12 16:51:47 [8] S2 snapshot, apply 39, commit 42, log 42, snapshot 29, len 14
+2025/09/12 16:51:47 [8] S0 snapshot, apply 39, commit 42, log 42, snapshot 39, len 4
+2025/09/12 16:51:47 [8] S2 snapshot, apply 39, commit 42, log 42, snapshot 39, len 4
+2025/09/12 16:51:47 [8] S0 start one(3923794617767451687)
+2025/09/12 16:51:47 [8] S0 Append 1 logs, lastLogIndex = 43
+2025/09/12 16:51:47 [8] S0 send APPEND ENTRIES RPC to server 2, prev 42, loglen 1, term 8
+2025/09/12 16:51:47 [8] S2 Got append RPC with pervLogIndex 42 loglen 1 term 8
+2025/09/12 16:51:47 [8] S2 , apply 42, commit 42, log 42, snapshot 39, len 4
+2025/09/12 16:51:47 [8] S2 Append 1 logs, lastLogIndex = 43
+2025/09/12 16:51:47 [8] S0 send InstallSnapshot to 1 at 39
+2025/09/12 16:51:47 [8] S1 InstallSnapshot start, apply 32, commit 32, log 32, snapshot 29, len 4
+2025/09/12 16:51:47 [8] S1 InstallSnapshot end, apply 39, commit 39, log 39, snapshot 39, len 1
+2025/09/12 16:51:47 [8] S0 Update commit index to 43
+2025/09/12 16:51:47 [8] S1 Reject append RPC, log is not match
+2025/09/12 16:51:47 [8] S2 Apply 1 logs to 43
+2025/09/12 16:51:47 [8] S0 Apply 1 logs to 43
+2025/09/12 16:51:47 [8] S1 Reject append RPC, log is not match
+2025/09/12 16:51:47 [8] S0 send APPEND ENTRIES RPC to server 1, prev 39, loglen 4, term 8
+2025/09/12 16:51:47 [8] S1 Got append RPC with pervLogIndex 39 loglen 4 term 8
+2025/09/12 16:51:47 [8] S1 , apply 39, commit 39, log 39, snapshot 39, len 1
+2025/09/12 16:51:47 [8] S1 Append 4 logs, lastLogIndex = 43
+2025/09/12 16:51:47 [8] S1 Apply 4 logs to 43
+2025/09/12 16:51:48 [9] S1 start election...
+2025/09/12 16:51:48 [8] S2 Got Vote RPC from 1, term 9
+2025/09/12 16:51:48 [9] S2 Grand vote to 1
+2025/09/12 16:51:48 [9] S1 Got Vote reply from 2, term 9
+2025/09/12 16:51:48 [9] S1 Change to leader
+2025/09/12 16:51:48 [9] S1 start one(6306491672215640920)
+2025/09/12 16:51:48 [9] S1 Append 1 logs, lastLogIndex = 44
+2025/09/12 16:51:48 [9] S2 Reject append RPC, log is not match
+2025/09/12 16:51:49 [9] S2 Reject append RPC, log is not match
+2025/09/12 16:51:49 [9] S1 send APPEND ENTRIES RPC to server 2, prev 39, loglen 5, term 9
+2025/09/12 16:51:49 [9] S2 Got append RPC with pervLogIndex 39 loglen 5 term 9
+2025/09/12 16:51:49 [9] S2 , apply 43, commit 43, log 43, snapshot 39, len 5
+2025/09/12 16:51:49 [9] S2 Append 5 logs, lastLogIndex = 44
+2025/09/12 16:51:49 [9] S1 Update commit index to 44
+2025/09/12 16:51:49 [9] S2 Apply 1 logs to 44
+2025/09/12 16:51:49 [9] S1 Apply 1 logs to 44
+2025/09/12 16:51:49 [9] S1 start one(7640489846034966247)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 45
+2025/09/12 16:51:49 [9] S1 start one(2789563467831331859)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 46
+2025/09/12 16:51:49 [9] S1 start one(1323312380641011577)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 47
+2025/09/12 16:51:49 [9] S1 start one(8506314297943790641)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 48
+2025/09/12 16:51:49 [9] S1 start one(6876456383428794663)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 49
+2025/09/12 16:51:49 [9] S1 start one(7013867127398258857)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 50
+2025/09/12 16:51:49 [9] S1 start one(3767390062179823985)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 51
+2025/09/12 16:51:49 [9] S1 start one(7457469391827794977)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 52
+2025/09/12 16:51:49 [9] S1 send APPEND ENTRIES RPC to server 2, prev 44, loglen 8, term 9
+2025/09/12 16:51:49 [9] S1 send APPEND ENTRIES RPC to server 0, prev 43, loglen 9, term 9
+2025/09/12 16:51:49 [9] S2 Got append RPC with pervLogIndex 44 loglen 8 term 9
+2025/09/12 16:51:49 [9] S2 , apply 44, commit 44, log 44, snapshot 39, len 6
+2025/09/12 16:51:49 [9] S2 Append 8 logs, lastLogIndex = 52
+2025/09/12 16:51:49 [9] S1 Update commit index to 52
+2025/09/12 16:51:49 [9] S1 Apply 8 logs to 52
+2025/09/12 16:51:49 [9] S1 SNAPSHOT at 49
+2025/09/12 16:51:49 [9] S1 snapshot, apply 50, commit 52, log 52, snapshot 39, len 14
+2025/09/12 16:51:49 [9] S1 snapshot, apply 50, commit 52, log 52, snapshot 49, len 4
+2025/09/12 16:51:49 [9] S2 Apply 8 logs to 52
+2025/09/12 16:51:49 [9] S2 SNAPSHOT at 49
+2025/09/12 16:51:49 [9] S2 snapshot, apply 50, commit 52, log 52, snapshot 39, len 14
+2025/09/12 16:51:49 [9] S2 snapshot, apply 50, commit 52, log 52, snapshot 49, len 4
+2025/09/12 16:51:49 [9] S1 start one(4127497647515314110)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 53
+2025/09/12 16:51:49 [9] S1 send APPEND ENTRIES RPC to server 2, prev 52, loglen 1, term 9
+2025/09/12 16:51:49 [9] S1 send InstallSnapshot to 0 at 49
+2025/09/12 16:51:49 [9] S2 Got append RPC with pervLogIndex 52 loglen 1 term 9
+2025/09/12 16:51:49 [9] S2 , apply 52, commit 52, log 52, snapshot 49, len 4
+2025/09/12 16:51:49 [9] S2 Append 1 logs, lastLogIndex = 53
+2025/09/12 16:51:49 [8] S0 InstallSnapshot start, apply 43, commit 43, log 43, snapshot 39, len 5
+2025/09/12 16:51:49 [9] S0 InstallSnapshot end, apply 49, commit 49, log 49, snapshot 49, len 1
+2025/09/12 16:51:49 [9] S1 Update commit index to 53
+2025/09/12 16:51:49 [9] S0 Reject append RPC, log is not match
+2025/09/12 16:51:49 [9] S1 Apply 1 logs to 53
+2025/09/12 16:51:49 [9] S2 Apply 1 logs to 53
+2025/09/12 16:51:49 [9] S0 Reject append RPC, log is not match
+2025/09/12 16:51:49 [9] S1 send APPEND ENTRIES RPC to server 0, prev 49, loglen 4, term 9
+2025/09/12 16:51:49 [9] S0 Got append RPC with pervLogIndex 49 loglen 4 term 9
+2025/09/12 16:51:49 [9] S0 , apply 49, commit 49, log 49, snapshot 49, len 1
+2025/09/12 16:51:49 [9] S0 Append 4 logs, lastLogIndex = 53
+2025/09/12 16:51:49 [9] S0 Apply 4 logs to 53
+2025/09/12 16:51:49 [9] S1 start one(6072852457222828040)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 54
+2025/09/12 16:51:49 [9] S1 send APPEND ENTRIES RPC to server 2, prev 53, loglen 1, term 9
+2025/09/12 16:51:49 [9] S1 send APPEND ENTRIES RPC to server 0, prev 53, loglen 1, term 9
+2025/09/12 16:51:49 [9] S0 Got append RPC with pervLogIndex 53 loglen 1 term 9
+2025/09/12 16:51:49 [9] S0 , apply 53, commit 53, log 53, snapshot 49, len 5
+2025/09/12 16:51:49 [9] S0 Append 1 logs, lastLogIndex = 54
+2025/09/12 16:51:49 [9] S1 Update commit index to 54
+2025/09/12 16:51:49 [9] S1 Apply 1 logs to 54
+2025/09/12 16:51:49 [9] S0 Apply 1 logs to 54
+2025/09/12 16:51:49 [9] S1 start one(3788130765259193956)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 55
+2025/09/12 16:51:49 [9] S1 start one(6701231934785677703)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 56
+2025/09/12 16:51:49 [9] S1 start one(6320018738208700612)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 57
+2025/09/12 16:51:49 [9] S1 start one(3246200591207902914)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 58
+2025/09/12 16:51:49 [9] S1 start one(7764259586370231074)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 59
+2025/09/12 16:51:49 [9] S1 start one(7224695669980641538)
+2025/09/12 16:51:49 [9] S1 Append 1 logs, lastLogIndex = 60
+2025/09/12 16:51:50 [9] S0 Reject append RPC, log is not match
+2025/09/12 16:51:50 [9] S1 send APPEND ENTRIES RPC to server 0, prev 49, loglen 11, term 9
+2025/09/12 16:51:50 [9] S0 Got append RPC with pervLogIndex 49 loglen 11 term 9
+2025/09/12 16:51:50 [9] S0 , apply 54, commit 54, log 54, snapshot 49, len 6
+2025/09/12 16:51:50 [9] S0 Append 11 logs, lastLogIndex = 60
+2025/09/12 16:51:50 [9] S1 Update commit index to 60
+2025/09/12 16:51:50 [9] S0 Apply 6 logs to 60
+2025/09/12 16:51:50 [9] S0 SNAPSHOT at 59
+2025/09/12 16:51:50 [9] S0 snapshot, apply 60, commit 60, log 60, snapshot 49, len 12
+2025/09/12 16:51:50 [9] S0 snapshot, apply 60, commit 60, log 60, snapshot 59, len 2
+2025/09/12 16:51:50 [9] S1 Apply 6 logs to 60
+2025/09/12 16:51:50 [9] S1 SNAPSHOT at 59
+2025/09/12 16:51:50 [9] S1 snapshot, apply 60, commit 60, log 60, snapshot 49, len 12
+2025/09/12 16:51:50 [9] S1 snapshot, apply 60, commit 60, log 60, snapshot 59, len 2
+2025/09/12 16:51:50 [9] S1 start one(891894897078860246)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 61
+2025/09/12 16:51:50 [9] S1 send InstallSnapshot to 2 at 59
+2025/09/12 16:51:50 [9] S1 send APPEND ENTRIES RPC to server 0, prev 60, loglen 1, term 9
+2025/09/12 16:51:50 [9] S2 InstallSnapshot start, apply 53, commit 53, log 53, snapshot 49, len 5
+2025/09/12 16:51:50 [9] S2 InstallSnapshot end, apply 59, commit 59, log 59, snapshot 59, len 1
+2025/09/12 16:51:50 [9] S0 Got append RPC with pervLogIndex 60 loglen 1 term 9
+2025/09/12 16:51:50 [9] S0 , apply 60, commit 60, log 60, snapshot 59, len 2
+2025/09/12 16:51:50 [9] S0 Append 1 logs, lastLogIndex = 61
+2025/09/12 16:51:50 [9] S1 Update commit index to 61
+2025/09/12 16:51:50 [9] S2 Reject append RPC, log is not match
+2025/09/12 16:51:50 [9] S1 Apply 1 logs to 61
+2025/09/12 16:51:50 [9] S0 Apply 1 logs to 61
+2025/09/12 16:51:50 [9] S2 Reject append RPC, log is not match
+2025/09/12 16:51:50 [9] S1 send APPEND ENTRIES RPC to server 2, prev 59, loglen 2, term 9
+2025/09/12 16:51:50 [9] S2 Got append RPC with pervLogIndex 59 loglen 2 term 9
+2025/09/12 16:51:50 [9] S2 , apply 59, commit 59, log 59, snapshot 59, len 1
+2025/09/12 16:51:50 [9] S2 Append 2 logs, lastLogIndex = 61
+2025/09/12 16:51:50 [9] S2 Apply 2 logs to 61
+2025/09/12 16:51:50 [9] S1 start one(4808599460458770730)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 62
+2025/09/12 16:51:50 [9] S1 send APPEND ENTRIES RPC to server 2, prev 61, loglen 1, term 9
+2025/09/12 16:51:50 [9] S1 send APPEND ENTRIES RPC to server 0, prev 61, loglen 1, term 9
+2025/09/12 16:51:50 [9] S0 Got append RPC with pervLogIndex 61 loglen 1 term 9
+2025/09/12 16:51:50 [9] S0 , apply 61, commit 61, log 61, snapshot 59, len 3
+2025/09/12 16:51:50 [9] S0 Append 1 logs, lastLogIndex = 62
+2025/09/12 16:51:50 [9] S1 Update commit index to 62
+2025/09/12 16:51:50 [9] S0 Apply 1 logs to 62
+2025/09/12 16:51:50 [9] S1 Apply 1 logs to 62
+2025/09/12 16:51:50 [9] S1 start one(109147730425366940)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 63
+2025/09/12 16:51:50 [9] S1 start one(4217055176471673377)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 64
+2025/09/12 16:51:50 [9] S1 start one(3504521564686703680)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 65
+2025/09/12 16:51:50 [9] S1 start one(7767255388042572513)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 66
+2025/09/12 16:51:50 [9] S1 start one(2349181487417446659)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 67
+2025/09/12 16:51:50 [9] S1 start one(7929961181156220451)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 68
+2025/09/12 16:51:50 [9] S1 start one(395944792411605889)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 69
+2025/09/12 16:51:50 [9] S1 start one(6578891587743941350)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 70
+2025/09/12 16:51:50 [9] S1 start one(1448076941547217666)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 71
+2025/09/12 16:51:50 [9] S1 start one(5735588938734072409)
+2025/09/12 16:51:50 [9] S1 Append 1 logs, lastLogIndex = 72
+2025/09/12 16:51:51 [9] S0 Reject append RPC, log is not match
+2025/09/12 16:51:51 [9] S1 send APPEND ENTRIES RPC to server 0, prev 59, loglen 13, term 9
+2025/09/12 16:51:51 [9] S0 Got append RPC with pervLogIndex 59 loglen 13 term 9
+2025/09/12 16:51:51 [9] S0 , apply 62, commit 62, log 62, snapshot 59, len 4
+2025/09/12 16:51:51 [9] S0 Append 13 logs, lastLogIndex = 72
+2025/09/12 16:51:51 [9] S1 Update commit index to 72
+2025/09/12 16:51:51 [9] S0 Apply 10 logs to 72
+2025/09/12 16:51:51 [9] S0 SNAPSHOT at 69
+2025/09/12 16:51:51 [9] S0 snapshot, apply 70, commit 72, log 72, snapshot 59, len 14
+2025/09/12 16:51:51 [9] S0 snapshot, apply 70, commit 72, log 72, snapshot 69, len 4
+2025/09/12 16:51:51 [9] S1 Apply 10 logs to 72
+2025/09/12 16:51:51 [9] S1 SNAPSHOT at 69
+2025/09/12 16:51:51 [9] S1 snapshot, apply 70, commit 72, log 72, snapshot 59, len 14
+2025/09/12 16:51:51 [9] S1 snapshot, apply 70, commit 72, log 72, snapshot 69, len 4
+2025/09/12 16:51:51 [9] S1 start one(4628643264871666992)
+2025/09/12 16:51:51 [9] S1 Append 1 logs, lastLogIndex = 73
+2025/09/12 16:51:51 [9] S1 send InstallSnapshot to 2 at 69
+2025/09/12 16:51:51 [9] S1 send APPEND ENTRIES RPC to server 0, prev 72, loglen 1, term 9
+2025/09/12 16:51:51 [9] S0 Got append RPC with pervLogIndex 72 loglen 1 term 9
+2025/09/12 16:51:51 [9] S0 , apply 72, commit 72, log 72, snapshot 69, len 4
+2025/09/12 16:51:51 [9] S0 Append 1 logs, lastLogIndex = 73
+2025/09/12 16:51:51 [9] S2 InstallSnapshot start, apply 61, commit 61, log 61, snapshot 59, len 3
+2025/09/12 16:51:51 [9] S2 InstallSnapshot end, apply 69, commit 69, log 69, snapshot 69, len 1
+2025/09/12 16:51:51 [9] S1 Update commit index to 73
+2025/09/12 16:51:51 [9] S2 Reject append RPC, log is not match
+2025/09/12 16:51:51 [9] S0 Apply 1 logs to 73
+2025/09/12 16:51:51 [9] S1 Apply 1 logs to 73
+2025/09/12 16:51:51 [9] S2 Reject append RPC, log is not match
+2025/09/12 16:51:51 [9] S1 send APPEND ENTRIES RPC to server 2, prev 69, loglen 4, term 9
+2025/09/12 16:51:51 [9] S2 Got append RPC with pervLogIndex 69 loglen 4 term 9
+2025/09/12 16:51:51 [9] S2 , apply 69, commit 69, log 69, snapshot 69, len 1
+2025/09/12 16:51:51 [9] S2 Append 4 logs, lastLogIndex = 73
+2025/09/12 16:51:51 [9] S2 Apply 4 logs to 73
+2025/09/12 16:51:52 [10] S0 start election...
+2025/09/12 16:51:52 [9] S2 Got Vote RPC from 0, term 10
+2025/09/12 16:51:52 [10] S2 Grand vote to 0
+2025/09/12 16:51:52 [10] S0 Got Vote reply from 2, term 10
+2025/09/12 16:51:52 [10] S0 Change to leader
+2025/09/12 16:51:52 [10] S0 start one(2920082699307034305)
+2025/09/12 16:51:52 [10] S0 Append 1 logs, lastLogIndex = 74
+2025/09/12 16:51:52 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:52 [10] S0 send APPEND ENTRIES RPC to server 2, prev 69, loglen 5, term 10
+2025/09/12 16:51:52 [10] S2 Got append RPC with pervLogIndex 69 loglen 5 term 10
+2025/09/12 16:51:52 [10] S2 , apply 73, commit 73, log 73, snapshot 69, len 5
+2025/09/12 16:51:52 [10] S2 Append 5 logs, lastLogIndex = 74
+2025/09/12 16:51:52 [10] S0 Update commit index to 74
+2025/09/12 16:51:52 [10] S2 Apply 1 logs to 74
+2025/09/12 16:51:52 [10] S0 Apply 1 logs to 74
+2025/09/12 16:51:52 [10] S0 start one(6081513095100324364)
+2025/09/12 16:51:52 [10] S0 Append 1 logs, lastLogIndex = 75
+2025/09/12 16:51:52 [10] S0 send APPEND ENTRIES RPC to server 2, prev 74, loglen 1, term 10
+2025/09/12 16:51:52 [10] S2 Got append RPC with pervLogIndex 74 loglen 1 term 10
+2025/09/12 16:51:52 [10] S0 send APPEND ENTRIES RPC to server 1, prev 73, loglen 2, term 10
+2025/09/12 16:51:52 [10] S2 , apply 74, commit 74, log 74, snapshot 69, len 6
+2025/09/12 16:51:52 [10] S2 Append 1 logs, lastLogIndex = 75
+2025/09/12 16:51:52 [10] S0 Update commit index to 75
+2025/09/12 16:51:52 [10] S2 Apply 1 logs to 75
+2025/09/12 16:51:52 [10] S0 Apply 1 logs to 75
+2025/09/12 16:51:52 [9] S1 start one(8141673848295575050)
+2025/09/12 16:51:52 [9] S1 Append 1 logs, lastLogIndex = 74
+2025/09/12 16:51:52 [9] S1 send APPEND ENTRIES RPC to server 2, prev 73, loglen 1, term 9
+2025/09/12 16:51:52 [9] S1 send APPEND ENTRIES RPC to server 0, prev 73, loglen 1, term 9
+2025/09/12 16:51:52 [10] S2 Got append RPC with pervLogIndex 73 loglen 1 term 9
+2025/09/12 16:51:52 [10] S2 , apply 75, commit 75, log 75, snapshot 69, len 7
+2025/09/12 16:51:52 [10] S2 Reject append RPC, term 9, current 10
+2025/09/12 16:51:52 [10] S0 Got append RPC with pervLogIndex 73 loglen 1 term 9
+2025/09/12 16:51:52 [10] S0 , apply 75, commit 75, log 75, snapshot 69, len 7
+2025/09/12 16:51:52 [10] S0 Reject append RPC, term 9, current 10
+2025/09/12 16:51:52 [10] S1 Reject append RPC, log is not match
+2025/09/12 16:51:52 [10] S0 send APPEND ENTRIES RPC to server 1, prev 69, loglen 6, term 10
+2025/09/12 16:51:52 [10] S1 Got append RPC with pervLogIndex 69 loglen 6 term 10
+2025/09/12 16:51:52 [10] S1 , apply 73, commit 73, log 74, snapshot 69, len 6
+2025/09/12 16:51:52 [10] S1 Append 6 logs, lastLogIndex = 75
+2025/09/12 16:51:52 [10] S1 Apply 2 logs to 75
+2025/09/12 16:51:52 [10] S0 start one(8141673848295575050)
+2025/09/12 16:51:52 [10] S0 Append 1 logs, lastLogIndex = 76
+2025/09/12 16:51:52 [10] S0 send APPEND ENTRIES RPC to server 2, prev 75, loglen 1, term 10
+2025/09/12 16:51:52 [10] S0 send APPEND ENTRIES RPC to server 1, prev 75, loglen 1, term 10
+2025/09/12 16:51:52 [10] S2 Got append RPC with pervLogIndex 75 loglen 1 term 10
+2025/09/12 16:51:52 [10] S2 , apply 75, commit 75, log 75, snapshot 69, len 7
+2025/09/12 16:51:52 [10] S2 Append 1 logs, lastLogIndex = 76
+2025/09/12 16:51:52 [10] S1 Got append RPC with pervLogIndex 75 loglen 1 term 10
+2025/09/12 16:51:52 [10] S1 , apply 75, commit 75, log 75, snapshot 69, len 7
+2025/09/12 16:51:52 [10] S1 Append 1 logs, lastLogIndex = 76
+2025/09/12 16:51:52 [10] S0 Update commit index to 76
+2025/09/12 16:51:52 [10] S1 Apply 1 logs to 76
+2025/09/12 16:51:52 [10] S2 Apply 1 logs to 76
+2025/09/12 16:51:52 [10] S0 Apply 1 logs to 76
+2025/09/12 16:51:52 [10] S0 start one(4557414115630620366)
+2025/09/12 16:51:52 [10] S0 Append 1 logs, lastLogIndex = 77
+2025/09/12 16:51:52 [10] S0 send APPEND ENTRIES RPC to server 2, prev 76, loglen 1, term 10
+2025/09/12 16:51:52 [10] S0 send APPEND ENTRIES RPC to server 1, prev 76, loglen 1, term 10
+2025/09/12 16:51:52 [10] S2 Got append RPC with pervLogIndex 76 loglen 1 term 10
+2025/09/12 16:51:52 [10] S2 , apply 76, commit 76, log 76, snapshot 69, len 8
+2025/09/12 16:51:52 [10] S2 Append 1 logs, lastLogIndex = 77
+2025/09/12 16:51:53 [10] S0 Update commit index to 77
+2025/09/12 16:51:53 [10] S0 Apply 1 logs to 77
+2025/09/12 16:51:53 [10] S2 Apply 1 logs to 77
+2025/09/12 16:51:53 [10] S0 start one(6114974760833218417)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 78
+2025/09/12 16:51:53 [10] S0 start one(6070767097461017967)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 79
+2025/09/12 16:51:53 [10] S0 start one(4247574801694528593)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 80
+2025/09/12 16:51:53 [10] S0 start one(6213313775830357005)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 81
+2025/09/12 16:51:53 [10] S0 start one(5467247922708255477)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 82
+2025/09/12 16:51:53 [10] S0 start one(3244081954914074791)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 83
+2025/09/12 16:51:53 [10] S0 start one(5259863347932306768)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 84
+2025/09/12 16:51:53 [10] S0 send APPEND ENTRIES RPC to server 2, prev 77, loglen 7, term 10
+2025/09/12 16:51:53 [10] S2 Got append RPC with pervLogIndex 77 loglen 7 term 10
+2025/09/12 16:51:53 [10] S2 , apply 77, commit 77, log 77, snapshot 69, len 9
+2025/09/12 16:51:53 [10] S2 Append 7 logs, lastLogIndex = 84
+2025/09/12 16:51:53 [10] S0 send APPEND ENTRIES RPC to server 1, prev 76, loglen 8, term 10
+2025/09/12 16:51:53 [10] S0 Update commit index to 84
+2025/09/12 16:51:53 [10] S0 Apply 7 logs to 84
+2025/09/12 16:51:53 [10] S2 Apply 7 logs to 84
+2025/09/12 16:51:53 [10] S0 SNAPSHOT at 79
+2025/09/12 16:51:53 [10] S0 snapshot, apply 79, commit 84, log 84, snapshot 69, len 16
+2025/09/12 16:51:53 [10] S2 SNAPSHOT at 79
+2025/09/12 16:51:53 [10] S2 snapshot, apply 79, commit 84, log 84, snapshot 69, len 16
+2025/09/12 16:51:53 [10] S2 snapshot, apply 80, commit 84, log 84, snapshot 79, len 6
+2025/09/12 16:51:53 [10] S0 snapshot, apply 79, commit 84, log 84, snapshot 79, len 6
+2025/09/12 16:51:53 [10] S0 start one(1259497466215452380)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 85
+2025/09/12 16:51:53 [10] S0 send APPEND ENTRIES RPC to server 2, prev 84, loglen 1, term 10
+2025/09/12 16:51:53 [10] S2 Got append RPC with pervLogIndex 84 loglen 1 term 10
+2025/09/12 16:51:53 [10] S2 , apply 84, commit 84, log 84, snapshot 79, len 6
+2025/09/12 16:51:53 [10] S0 send InstallSnapshot to 1 at 79
+2025/09/12 16:51:53 [10] S2 Append 1 logs, lastLogIndex = 85
+2025/09/12 16:51:53 [10] S1 InstallSnapshot start, apply 76, commit 76, log 76, snapshot 69, len 8
+2025/09/12 16:51:53 [10] S1 InstallSnapshot end, apply 79, commit 79, log 79, snapshot 79, len 1
+2025/09/12 16:51:53 [10] S0 Update commit index to 85
+2025/09/12 16:51:53 [10] S1 Reject append RPC, log is not match
+2025/09/12 16:51:53 [10] S2 Apply 1 logs to 85
+2025/09/12 16:51:53 [10] S0 Apply 1 logs to 85
+2025/09/12 16:51:53 [10] S1 Reject append RPC, log is not match
+2025/09/12 16:51:53 [10] S0 send APPEND ENTRIES RPC to server 1, prev 79, loglen 6, term 10
+2025/09/12 16:51:53 [10] S1 Got append RPC with pervLogIndex 79 loglen 6 term 10
+2025/09/12 16:51:53 [10] S1 , apply 79, commit 79, log 79, snapshot 79, len 1
+2025/09/12 16:51:53 [10] S1 Append 6 logs, lastLogIndex = 85
+2025/09/12 16:51:53 [10] S1 Apply 6 logs to 85
+2025/09/12 16:51:53 [10] S0 start one(6338474454471148397)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 86
+2025/09/12 16:51:53 [10] S0 send APPEND ENTRIES RPC to server 2, prev 85, loglen 1, term 10
+2025/09/12 16:51:53 [10] S2 Got append RPC with pervLogIndex 85 loglen 1 term 10
+2025/09/12 16:51:53 [10] S2 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:53 [10] S2 Append 1 logs, lastLogIndex = 86
+2025/09/12 16:51:53 [10] S0 send APPEND ENTRIES RPC to server 1, prev 85, loglen 1, term 10
+2025/09/12 16:51:53 [10] S0 Update commit index to 86
+2025/09/12 16:51:53 [10] S2 Apply 1 logs to 86
+2025/09/12 16:51:53 [10] S0 Apply 1 logs to 86
+2025/09/12 16:51:53 [10] S0 start one(6594778965927363062)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 87
+2025/09/12 16:51:53 [10] S0 start one(6296207020360127586)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 88
+2025/09/12 16:51:53 [10] S0 start one(4868865700605378223)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 89
+2025/09/12 16:51:53 [10] S0 start one(8204734752372462185)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 90
+2025/09/12 16:51:53 [10] S0 start one(5030116114148836428)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 91
+2025/09/12 16:51:53 [10] S0 start one(2311984388278375863)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 92
+2025/09/12 16:51:53 [10] S0 start one(8536975583687079793)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 93
+2025/09/12 16:51:53 [10] S0 start one(3070498295322746018)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 94
+2025/09/12 16:51:53 [10] S0 start one(3219470890000120145)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 95
+2025/09/12 16:51:53 [10] S0 start one(1697176977310103544)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 96
+2025/09/12 16:51:53 [10] S0 start one(1413611492694931780)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 97
+2025/09/12 16:51:53 [10] S0 start one(6962468134924477732)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 98
+2025/09/12 16:51:53 [10] S0 start one(4973230034968992043)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 99
+2025/09/12 16:51:53 [10] S0 send APPEND ENTRIES RPC to server 2, prev 86, loglen 13, term 10
+2025/09/12 16:51:53 [10] S0 send APPEND ENTRIES RPC to server 1, prev 85, loglen 14, term 10
+2025/09/12 16:51:53 [10] S0 start one(7661118055684704588)
+2025/09/12 16:51:53 [10] S0 Append 1 logs, lastLogIndex = 100
+2025/09/12 16:51:53 [10] S2 Got append RPC with pervLogIndex 86 loglen 13 term 10
+2025/09/12 16:51:53 [10] S2 , apply 86, commit 86, log 86, snapshot 79, len 8
+2025/09/12 16:51:53 [10] S2 Append 13 logs, lastLogIndex = 99
+2025/09/12 16:51:54 [10] S0 Update commit index to 99
+2025/09/12 16:51:54 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:54 [10] S0 Apply 13 logs to 99
+2025/09/12 16:51:54 [10] S0 SNAPSHOT at 89
+2025/09/12 16:51:54 [10] S0 snapshot, apply 90, commit 99, log 100, snapshot 79, len 22
+2025/09/12 16:51:54 [10] S0 snapshot, apply 90, commit 99, log 100, snapshot 89, len 12
+2025/09/12 16:51:54 [10] S0 SNAPSHOT at 99
+2025/09/12 16:51:54 [10] S0 snapshot, apply 99, commit 99, log 100, snapshot 89, len 12
+2025/09/12 16:51:54 [10] S0 snapshot, apply 99, commit 99, log 100, snapshot 99, len 2
+2025/09/12 16:51:54 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:54 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:54 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:54 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:54 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:54 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:54 [11] S1 start election...
+2025/09/12 16:51:54 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:54 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:54 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:54 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:54 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:54 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:54 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:54 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:54 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:54 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:54 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:54 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:55 [12] S1 start election...
+2025/09/12 16:51:55 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:55 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:55 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:55 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:55 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:55 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:55 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:55 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:55 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:55 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:55 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:55 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:55 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:55 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:55 [13] S1 start election...
+2025/09/12 16:51:55 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:55 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:55 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:55 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:55 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:55 [10] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:55 [10] S0 start one(7661118055684704588)
+2025/09/12 16:51:55 [10] S0 Append 1 logs, lastLogIndex = 101
+2025/09/12 16:51:55 [10] S0 send InstallSnapshot to 2 at 99
+2025/09/12 16:51:55 [10] S2 InstallSnapshot start, apply 86, commit 86, log 99, snapshot 79, len 21
+2025/09/12 16:51:55 [10] S2 InstallSnapshot end, apply 99, commit 99, log 99, snapshot 99, len 1
+2025/09/12 16:51:55 [10] S0 send InstallSnapshot to 1 at 99
+2025/09/12 16:51:56 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:56 [10] S2 Reject append RPC, log is not match
+2025/09/12 16:51:56 [10] S0 send APPEND ENTRIES RPC to server 2, prev 99, loglen 2, term 10
+2025/09/12 16:51:56 [10] S2 Got append RPC with pervLogIndex 99 loglen 2 term 10
+2025/09/12 16:51:56 [10] S2 , apply 99, commit 99, log 99, snapshot 99, len 1
+2025/09/12 16:51:56 [10] S2 Append 2 logs, lastLogIndex = 101
+2025/09/12 16:51:56 [10] S0 Update commit index to 101
+2025/09/12 16:51:56 [10] S0 Apply 2 logs to 101
+2025/09/12 16:51:56 [10] S2 Apply 2 logs to 101
+2025/09/12 16:51:56 [10] S0 start one(8792436139239386626)
+2025/09/12 16:51:56 [10] S0 Append 1 logs, lastLogIndex = 102
+2025/09/12 16:51:56 [10] S0 send APPEND ENTRIES RPC to server 2, prev 101, loglen 1, term 10
+2025/09/12 16:51:56 [10] S0 send InstallSnapshot to 1 at 99
+2025/09/12 16:51:56 [10] S2 Got append RPC with pervLogIndex 101 loglen 1 term 10
+2025/09/12 16:51:56 [10] S2 , apply 101, commit 101, log 101, snapshot 99, len 3
+2025/09/12 16:51:56 [10] S2 Append 1 logs, lastLogIndex = 102
+2025/09/12 16:51:56 [13] S1 InstallSnapshot start, apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:56 [13] S1 InstallSnapshot reject Term, apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:56 [10] S0 Update commit index to 102
+2025/09/12 16:51:56 [13] S1 Reject append RPC, term 10, current 13
+2025/09/12 16:51:56 [13] S0 Reject handle append RPC without Backforwards
+2025/09/12 16:51:56 [10] S2 Apply 1 logs to 102
+2025/09/12 16:51:56 [13] S0 Apply 1 logs to 102
+2025/09/12 16:51:56 [14] S1 start election...
+2025/09/12 16:51:56 [10] S2 Got Vote RPC from 1, term 14
+2025/09/12 16:51:56 [14] S2 Reject vote RPC
+2025/09/12 16:51:56 [13] S0 Got Vote RPC from 1, term 14
+2025/09/12 16:51:56 [14] S0 Reject vote RPC
+2025/09/12 16:51:56 [14] S1 Got Vote reply from 2, term 14
+2025/09/12 16:51:56 [14] S1 Got Vote reply from 0, term 14
+2025/09/12 16:51:57 [15] S0 start election...
+2025/09/12 16:51:57 [14] S1 Got Vote RPC from 0, term 15
+2025/09/12 16:51:57 [15] S1 Grand vote to 0
+2025/09/12 16:51:57 [15] S0 Got Vote reply from 1, term 15
+2025/09/12 16:51:57 [15] S0 Change to leader
+2025/09/12 16:51:57 [14] S2 Got Vote RPC from 0, term 15
+2025/09/12 16:51:57 [15] S2 Grand vote to 0
+2025/09/12 16:51:57 [15] S0 Got Vote reply from 2, term 15
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 3, term 15
+2025/09/12 16:51:57 [15] S1 Got append RPC with pervLogIndex 99 loglen 3 term 15
+2025/09/12 16:51:57 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 3, term 15
+2025/09/12 16:51:57 [15] S1 Got append RPC with pervLogIndex 99 loglen 3 term 15
+2025/09/12 16:51:57 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 3, term 15
+2025/09/12 16:51:57 [15] S1 Got append RPC with pervLogIndex 99 loglen 3 term 15
+2025/09/12 16:51:57 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 3, term 15
+2025/09/12 16:51:57 [15] S1 Got append RPC with pervLogIndex 99 loglen 3 term 15
+2025/09/12 16:51:57 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 3, term 15
+2025/09/12 16:51:57 [15] S1 Got append RPC with pervLogIndex 99 loglen 3 term 15
+2025/09/12 16:51:57 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 3, term 15
+2025/09/12 16:51:57 [15] S1 Got append RPC with pervLogIndex 99 loglen 3 term 15
+2025/09/12 16:51:57 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 3, term 15
+2025/09/12 16:51:57 [15] S1 Got append RPC with pervLogIndex 99 loglen 3 term 15
+2025/09/12 16:51:57 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:57 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 3, term 15
+2025/09/12 16:51:57 [15] S1 Got append RPC with pervLogIndex 99 loglen 3 term 15
+2025/09/12 16:51:57 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:57 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 3, term 15
+2025/09/12 16:51:58 [15] S1 Got append RPC with pervLogIndex 99 loglen 3 term 15
+2025/09/12 16:51:58 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 3, term 15
+2025/09/12 16:51:58 [15] S1 Got append RPC with pervLogIndex 99 loglen 3 term 15
+2025/09/12 16:51:58 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 3, term 15
+2025/09/12 16:51:58 [15] S1 Got append RPC with pervLogIndex 99 loglen 3 term 15
+2025/09/12 16:51:58 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S0 start one(8792436139239386626)
+2025/09/12 16:51:58 [15] S0 Append 1 logs, lastLogIndex = 103
+2025/09/12 16:51:58 [15] S0 send APPEND ENTRIES RPC to server 2, prev 102, loglen 1, term 15
+2025/09/12 16:51:58 [15] S2 Got append RPC with pervLogIndex 102 loglen 1 term 15
+2025/09/12 16:51:58 [15] S2 , apply 102, commit 102, log 102, snapshot 99, len 4
+2025/09/12 16:51:58 [15] S2 Append 1 logs, lastLogIndex = 103
+2025/09/12 16:51:58 [15] S0 Update commit index to 103
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S0 Apply 1 logs to 103
+2025/09/12 16:51:58 [15] S2 Apply 1 logs to 103
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:58 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:58 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:58 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:58 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:58 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:58 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:58 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:58 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:58 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:58 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:58 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:58 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:58 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:58 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:59 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:59 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:59 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:59 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:59 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:59 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:59 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:59 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:59 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:59 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:59 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:59 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:59 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:59 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:59 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:59 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:51:59 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:51:59 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:51:59 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:51:59 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:52:00 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:52:00 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 4, term 15
+2025/09/12 16:52:00 [15] S1 Got append RPC with pervLogIndex 99 loglen 4 term 15
+2025/09/12 16:52:00 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S0 start one(8792436139239386626)
+2025/09/12 16:52:00 [15] S0 Append 1 logs, lastLogIndex = 104
+2025/09/12 16:52:00 [15] S0 send APPEND ENTRIES RPC to server 2, prev 103, loglen 1, term 15
+2025/09/12 16:52:00 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:00 [15] S2 Got append RPC with pervLogIndex 103 loglen 1 term 15
+2025/09/12 16:52:00 [15] S2 , apply 103, commit 103, log 103, snapshot 99, len 5
+2025/09/12 16:52:00 [15] S2 Append 1 logs, lastLogIndex = 104
+2025/09/12 16:52:00 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:00 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S0 Update commit index to 104
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S0 Apply 1 logs to 104
+2025/09/12 16:52:00 [15] S2 Apply 1 logs to 104
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:00 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:00 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:00 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:00 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:00 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:00 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:00 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:00 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:00 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:00 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:00 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:00 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:01 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:01 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:01 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:01 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:01 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:01 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:01 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:01 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:01 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:01 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:01 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:01 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:01 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:01 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:01 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:01 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:01 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:01 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:02 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:02 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:02 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:02 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:02 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:02 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 5, term 15
+2025/09/12 16:52:02 [15] S1 Got append RPC with pervLogIndex 99 loglen 5 term 15
+2025/09/12 16:52:02 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S0 start one(8792436139239386626)
+2025/09/12 16:52:02 [15] S0 Append 1 logs, lastLogIndex = 105
+2025/09/12 16:52:02 [15] S0 send APPEND ENTRIES RPC to server 2, prev 104, loglen 1, term 15
+2025/09/12 16:52:02 [15] S2 Got append RPC with pervLogIndex 104 loglen 1 term 15
+2025/09/12 16:52:02 [15] S2 , apply 104, commit 104, log 104, snapshot 99, len 6
+2025/09/12 16:52:02 [15] S2 Append 1 logs, lastLogIndex = 105
+2025/09/12 16:52:02 [15] S0 Update commit index to 105
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S0 Apply 1 logs to 105
+2025/09/12 16:52:02 [15] S2 Apply 1 logs to 105
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:02 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:02 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:02 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:02 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:02 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:02 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:02 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:02 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:02 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:02 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:02 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:02 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:03 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:03 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:03 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:03 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:03 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:03 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:03 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:03 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:03 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:03 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:03 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:03 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:03 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:03 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:03 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:03 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:03 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:03 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:04 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:04 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:04 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:04 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 6, term 15
+2025/09/12 16:52:04 [15] S1 Got append RPC with pervLogIndex 99 loglen 6 term 15
+2025/09/12 16:52:04 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S0 start one(8792436139239386626)
+2025/09/12 16:52:04 [15] S0 Append 1 logs, lastLogIndex = 106
+2025/09/12 16:52:04 [15] S0 send APPEND ENTRIES RPC to server 2, prev 105, loglen 1, term 15
+2025/09/12 16:52:04 [15] S2 Got append RPC with pervLogIndex 105 loglen 1 term 15
+2025/09/12 16:52:04 [15] S2 , apply 105, commit 105, log 105, snapshot 99, len 7
+2025/09/12 16:52:04 [15] S2 Append 1 logs, lastLogIndex = 106
+2025/09/12 16:52:04 [15] S0 Update commit index to 106
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:04 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:04 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S2 Apply 1 logs to 106
+2025/09/12 16:52:04 [15] S0 Apply 1 logs to 106
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:04 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:04 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:04 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:04 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:04 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:04 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:04 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:04 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:04 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:04 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:05 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:05 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:05 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:05 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:05 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:05 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:05 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:05 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:05 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:05 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:05 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:05 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:05 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:05 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:05 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:05 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:05 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:05 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:06 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:06 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:06 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:06 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:06 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:06 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:06 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:06 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:06 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:06 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:06 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:06 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:06 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:06 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:06 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:06 [15] S1 Reject append RPC, log is not match
+2025/09/12 16:52:06 [15] S0 send APPEND ENTRIES RPC to server 1, prev 99, loglen 7, term 15
+2025/09/12 16:52:06 [15] S1 Got append RPC with pervLogIndex 99 loglen 7 term 15
+2025/09/12 16:52:06 [15] S1 , apply 85, commit 85, log 85, snapshot 79, len 7
+2025/09/12 16:52:06 [15] S1 Reject append RPC, log is not match
+Fatal: one(8792436139239386626) failed to reach agreement
+        /home/akane/learning/6.5840/src/raft1/test.go:283
+        /home/akane/learning/6.5840/src/raft1/raft_test.go:1285
+        /home/akane/learning/6.5840/src/raft1/raft_test.go:1302
+info: wrote visualization to /tmp/porcupine-732610343.html
+--- FAIL: TestSnapshotInstall3D (39.18s)
+FAIL
+exit status 1
+FAIL	6.5840/raft1	39.185s

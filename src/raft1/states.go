@@ -163,6 +163,10 @@ func (rf *Raft) IsFoundAnotherLeader(term int) bool {
 	return false
 }
 
+func (rf *Raft) IsFoundAnotherCandidateInSameTerm(term int) bool {
+	return term == rf.currentTerm && rf.state == Candidate
+}
+
 func (rf *Raft) IsOutofDate(term int) bool {
 	return term < rf.currentTerm
 }

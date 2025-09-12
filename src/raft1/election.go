@@ -19,7 +19,7 @@ func (rf *Raft) StartElection() {
 	rf.incTermWithoutLock()
 	rf.ChangeRoleWithoutLock(Candidate, rf.currentTerm)
 	rf.lastHeartbeatTime = time.Now()
-	  // mDebug(rf, "start election...")
+	   mDebug(rf, "start election...")
 	rf.BoardcastRequestVote()
 	rf.persist()
 }
@@ -30,7 +30,7 @@ func (rf *Raft) ticker() {
 		// Check if a leader election should be started.
 		rf.mu.Lock()
 		state := rf.state
-		electionTimeout := GetRand(600, 800)
+		electionTimeout := GetRand(500, 800)
 		heartbeatTimeout := time.Duration(electionTimeout)*time.Millisecond 
 		if state == Leader { // 发送心跳
 			go rf.SendHeartbeat();
