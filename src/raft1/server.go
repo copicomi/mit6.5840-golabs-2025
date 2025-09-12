@@ -192,7 +192,7 @@ func (rs *rfsrv) ingestSnap(snapshot []byte, index int) string {
 		return "snapshot Decode() error"
 	}
 	if index != -1 && index != lastIncludedIndex {
-		err := fmt.Sprintf("server %v snapshot doesn't match m.SnapshotIndex", rs.me)
+		err := fmt.Sprintf("server %v snapshot index %d doesn't match m.SnapshotIndex %d", rs.me, index, lastIncludedIndex)
 		return err
 	}
 	rs.logs = map[int]any{}

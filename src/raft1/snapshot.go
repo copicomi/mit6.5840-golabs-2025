@@ -91,7 +91,7 @@ func (rf *Raft) SnapShotWithLock(index int, snapshot []byte) {
 }
 func (rf *Raft) SnapShotWithoutLock(index int, snapshot []byte) {
 	mDebug(rf, "SNAPSHOT at %d", index)
-	mDebugIndex(rf, "snapshot")
+	// mDebugIndex(rf, "snapshot")
 	defer mDebugIndex(rf, "snapshot END")
 	if index <= rf.snapshotEndIndex || index > rf.commitIndex {
 		mDebug(rf, "reject SNAPSHOT")

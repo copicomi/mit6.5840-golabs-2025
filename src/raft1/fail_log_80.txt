@@ -2527,7 +2527,7 @@ Test (3D): install snapshots (disconnect) (unreliable network)...
 2025/09/12 19:12:11 [11] S2 , apply 138, commit 138, log 139, snapshot 129, len 11
 2025/09/12 19:12:11 [11] S0 Apply 1 logs to 139
 2025/09/12 19:12:11 [11] S0 begin apply log 139
-2025/09/12 19:12:11 [11] S0 APPLY , apply 138, commit 139, log 139, snapshot 129, len 11
+2025/09/12 19:12:11 [11] S0 8APPLY , apply 13, commit 139, log 139, snapshot 129, len 11
 2025/09/12 19:12:11 [11] S0 end apply log 139
 2025/09/12 19:12:11 [11] S2 Apply 1 logs to 139
 2025/09/12 19:12:11 [11] S2 begin apply log 139
