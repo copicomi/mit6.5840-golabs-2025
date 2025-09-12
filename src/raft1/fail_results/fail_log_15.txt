@@ -1,0 +1,10 @@
+Test (3D): install snapshots (disconnect) (unreliable network)...
+Fatal: one(1551479941612081824) failed to reach agreement
+        /home/akane/learning/6.5840/src/raft1/test.go:283
+        /home/akane/learning/6.5840/src/raft1/raft_test.go:1285
+        /home/akane/learning/6.5840/src/raft1/raft_test.go:1306
+info: wrote visualization to /tmp/porcupine-952048820.html
+--- FAIL: TestSnapshotInstallUnreliable3D (75.67s)
+FAIL
+exit status 1
+FAIL	6.5840/raft1	75.676s

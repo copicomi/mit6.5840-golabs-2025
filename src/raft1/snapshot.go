@@ -37,7 +37,6 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 
 	rf.ApplySnapshot(args.Data, args.LastIncludedIndex, args.LastIncludedTerm)
 	mDebugIndex(rf, "InstallSnapshot end")
-	rf.persist()
 }
 
 func (rf *Raft) HandleInstallReply(server int, args *InstallSnapshotArgs, reply *InstallSnapshotReply) {
@@ -75,6 +74,7 @@ func (rf *Raft) ApplySnapshot(snapshot []byte, index int, term int) {
 	rf.snapshotEndIndex = index
 	rf.lastApplied = max(rf.lastApplied, index)
 	rf.commitIndex = max(rf.commitIndex, index)
+	rf.persist()
 }
 func (rf *Raft) SnapShotWithLock(index int, snapshot []byte) {
 	rf.mu.Lock()

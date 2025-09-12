@@ -28,6 +28,7 @@ func (rf *Raft) persist() {
 	e.Encode(rf.currentTerm)
 	e.Encode(rf.votedFor)
 	e.Encode(rf.log)
+	e.Encode(rf.snapshotEndIndex)
 	raftstate := w.Bytes()
 	rf.persister.Save(raftstate, rf.snapshot)
 }
@@ -43,14 +44,23 @@ func (rf *Raft) readPersist(data []byte) {
 	var currentTerm int
 	var votedFor int
 	var logs []LogEntry
+	var snapshotEndIndex int
 	if d.Decode(&currentTerm) != nil ||
 		d.Decode(&votedFor) != nil ||
-		d.Decode(&logs) != nil {
+		d.Decode(&logs) != nil || 
+		d.Decode(&snapshotEndIndex) != nil{
 		log.Fatal("readPersist")
 	} else {
 		rf.currentTerm = currentTerm
 		rf.votedFor = votedFor
 		rf.log = logs
+		rf.snapshotEndIndex = snapshotEndIndex
+		rf.commitIndex = rf.snapshotEndIndex
+		rf.lastApplied = rf.snapshotEndIndex
+		for i := range rf.peers {
+			rf.nextIndex[i] = rf.GetLastLogIndexWithoutLock() + 1
+			rf.matchIndex[i] = rf.snapshotEndIndex
+		}
 	}
 	// Your code here (3C).
 	// Example:

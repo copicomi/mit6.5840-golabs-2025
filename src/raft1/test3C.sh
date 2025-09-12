@@ -4,7 +4,7 @@
 
 passed=0
 failed=0
-total=500
+total=20
 max_jobs=16  # 同时运行的最大测试数量
 
 echo "开始并行运行3C测试$total次，最大并发数: $max_jobs..."
@@ -18,7 +18,7 @@ run_test() {
     local output_file="test_results/test_$i.txt"
     
     # 运行3C相关的测试
-    go test -run 3C > "$output_file" 2>&1
+    go test -run SnapshotInstallUnreliable3D > "$output_file" 2>&1
     
     # 检查测试是否通过
     if grep -q "PASS" "$output_file" && ! grep -q "FAIL" "$output_file"; then
