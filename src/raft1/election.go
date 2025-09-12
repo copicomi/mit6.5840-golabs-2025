@@ -29,20 +29,17 @@ func (rf *Raft) ticker() {
 		// Your code here (3A)
 		// Check if a leader election should be started.
 		rf.mu.Lock()
-		var sleepMs int
 		state := rf.state
-		electionTimeout := GetRand(600, 900)
+		electionTimeout := GetRand(600, 800)
 		heartbeatTimeout := time.Duration(electionTimeout)*time.Millisecond 
 		if state == Leader { // 发送心跳
 			go rf.SendHeartbeat();
-			sleepMs = rf.heartbeatInterval
 		} else if state == Follower || state == Candidate { // 等待心跳
 			if time.Since(rf.lastHeartbeatTime) > heartbeatTimeout{
 				go rf.StartElection()
 			}
-			sleepMs = 100
 		} 
 		rf.mu.Unlock()
-		time.Sleep(time.Duration(sleepMs) * time.Millisecond)
+		time.Sleep(time.Duration(100) * time.Millisecond)
 	}
 }

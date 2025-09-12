@@ -87,7 +87,6 @@ func (rf *Raft) InitElectionState() {
 	rf.state = Follower
 	rf.votedFor = -1
 	rf.currentTerm = 0
-	rf.heartbeatInterval = 100 // heartbeat every 100 ms
 	rf.lastHeartbeatTime = time.Now()
 }
 
@@ -165,9 +164,6 @@ func (rf *Raft) IsFoundAnotherLeader(term int) bool {
 }
 
 func (rf *Raft) IsMatchPrevLog(index int, term int) bool {
-	if index == 0 {
-		return true
-	}
 	if rf.GetLastLogIndexWithoutLock() < index {
 		return false
 	}
@@ -183,5 +179,5 @@ func (rf *Raft) IsExistedInLogList(index int) bool {
 }
 
 func (rf *Raft) IsExistedInSnapshot(index int) bool {
-	return index <= rf.snapshotEndIndex
+	return index <= rf.snapshotEndIndex && index >= 0
 }

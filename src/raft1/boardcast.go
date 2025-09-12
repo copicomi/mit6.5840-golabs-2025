@@ -1,7 +1,5 @@
 package raft
 
-import "time"
-
 func (rf *Raft) SendAndHandleRPC(
 	server int, 
 	argsFactory RPCFactoryFunc,
@@ -11,16 +9,10 @@ func (rf *Raft) SendAndHandleRPC(
 ) {
 	args := argsFactory()
 	reply := replyFactory()
-	for !rf.killed() {
-		ok := sendFunction(server, args, reply)
-		if ok || handleFunction == nil {
-			break
-		}
-		time.Sleep(100 * time.Millisecond)
-	}
-	if handleFunction != nil {
+	ok := sendFunction(server, args, reply)
+	if ok && handleFunction != nil {
 		handleFunction(server, args, reply)
-	}		
+	}
 }
 func (rf *Raft) BoardcastWithPeersIndex(
 	argsFactory RPCFactoryFunc,

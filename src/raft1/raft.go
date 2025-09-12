@@ -41,7 +41,6 @@ type Raft struct {
 	// 3A election
 	state 	 int // Follower, Candidate, Leader
 	lastHeartbeatTime time.Time
-	heartbeatInterval int
 	voteCount int
 
 	// 3B log 
@@ -78,6 +77,8 @@ func (rf *Raft) SnapShotWithoutLock(index int, snapshot []byte) {
 	}
 	rf.snapshotEndIndex = index
 	rf.snapshot = snapshot
+	rf.commitIndex = max(rf.commitIndex, index)
+	rf.lastApplied = max(rf.lastApplied, index)
 	mDebugLogs(rf, "snapshot")
 	rf.persist()
 }

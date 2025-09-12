@@ -1,33 +1,89 @@
-Test (3D): snapshots basic (reliable network)...
-Fatal: one(1962614104573959391) failed to reach agreement
-        /home/akane/learning/6.5840/src/raft1/test.go:283
-        /home/akane/learning/6.5840/src/raft1/raft_test.go:1272
-        /home/akane/learning/6.5840/src/raft1/raft_test.go:1298
-info: wrote visualization to /tmp/porcupine-2960903326.html
---- FAIL: TestSnapshotBasic3D (14.20s)
+2025/09/11 21:39:33 [0] S0 restart!!
+2025/09/11 21:39:33 [0] S1 restart!!
+2025/09/11 21:39:33 [0] S2 restart!!
 Test (3D): install snapshots (disconnect) (reliable network)...
+2025/09/11 21:39:33 [1] S1 Change to leader
+2025/09/11 21:39:33 [1] S1 Append 1 logs, lastLogIndex = 1
+2025/09/11 21:39:33 [1] S1 send APPEND ENTRIES RPC to server 2, prev 0, loglen 1, term 1
+2025/09/11 21:39:33 [1] S2 Got append RPC with pervLogIndex 0 loglen 1 term 1
+2025/09/11 21:39:33 [1] S2 Append 1 logs, lastLogIndex = 1
+2025/09/11 21:39:33 [1] S1 send APPEND ENTRIES RPC to server 0, prev 0, loglen 1, term 1
+2025/09/11 21:39:33 [1] S1 Got append reply from 2, term 1
+2025/09/11 21:39:33 [1] S1 [APP]Update matchIndex 2 to 1
+2025/09/11 21:39:33 [1] S0 Got append RPC with pervLogIndex 0 loglen 1 term 1
+2025/09/11 21:39:33 [1] S0 Append 1 logs, lastLogIndex = 1
+2025/09/11 21:39:33 [1] S1 Got append reply from 0, term 1
+2025/09/11 21:39:33 [1] S1 [APP]Update matchIndex 0 to 1
+2025/09/11 21:39:33 [1] S1 Update commit index to 1
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 2
+2025/09/11 21:39:34 [1] S1 send APPEND ENTRIES RPC to server 2, prev 1, loglen 1, term 1
+2025/09/11 21:39:34 [1] S1 send APPEND ENTRIES RPC to server 0, prev 1, loglen 1, term 1
+2025/09/11 21:39:34 [1] S0 Got append RPC with pervLogIndex 1 loglen 1 term 1
+2025/09/11 21:39:34 [1] S0 Append 1 logs, lastLogIndex = 2
+2025/09/11 21:39:34 [1] S1 Got append reply from 0, term 1
+2025/09/11 21:39:34 [1] S1 [APP]Update matchIndex 0 to 2
+2025/09/11 21:39:34 [1] S1 Update commit index to 2
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 3
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 4
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 5
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 6
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 7
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 8
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 9
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 10
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 11
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 12
+2025/09/11 21:39:34 [1] S1 send APPEND ENTRIES RPC to server 0, prev 2, loglen 10, term 1
+2025/09/11 21:39:34 [1] S1 send APPEND ENTRIES RPC to server 2, prev 1, loglen 11, term 1
+2025/09/11 21:39:34 [1] S1 send APPEND ENTRIES RPC to server 0, prev 2, loglen 10, term 1
+2025/09/11 21:39:34 [1] S0 Got append RPC with pervLogIndex 2 loglen 10 term 1
+2025/09/11 21:39:34 [1] S0 Append 10 logs, lastLogIndex = 12
+2025/09/11 21:39:34 [1] S1 Got append reply from 0, term 1
+2025/09/11 21:39:34 [1] S1 [APP]Update matchIndex 0 to 12
+2025/09/11 21:39:34 [1] S0 Got append RPC with pervLogIndex 2 loglen 10 term 1
+2025/09/11 21:39:34 [1] S0 Append 10 logs, lastLogIndex = 12
+2025/09/11 21:39:34 [1] S1 Got append reply from 0, term 1
+2025/09/11 21:39:34 [1] S1 [APP]Update matchIndex 0 to 12
+2025/09/11 21:39:34 [1] S1 Update commit index to 12
+2025/09/11 21:39:34 [1] S1 SNAPSHOT at 9
+2025/09/11 21:39:34 [1] S1 snapshot, snapshotIndex 0, loglength 13, total 13
+2025/09/11 21:39:34 [1] S1 snapshot, snapshotIndex 9, loglength 4, total 13
+2025/09/11 21:39:34 [1] S0 SNAPSHOT at 9
+2025/09/11 21:39:34 [1] S0 snapshot, snapshotIndex 0, loglength 13, total 13
+2025/09/11 21:39:34 [1] S0 snapshot, snapshotIndex 9, loglength 4, total 13
+2025/09/11 21:39:34 [1] S1 Append 1 logs, lastLogIndex = 13
+2025/09/11 21:39:34 [1] S1 send InstallSnapshot () Have lock
+2025/09/11 21:39:34 [1] S1 send APPEND ENTRIES RPC to server 0, prev 12, loglen 1, term 1
+2025/09/11 21:39:34 [1] S2 InstallSnapshot start
+2025/09/11 21:39:34 [1] S2 SNAPSHOT at 9
+2025/09/11 21:39:34 [1] S2 snapshot, snapshotIndex 0, loglength 2, total 2
+2025/09/11 21:39:34 [1] S2 snapshot, snapshotIndex 9, loglength 1, total 10
+2025/09/11 21:39:34 [1] S2 InstallSnapshot End
+2025/09/11 21:39:34 [1] S0 Got append RPC with pervLogIndex 12 loglen 1 term 1
+2025/09/11 21:39:34 [1] S0 Append 1 logs, lastLogIndex = 13
+2025/09/11 21:39:34 [1] S1 Got append reply from 0, term 1
+2025/09/11 21:39:34 [1] S1 [APP]Update matchIndex 0 to 13
+2025/09/11 21:39:34 [1] S1 Update commit index to 13
+2025/09/11 21:39:34 [1] S2 Got append RPC with pervLogIndex 1 loglen 11 term 1
+2025/09/11 21:39:34 [1] S2 Reject append RPC, log is in snapshot
+2025/09/11 21:39:34 [1] S1 Got append reply from 2, term 1
+2025/09/11 21:39:34 [1] S1 BackforwardsNextIndex with i 1
 panic: runtime error: index out of range [-8]
 
-goroutine 2861 [running]:
+goroutine 180 [running]:
 6.5840/raft1.(*Raft).GetLogAtIndexWithoutLock(...)
 	/home/akane/learning/6.5840/src/raft1/states.go:126
 6.5840/raft1.(*Raft).GetLogTermAtIndexWithoutLock(...)
 	/home/akane/learning/6.5840/src/raft1/states.go:129
-6.5840/raft1.(*Raft).IsMatchPrevLog(...)
-	/home/akane/learning/6.5840/src/raft1/states.go:174
-6.5840/raft1.(*Raft).AppendEntries(0xc000216900, 0xc000310500, 0xc0002f9d10)
-	/home/akane/learning/6.5840/src/raft1/rpc.go:101 +0x206
-reflect.Value.call({0xc000162690?, 0xc00040a1d0?, 0xc0005f5b18?}, {0x66be38, 0x4}, {0xc0005f5d20, 0x3, 0xc0005f5b48?})
-	/usr/lib/go-1.22/src/reflect/value.go:596 +0xca6
-reflect.Value.Call({0xc000162690?, 0xc00040a1d0?, 0xc000119848?}, {0xc0005f5d20?, 0xc0001c53b0?, 0x41a345?})
-	/usr/lib/go-1.22/src/reflect/value.go:380 +0xb9
-6.5840/labrpc.(*Service).dispatch(0xc00041e6c0, {0x66f8f1, 0xd}, {{0x61d9a0, 0xc00041a200}, {0x66f8ec, 0x12}, {0x6d08c0, 0x6154c0}, {0xc0005cc600, ...}, ...})
-	/home/akane/learning/6.5840/src/labrpc/labrpc.go:526 +0x36e
-6.5840/labrpc.(*Server).dispatch(0xc0003441c8, {{0x61d9a0, 0xc00041a200}, {0x66f8ec, 0x12}, {0x6d08c0, 0x6154c0}, {0xc0005cc600, 0x1c3, 0x200}, ...})
-	/home/akane/learning/6.5840/src/labrpc/labrpc.go:450 +0x1e5
-6.5840/labrpc.(*Network).processReq.func1()
-	/home/akane/learning/6.5840/src/labrpc/labrpc.go:260 +0x3f
-created by 6.5840/labrpc.(*Network).processReq in goroutine 2860
-	/home/akane/learning/6.5840/src/labrpc/labrpc.go:259 +0x1d0
+6.5840/raft1.(*Raft).BackforwardsNextIndex(0xc0001e4360, 0x2)
+	/home/akane/learning/6.5840/src/raft1/replicator.go:70 +0x119
+6.5840/raft1.(*Raft).HandleAppendReply(0xc0001e4360, 0x2, 0xc0002c2a40, 0xc00012b3b0)
+	/home/akane/learning/6.5840/src/raft1/rpc.go:145 +0x276
+6.5840/raft1.(*Raft).replicateAppendEntries.(*Raft).MakeHandleFunction.func10(0x5f5e100?, {0x6154c0?, 0xc0002c2a40?}, {0x615500?, 0xc00012b3b0?})
+	/home/akane/learning/6.5840/src/raft1/factory.go:30 +0x65
+6.5840/raft1.(*Raft).SendAndHandleRPC(0xc0001e4360, 0x2, 0x44869d?, 0x687390, 0xc0002ca0b0, 0xc0002ca0c0)
+	/home/akane/learning/6.5840/src/raft1/boardcast.go:22 +0xed
+created by 6.5840/raft1.(*Raft).replicateAppendEntries in goroutine 45
+	/home/akane/learning/6.5840/src/raft1/replicator.go:41 +0x359
 exit status 2
-FAIL	6.5840/raft1	16.447s
+FAIL	6.5840/raft1	1.810s

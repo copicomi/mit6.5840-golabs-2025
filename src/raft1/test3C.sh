@@ -4,7 +4,7 @@
 
 passed=0
 failed=0
-total=50
+total=500
 max_jobs=16  # 同时运行的最大测试数量
 
 echo "开始并行运行3C测试$total次，最大并发数: $max_jobs..."

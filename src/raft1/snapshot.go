@@ -16,7 +16,6 @@ type InstallSnapshotArgs struct {
 
 type InstallSnapshotReply struct {
     Term int
-	Success bool
 }
 
 func (rf *Raft) sendInstallSnapshot(server int, args *InstallSnapshotArgs, reply *InstallSnapshotReply) bool {
@@ -31,7 +30,6 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 
 	term := args.Term
 	reply.Term = rf.currentTerm
-	reply.Success = false
 	if term < rf.currentTerm {
 		return
 	}
@@ -42,30 +40,14 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 	if args.LastIncludedIndex <= rf.commitIndex {
 		return
 	}
-	rf.ApplySnapshot(args.Data, args.LastIncludedIndex, args.LastIncludedTerm)
 	rf.SnapShotWithoutLock(args.LastIncludedIndex, args.Data)
-	reply.Success = true
+	rf.ApplySnapshot(args.Data, args.LastIncludedIndex, args.LastIncludedTerm)
 	mDebug(rf, "InstallSnapshot End")
 }
 
 func (rf *Raft) HandleInstallReply(server int, args *InstallSnapshotArgs, reply *InstallSnapshotReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	if reply.Term < rf.currentTerm || rf.state != Leader {
-		return
-	}
-	if rf.IsFoundAnotherLeader(reply.Term) { 
-		rf.ChangeRoleWithoutLock(Follower, reply.Term)
-		return
-	} 
-	if reply.Success { 
-		rf.matchIndex[server] = max(rf.matchIndex[server], args.LastIncludedIndex)
-		rf.nextIndex[server] = max(rf.nextIndex[server], args.LastIncludedIndex + 1)
-		mDebug(rf, "[INS]Update matchIndex %d to %d", server, rf.matchIndex[server])
-	} else {
-
-		mDebug(rf, "[INS]Not Update matchIndex %d to %d", server, rf.matchIndex[server])
-	}
 }
 
 func (rf *Raft) ApplySnapshot(snapshot []byte, index int, term int) {

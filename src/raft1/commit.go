@@ -27,7 +27,7 @@ func (rf *Raft) ApplyCommittedLogs() {
 			CommandIndex: i,
 		}
 	}
-	// mDebug(rf, "Apply %d logs", rf.commitIndex - rf.lastApplied)
+	mDebug(rf, "Apply %d logs", rf.commitIndex - rf.lastApplied)
 	rf.lastApplied = max(rf.lastApplied, commitIndex)
 }
 

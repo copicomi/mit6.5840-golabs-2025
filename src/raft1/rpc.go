@@ -82,8 +82,9 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 
-	mDebug(rf, "Got append RPC with pervLogIndex %d loglen %d term %d", args.PrevLogIndex, len(args.Entries), args.Term)
-
+	if len(args.Entries) > 0 {
+		mDebug(rf, "Got append RPC with pervLogIndex %d loglen %d term %d", args.PrevLogIndex, len(args.Entries), args.Term)
+	}
 	term := args.Term
 	reply.Term = rf.currentTerm
 	reply.Success = false
@@ -98,9 +99,14 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	} 
 
 	rf.lastHeartbeatTime = time.Now()
+	if rf.IsExistedInSnapshot(args.PrevLogIndex + 1) {
+		mDebug(rf, "Reject append RPC, log is in snapshot")
+		return
+	}
 	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
 		return
 	}
+	
 
 	if args.Entries != nil || len(args.Entries) > 0 {
 		rf.AppendLogListWithoutLock(args.Entries, args.PrevLogIndex)
@@ -132,11 +138,13 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 		rf.nextIndex[server] = max(rf.nextIndex[server], args.PrevLogIndex + len(args.Entries) + 1)
 		mDebug(rf, "[APP]Update matchIndex %d to %d", server, rf.matchIndex[server])
 	} else {
-		if args.PrevLogIndex == 0 {
+		if args.PrevLogIndex == rf.snapshotEndIndex {
 			// mDebug(rf, "Reject append RPC without Backforwards")
 			return
 		}
-		rf.BackforwardsNextIndex(server)
+		if len(args.Entries) > 0 { // 不是heartbeat
+			rf.BackforwardsNextIndex(server)
+		}
 		// mDebug(rf, "Retry append with prevLogIndex %d", rf.nextIndex[server] - 1)
 		rf.replicateCond[server].Signal()
 	}
