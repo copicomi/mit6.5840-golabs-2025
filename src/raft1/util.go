@@ -31,6 +31,11 @@ func mDebugLogs(rf *Raft, msg string) {
 	mDebug(rf, "%s, snapshotIndex %d, loglength %d, total %d", msg, rf.snapshotEndIndex, len(rf.log), rf.snapshotEndIndex + len(rf.log))
 }
 
+func mDebugIndex(rf *Raft, msg string)  {
+	indexMsg := fmt.Sprintf("apply %d, commit %d, log %d, snapshot %d, len %d", rf.lastApplied, rf.commitIndex, rf.GetLastLogIndexWithoutLock(), rf.snapshotEndIndex, len(rf.log))
+	mDebug(rf, "%s, %s", msg, indexMsg)
+}
+
 func GetRand(min int, max int) int {
 	return rand.Intn(max-min) + min
 }

@@ -1,0 +1,186 @@
+2025/09/12 14:43:09 [0] S0 restart!!
+2025/09/12 14:43:09 [0] S1 restart!!
+2025/09/12 14:43:09 [0] S2 restart!!
+Test (3D): install snapshots (disconnect) (reliable network)...
+2025/09/12 14:43:10 [1] S0 Change to leader
+2025/09/12 14:43:10 [1] S0 Append 1 logs, lastLogIndex = 1
+2025/09/12 14:43:12 [1] S0 Append 1 logs, lastLogIndex = 2
+2025/09/12 14:43:12 [1] S2 Append 2 logs, lastLogIndex = 2
+2025/09/12 14:43:12 [1] S1 Append 2 logs, lastLogIndex = 2
+2025/09/12 14:43:12 [1] S0 Update commit index to 2
+2025/09/12 14:43:12 [1] S1 Apply 2 logs to 2
+2025/09/12 14:43:12 [1] S2 Apply 2 logs to 2
+2025/09/12 14:43:12 [1] S0 Apply 2 logs to 2
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 3
+2025/09/12 14:43:13 [1] S2 Append 1 logs, lastLogIndex = 3
+2025/09/12 14:43:13 [1] S0 Update commit index to 3
+2025/09/12 14:43:13 [1] S0 Apply 1 logs to 3
+2025/09/12 14:43:13 [1] S2 Apply 1 logs to 3
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 4
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 5
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 6
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 7
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 8
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 9
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 10
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 11
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 12
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 13
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 14
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 15
+2025/09/12 14:43:13 [1] S0 Append 1 logs, lastLogIndex = 16
+2025/09/12 14:43:15 [1] S0 Append 1 logs, lastLogIndex = 17
+2025/09/12 14:43:15 [1] S2 Append 14 logs, lastLogIndex = 17
+2025/09/12 14:43:15 [1] S0 Update commit index to 17
+2025/09/12 14:43:15 [1] S0 Apply 14 logs to 17
+2025/09/12 14:43:15 [1] S2 Apply 14 logs to 17
+2025/09/12 14:43:15 [1] S0 SNAPSHOT at 9
+2025/09/12 14:43:15 [1] S0 snapshot, apply 10, commit 17, log 17, snapshot 0, len 18
+2025/09/12 14:43:15 [1] S2 SNAPSHOT at 9
+2025/09/12 14:43:15 [1] S2 snapshot, apply 10, commit 17, log 17, snapshot 0, len 18
+2025/09/12 14:43:15 [1] S2 snapshot, apply 10, commit 17, log 17, snapshot 9, len 9
+2025/09/12 14:43:15 [1] S0 snapshot, apply 10, commit 17, log 17, snapshot 9, len 9
+2025/09/12 14:43:15 [1] S0 Append 1 logs, lastLogIndex = 18
+2025/09/12 14:43:15 [1] S0 send InstallSnapshot to 1 at 9
+2025/09/12 14:43:15 [1] S2 Append 1 logs, lastLogIndex = 18
+2025/09/12 14:43:15 [4] S1 InstallSnapshot start, apply 2, commit 2, log 2, snapshot 0, len 3
+2025/09/12 14:43:15 [1] S0 Update commit index to 18
+2025/09/12 14:43:15 [4] S0 Apply 1 logs to 18
+2025/09/12 14:43:15 [1] S2 Apply 1 logs to 18
+2025/09/12 14:43:16 [6] S0 Change to leader
+2025/09/12 14:43:17 [6] S0 Append 1 logs, lastLogIndex = 19
+2025/09/12 14:43:17 [6] S2 Append 1 logs, lastLogIndex = 19
+2025/09/12 14:43:17 [6] S0 Update commit index to 19
+2025/09/12 14:43:17 [6] S2 Apply 1 logs to 19
+2025/09/12 14:43:17 [6] S0 Apply 1 logs to 19
+2025/09/12 14:43:17 [6] S2 SNAPSHOT at 19
+2025/09/12 14:43:17 [6] S2 snapshot, apply 19, commit 19, log 19, snapshot 9, len 11
+2025/09/12 14:43:17 [6] S2 snapshot, apply 19, commit 19, log 19, snapshot 19, len 1
+2025/09/12 14:43:17 [6] S0 SNAPSHOT at 19
+2025/09/12 14:43:17 [6] S0 snapshot, apply 19, commit 19, log 19, snapshot 9, len 11
+2025/09/12 14:43:17 [6] S0 snapshot, apply 19, commit 19, log 19, snapshot 19, len 1
+2025/09/12 14:43:19 [6] S0 Append 1 logs, lastLogIndex = 20
+2025/09/12 14:43:19 [6] S2 Append 1 logs, lastLogIndex = 20
+2025/09/12 14:43:19 [6] S0 send InstallSnapshot to 1 at 19
+2025/09/12 14:43:19 [6] S1 InstallSnapshot start, apply 2, commit 2, log 2, snapshot 0, len 3
+2025/09/12 14:43:19 [6] S1 InstallSnapshot end, apply 19, commit 19, log 19, snapshot 19, len 1
+2025/09/12 14:43:19 [6] S0 Update commit index to 20
+2025/09/12 14:43:19 [6] S0 Apply 1 logs to 20
+2025/09/12 14:43:19 [6] S2 Apply 1 logs to 20
+2025/09/12 14:43:21 [6] S0 Append 1 logs, lastLogIndex = 21
+2025/09/12 14:43:21 [6] S2 Append 1 logs, lastLogIndex = 21
+2025/09/12 14:43:21 [6] S1 Append 2 logs, lastLogIndex = 21
+2025/09/12 14:43:21 [6] S1 Apply 1 logs to 20
+2025/09/12 14:43:21 [6] S0 Update commit index to 21
+2025/09/12 14:43:21 [6] S0 Apply 1 logs to 21
+2025/09/12 14:43:21 [6] S2 Apply 1 logs to 21
+2025/09/12 14:43:21 [6] S1 Apply 1 logs to 21
+2025/09/12 14:43:22 [7] S2 Change to leader
+2025/09/12 14:43:22 [7] S2 Append 1 logs, lastLogIndex = 22
+2025/09/12 14:43:22 [7] S2 Append 1 logs, lastLogIndex = 23
+2025/09/12 14:43:22 [7] S1 Append 2 logs, lastLogIndex = 23
+2025/09/12 14:43:22 [7] S2 Update commit index to 23
+2025/09/12 14:43:22 [7] S1 Apply 2 logs to 23
+2025/09/12 14:43:22 [7] S2 Apply 2 logs to 23
+2025/09/12 14:43:22 [7] S2 Append 1 logs, lastLogIndex = 24
+2025/09/12 14:43:22 [7] S1 Append 1 logs, lastLogIndex = 24
+2025/09/12 14:43:22 [7] S2 Update commit index to 24
+2025/09/12 14:43:22 [7] S2 Apply 1 logs to 24
+2025/09/12 14:43:22 [7] S1 Apply 1 logs to 24
+2025/09/12 14:43:22 [7] S2 Append 1 logs, lastLogIndex = 25
+2025/09/12 14:43:22 [7] S0 Append 4 logs, lastLogIndex = 25
+2025/09/12 14:43:22 [7] S1 Append 1 logs, lastLogIndex = 25
+2025/09/12 14:43:22 [7] S0 Apply 3 logs to 24
+2025/09/12 14:43:22 [7] S2 Update commit index to 25
+2025/09/12 14:43:22 [7] S0 Apply 1 logs to 25
+2025/09/12 14:43:22 [7] S2 Apply 1 logs to 25
+2025/09/12 14:43:22 [7] S1 Apply 1 logs to 25
+2025/09/12 14:43:22 [7] S2 Append 1 logs, lastLogIndex = 26
+2025/09/12 14:43:22 [7] S1 Append 1 logs, lastLogIndex = 26
+2025/09/12 14:43:23 [7] S2 Update commit index to 26
+2025/09/12 14:43:23 [7] S2 Apply 1 logs to 26
+2025/09/12 14:43:23 [7] S1 Apply 1 logs to 26
+2025/09/12 14:43:23 [7] S2 Append 1 logs, lastLogIndex = 27
+2025/09/12 14:43:23 [7] S2 Append 1 logs, lastLogIndex = 28
+2025/09/12 14:43:23 [7] S2 Append 1 logs, lastLogIndex = 29
+2025/09/12 14:43:23 [7] S2 Append 1 logs, lastLogIndex = 30
+2025/09/12 14:43:23 [7] S2 Append 1 logs, lastLogIndex = 31
+2025/09/12 14:43:23 [7] S2 Append 1 logs, lastLogIndex = 32
+2025/09/12 14:43:23 [7] S2 Append 1 logs, lastLogIndex = 33
+2025/09/12 14:43:23 [7] S2 Append 1 logs, lastLogIndex = 34
+2025/09/12 14:43:23 [7] S2 Append 1 logs, lastLogIndex = 35
+2025/09/12 14:43:23 [7] S1 Append 9 logs, lastLogIndex = 35
+2025/09/12 14:43:23 [7] S2 Update commit index to 35
+2025/09/12 14:43:23 [7] S1 Apply 9 logs to 35
+2025/09/12 14:43:23 [7] S1 SNAPSHOT at 29
+2025/09/12 14:43:23 [7] S1 snapshot, apply 30, commit 35, log 35, snapshot 19, len 17
+2025/09/12 14:43:23 [7] S1 snapshot, apply 30, commit 35, log 35, snapshot 29, len 7
+2025/09/12 14:43:23 [7] S2 Apply 9 logs to 35
+2025/09/12 14:43:23 [7] S2 SNAPSHOT at 29
+2025/09/12 14:43:23 [7] S2 snapshot, apply 30, commit 35, log 35, snapshot 19, len 17
+2025/09/12 14:43:23 [7] S2 snapshot, apply 30, commit 35, log 35, snapshot 29, len 7
+2025/09/12 14:43:23 [7] S2 Append 1 logs, lastLogIndex = 36
+2025/09/12 14:43:23 [7] S2 send InstallSnapshot to 0 at 29
+2025/09/12 14:43:23 [7] S0 InstallSnapshot start, apply 25, commit 25, log 25, snapshot 19, len 7
+2025/09/12 14:43:23 [7] S0 InstallSnapshot end, apply 29, commit 29, log 29, snapshot 29, len 1
+2025/09/12 14:43:23 [7] S1 Append 1 logs, lastLogIndex = 36
+2025/09/12 14:43:23 [7] S2 Update commit index to 36
+2025/09/12 14:43:23 [7] S1 Apply 1 logs to 36
+2025/09/12 14:43:23 [7] S2 Apply 1 logs to 36
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 37
+2025/09/12 14:43:25 [7] S0 Append 8 logs, lastLogIndex = 37
+2025/09/12 14:43:25 [7] S1 Append 1 logs, lastLogIndex = 37
+2025/09/12 14:43:25 [7] S0 Apply 7 logs to 36
+2025/09/12 14:43:25 [7] S2 Update commit index to 37
+2025/09/12 14:43:25 [7] S1 Apply 1 logs to 37
+2025/09/12 14:43:25 [7] S2 Apply 1 logs to 37
+2025/09/12 14:43:25 [7] S0 Apply 1 logs to 37
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 38
+2025/09/12 14:43:25 [7] S1 Append 1 logs, lastLogIndex = 38
+2025/09/12 14:43:25 [7] S2 Update commit index to 38
+2025/09/12 14:43:25 [7] S2 Apply 1 logs to 38
+2025/09/12 14:43:25 [7] S1 Apply 1 logs to 38
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 39
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 40
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 41
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 42
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 43
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 44
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 45
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 46
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 47
+2025/09/12 14:43:25 [7] S1 Append 9 logs, lastLogIndex = 47
+2025/09/12 14:43:25 [7] S2 Update commit index to 47
+2025/09/12 14:43:25 [7] S2 Apply 9 logs to 47
+2025/09/12 14:43:25 [7] S2 SNAPSHOT at 39
+2025/09/12 14:43:25 [7] S2 snapshot, apply 40, commit 47, log 47, snapshot 29, len 19
+2025/09/12 14:43:25 [7] S2 snapshot, apply 40, commit 47, log 47, snapshot 39, len 9
+2025/09/12 14:43:25 [7] S1 Apply 9 logs to 47
+2025/09/12 14:43:25 [7] S1 SNAPSHOT at 39
+2025/09/12 14:43:25 [7] S1 snapshot, apply 40, commit 47, log 47, snapshot 29, len 19
+2025/09/12 14:43:25 [7] S1 snapshot, apply 40, commit 47, log 47, snapshot 39, len 9
+2025/09/12 14:43:25 [7] S2 Append 1 logs, lastLogIndex = 48
+2025/09/12 14:43:25 [7] S2 send InstallSnapshot to 0 at 39
+2025/09/12 14:43:25 [7] S0 InstallSnapshot start, apply 37, commit 37, log 37, snapshot 29, len 9
+2025/09/12 14:43:25 [7] S0 InstallSnapshot end, apply 37, commit 37, log 47, snapshot 39, len 9
+2025/09/12 14:43:25 [7] S1 Append 1 logs, lastLogIndex = 48
+2025/09/12 14:43:26 [7] S2 Update commit index to 48
+2025/09/12 14:43:26 [7] S2 Apply 1 logs to 48
+2025/09/12 14:43:26 [7] S1 Apply 1 logs to 48
+2025/09/12 14:43:27 [7] S2 Append 1 logs, lastLogIndex = 49
+2025/09/12 14:43:27 [7] S0 Append 10 logs, lastLogIndex = 49
+2025/09/12 14:43:27 [7] S1 Append 1 logs, lastLogIndex = 49
+2025/09/12 14:43:27 [7] S0 Apply 11 logs to 48
+panic: runtime error: index out of range [-1]
+
+goroutine 22 [running]:
+6.5840/raft1.(*Raft).GetLogAtIndexWithoutLock(...)
+	/home/akane/learning/6.5840/src/raft1/states.go:125
+6.5840/raft1.(*Raft).ApplyCommittedLogs(0xc000164120)
+	/home/akane/learning/6.5840/src/raft1/commit.go:23 +0x15c
+6.5840/raft1.(*Raft).applier(0xc000164120)
+	/home/akane/learning/6.5840/src/raft1/commit.go:13 +0x6e
+created by 6.5840/raft1.Make in goroutine 19
+	/home/akane/learning/6.5840/src/raft1/raft.go:91 +0x445
+exit status 2
+FAIL	6.5840/raft1	20.692s

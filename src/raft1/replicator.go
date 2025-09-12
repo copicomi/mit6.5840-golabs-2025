@@ -39,8 +39,10 @@ func (rf *Raft) replicateAppendEntries(server int) {
 		Entries:      rf.GetLogListBeginAtIndexWithoutLock(rf.nextIndex[server]),
 		LeaderCommit: rf.commitIndex,
 	}
-	// mDebug(rf, "send APPEND ENTRIES RPC to server %d, prev %d, loglen %d, term %d", server, args.PrevLogIndex, len(args.Entries), args.Term)
+	if len(args.Entries) > 0 {
+	 mDebug(rf, "send APPEND ENTRIES RPC to server %d, prev %d, loglen %d, term %d", server, args.PrevLogIndex, len(args.Entries), args.Term)
 	// mDebug(rf, "replicate %d at %d", server, args.PrevLogIndex)
+	}
 	go rf.SendAndHandleRPC(
 		server,
 		rf.MakeArgsFactoryFunction(RPCAppendEntries, args),

@@ -21,20 +21,22 @@ type InstallSnapshotReply struct {
 func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapshotReply) { 
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	mDebug(rf, "InstallSnapshot start")
+	mDebugIndex(rf, "InstallSnapshot start")
 
 	if !rf.CheckRPCTermWithoutLock(args.Term) {
+		mDebugIndex(rf, "InstallSnapshot reject Term")
 		return
 	}
 	rf.lastHeartbeatTime = time.Now()
 	reply.Term = rf.currentTerm
 
 	if args.LastIncludedIndex <= rf.commitIndex {
+		mDebugIndex(rf, "InstallSnapshot reject")
 		return
 	}
 
 	rf.ApplySnapshot(args.Data, args.LastIncludedIndex, args.LastIncludedTerm)
-	mDebug(rf, "InstallSnapshot End")
+	mDebugIndex(rf, "InstallSnapshot end")
 	rf.persist()
 }
 
@@ -56,13 +58,11 @@ func (rf *Raft) ApplySnapshot(snapshot []byte, index int, term int) {
 	if index <= rf.snapshotEndIndex {
 		return
 	}
-	rf.snapshot = snapshot
-	rf.snapshotEndIndex = index
 	if rf.IsMatchPrevLog(index, term) {
 		rf.log = rf.GetLogListBeginAtIndexWithoutLock(index)
-		return
+	} else {
+		rf.log = []LogEntry{{Command: nil, Term: term}}
 	}
-	rf.log = []LogEntry{{Command: nil, Term: term}}
 	if rf.lastApplied < index {
 		rf.applyCh <- raftapi.ApplyMsg{
 			SnapshotValid: true,
@@ -70,7 +70,28 @@ func (rf *Raft) ApplySnapshot(snapshot []byte, index int, term int) {
 			SnapshotIndex: index,
 			SnapshotTerm: term,
 		}
-		rf.lastApplied = index
-		rf.commitIndex = max(rf.commitIndex, index)
+		rf.snapshot = snapshot
 	}
+	rf.snapshotEndIndex = index
+	rf.lastApplied = max(rf.lastApplied, index)
+	rf.commitIndex = max(rf.commitIndex, index)
+}
+func (rf *Raft) SnapShotWithLock(index int, snapshot []byte) {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	rf.SnapShotWithoutLock(index, snapshot)
+}
+func (rf *Raft) SnapShotWithoutLock(index int, snapshot []byte) {
+	mDebug(rf, "SNAPSHOT at %d", index)
+	mDebugIndex(rf, "snapshot")
+	defer mDebugIndex(rf, "snapshot")
+	if index <= rf.snapshotEndIndex || index > rf.commitIndex {
+		mDebug(rf, "reject SNAPSHOT")
+		return
+	}
+	rf.log = rf.GetLogListBeginAtIndexWithoutLock(index)
+	rf.snapshotEndIndex = index
+	rf.snapshot = snapshot
+	rf.lastApplied = max(rf.lastApplied, index)
+	rf.persist()
 }

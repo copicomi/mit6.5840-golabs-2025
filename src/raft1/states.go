@@ -51,7 +51,7 @@ func (rf *Raft) ChangeRoleWithoutLock(role int, term int) {
 		mDebug(rf, "Change to leader")
 		for i := 0; i < len(rf.peers); i++ {
 			rf.nextIndex[i] = rf.GetLastLogIndexWithoutLock() + 1
-			rf.matchIndex[i] = 0
+			rf.matchIndex[i] = rf.snapshotEndIndex
 		}
 		rf.WakeupAllReplicators()
 	}

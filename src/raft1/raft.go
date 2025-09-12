@@ -61,28 +61,6 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	rf.SnapShotWithoutLock(index, snapshot)
 }
 
-func (rf *Raft) SnapShotWithLock(index int, snapshot []byte) {
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
-	rf.SnapShotWithoutLock(index, snapshot)
-}
-func (rf *Raft) SnapShotWithoutLock(index int, snapshot []byte) {
-	mDebug(rf, "SNAPSHOT at %d", index)
-	mDebugLogs(rf, "snapshot")
-	snapshotEndTerm := rf.GetLastLogTermWithoutLock()
-	if rf.GetLastLogIndexWithoutLock() >= index {
-		cutIndex := index - rf.snapshotEndIndex
-		rf.log = rf.log[cutIndex:]
-	} else {
-		rf.log = []LogEntry{{Command: nil, Term: snapshotEndTerm}}
-	}
-	rf.snapshotEndIndex = index
-	rf.snapshot = snapshot
-	rf.commitIndex = max(rf.commitIndex, index)
-	rf.lastApplied = max(rf.lastApplied, index)
-	mDebugLogs(rf, "snapshot")
-	rf.persist()
-}
 // the service or tester wants to create a Raft server. the ports
 // of all the Raft servers (including this one) are in peers[]. this
 // server's port is peers[me]. all the servers' peers[] arrays

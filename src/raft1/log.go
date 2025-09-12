@@ -29,9 +29,9 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 			Command: command,
 			Term: rf.currentTerm,
 		}
+		mDebug(rf, "start one(%v)", log.Command)
 		rf.AppendLogListWithoutLock([]LogEntry{log}, rf.GetLastLogIndexWithoutLock())
 		go rf.WakeupAllReplicators()
-		// mDebug(rf, "wakeup Start...")
 	}  
 	return index, term, isLeader
 }
