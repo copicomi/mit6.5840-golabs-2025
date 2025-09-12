@@ -78,7 +78,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 	if len(args.Entries) > 0 {
-		mDebug(rf, "Got append RPC with pervLogIndex %d loglen %d term %d", args.PrevLogIndex, len(args.Entries), args.Term)
+		// mDebug(rf, "Got append RPC with pervLogIndex %d loglen %d term %d", args.PrevLogIndex, len(args.Entries), args.Term)
 	}
 	term := args.Term
 	reply.Term = rf.currentTerm
@@ -118,9 +118,7 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 			// mDebug(rf, "Reject append RPC without Backforwards")
 			return
 		}
-		if len(args.Entries) > 0 { // 不是heartbeat
-			rf.BackforwardsNextIndex(server)
-		}
+		rf.BackforwardsNextIndex(server)
 		// mDebug(rf, "Retry append with prevLogIndex %d", rf.nextIndex[server] - 1)
 		rf.replicateCond[server].Signal()
 	}

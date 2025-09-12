@@ -69,11 +69,12 @@ func (rf *Raft) SnapShotWithLock(index int, snapshot []byte) {
 func (rf *Raft) SnapShotWithoutLock(index int, snapshot []byte) {
 	mDebug(rf, "SNAPSHOT at %d", index)
 	mDebugLogs(rf, "snapshot")
+	snapshotEndTerm := rf.GetLastLogTermWithoutLock()
 	if rf.GetLastLogIndexWithoutLock() >= index {
 		cutIndex := index - rf.snapshotEndIndex
 		rf.log = rf.log[cutIndex:]
 	} else {
-		rf.log = []LogEntry{{Command: nil, Term: 0}}
+		rf.log = []LogEntry{{Command: nil, Term: snapshotEndTerm}}
 	}
 	rf.snapshotEndIndex = index
 	rf.snapshot = snapshot

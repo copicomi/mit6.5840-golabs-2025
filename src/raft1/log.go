@@ -62,6 +62,8 @@ func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 		}
 		rf.AppendSingleLogWithoutLock(entry)
 	}
-	mDebug(rf, "Append %d logs, lastLogIndex = %d", len(logs), rf.GetLastLogIndexWithoutLock())
+	if len(logs) > 0 {
+		mDebug(rf, "Append %d logs, lastLogIndex = %d", len(logs), rf.GetLastLogIndexWithoutLock())
+	}
 }
 

@@ -35,6 +35,7 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 
 	rf.ApplySnapshot(args.Data, args.LastIncludedIndex, args.LastIncludedTerm)
 	mDebug(rf, "InstallSnapshot End")
+	rf.persist()
 }
 
 func (rf *Raft) HandleInstallReply(server int, args *InstallSnapshotArgs, reply *InstallSnapshotReply) {
@@ -52,10 +53,24 @@ func (rf *Raft) sendInstallSnapshot(server int, args *InstallSnapshotArgs, reply
 }
 
 func (rf *Raft) ApplySnapshot(snapshot []byte, index int, term int) {
-	rf.applyCh <- raftapi.ApplyMsg{
-		Snapshot:      snapshot,
-		SnapshotIndex: index,
-		SnapshotTerm:  term,
-		SnapshotValid: true,
+	if index <= rf.snapshotEndIndex {
+		return
+	}
+	rf.snapshot = snapshot
+	rf.snapshotEndIndex = index
+	if rf.IsMatchPrevLog(index, term) {
+		rf.log = rf.GetLogListBeginAtIndexWithoutLock(index)
+		return
+	}
+	rf.log = []LogEntry{{Command: nil, Term: term}}
+	if rf.lastApplied < index {
+		rf.applyCh <- raftapi.ApplyMsg{
+			SnapshotValid: true,
+			Snapshot: snapshot,
+			SnapshotIndex: index,
+			SnapshotTerm: term,
+		}
+		rf.lastApplied = index
+		rf.commitIndex = max(rf.commitIndex, index)
 	}
 }

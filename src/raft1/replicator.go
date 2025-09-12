@@ -1,5 +1,7 @@
 package raft
 
+import "time"
+
 func (rf *Raft) replicator(server int) { 
 	for !rf.killed() { 
 		rf.replicateCond[server].L.Lock()
@@ -9,6 +11,7 @@ func (rf *Raft) replicator(server int) {
 		}
 		rf.replicateOneRound(server)
 		rf.replicateCond[server].L.Unlock()
+		time.Sleep(100 * time.Millisecond)
 	}
 }
 
@@ -36,7 +39,7 @@ func (rf *Raft) replicateAppendEntries(server int) {
 		Entries:      rf.GetLogListBeginAtIndexWithoutLock(rf.nextIndex[server]),
 		LeaderCommit: rf.commitIndex,
 	}
-	mDebug(rf, "send APPEND ENTRIES RPC to server %d, prev %d, loglen %d, term %d", server, args.PrevLogIndex, len(args.Entries), args.Term)
+	// mDebug(rf, "send APPEND ENTRIES RPC to server %d, prev %d, loglen %d, term %d", server, args.PrevLogIndex, len(args.Entries), args.Term)
 	// mDebug(rf, "replicate %d at %d", server, args.PrevLogIndex)
 	go rf.SendAndHandleRPC(
 		server,
@@ -48,7 +51,6 @@ func (rf *Raft) replicateAppendEntries(server int) {
 }
 
 func (rf *Raft) replicateInstallSnapshot(server int) { 
-	mDebugLock(rf, "send InstallSnapshot ")
 	args := &InstallSnapshotArgs{
 		Data: rf.persister.ReadSnapshot(),
 		LastIncludedIndex: rf.snapshotEndIndex,
@@ -56,6 +58,7 @@ func (rf *Raft) replicateInstallSnapshot(server int) {
 		LeaderId: rf.me,
 		Term: rf.currentTerm,
 	}
+	mDebug(rf, "send InstallSnapshot to %d at %d", server, args.LastIncludedIndex)
 	go rf.SendAndHandleRPC(
 		server,
 		rf.MakeArgsFactoryFunction(RPCInstallSnapshot, args),
@@ -66,7 +69,7 @@ func (rf *Raft) replicateInstallSnapshot(server int) {
 }
 func (rf *Raft) BackforwardsNextIndex(server int) {
 	i := rf.nextIndex[server] - 1
-	mDebug(rf, "BackforwardsNextIndex with i %d", i)
+	// mDebug(rf, "BackforwardsNextIndex with i %d", i)
 	conflictTerm := rf.GetLogTermAtIndexWithoutLock(i)
 	for ; i > rf.snapshotEndIndex; i -- {
 		if rf.GetLogTermAtIndexWithoutLock(i) != conflictTerm {
