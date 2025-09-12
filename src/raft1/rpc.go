@@ -80,10 +80,8 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	if len(args.Entries) > 0 {
 		 mDebug(rf, "Got append RPC with pervLogIndex %d loglen %d term %d", args.PrevLogIndex, len(args.Entries), args.Term)
 		 mDebugIndex(rf, "")
-	}
 	term := args.Term
 	reply.Term = rf.currentTerm
 	reply.Success = false
@@ -121,9 +119,12 @@ func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *Ap
 	} else {
 		if rf.nextIndex[server] <= rf.snapshotEndIndex {
 			mDebug(rf, "Reject handle append RPC without Backforwards")
+			rf.replicateCond[server].Signal()
 			return
 		}
-		rf.BackforwardsNextIndex(server)
+		if len(args.Entries) > 0 {
+			rf.BackforwardsNextIndex(server)
+		}
 		// mDebug(rf, "Retry append with prevLogIndex %d", rf.nextIndex[server] - 1)
 		rf.replicateCond[server].Signal()
 	}

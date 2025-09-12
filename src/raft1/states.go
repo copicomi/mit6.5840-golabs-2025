@@ -187,7 +187,8 @@ func (rf *Raft) IsExistedInLogList(index int) bool {
 }
 
 func (rf *Raft) IsExistedInSnapshot(index int) bool {
-	return index <= rf.snapshotEndIndex && index >= 0
+	// 必须判断 snapshot是否存在，否则在 snapshot 为空时，replicator 会尝试发送空快照
+	return index <= rf.snapshotEndIndex && index >= 0 && rf.snapshotEndIndex >= 0
 }
 
 func (rf *Raft) UpdateServerMatchIndex(server int, index int) {

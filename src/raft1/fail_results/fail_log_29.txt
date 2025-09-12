@@ -1,0 +1,265 @@
+2025/09/12 18:34:13 [0] S0 restart!!
+2025/09/12 18:34:13 [0] S1 restart!!
+2025/09/12 18:34:13 [0] S2 restart!!
+Test (3D): install snapshots (disconnect) (reliable network)...
+2025/09/12 18:34:13 [1] S2 start election...
+2025/09/12 18:34:14 [1] S2 Got Vote reply from 1, term 1
+2025/09/12 18:34:14 [1] S2 Change to leader
+2025/09/12 18:34:14 [1] S2 Got Vote reply from 0, term 1
+2025/09/12 18:34:14 [1] S2 start one(5167696579015518633)
+2025/09/12 18:34:14 [1] S2 Append 1 logs, lastLogIndex = 1
+2025/09/12 18:34:14 [1] S2 BackforwardsNextIndex 0
+2025/09/12 18:34:14 [1] S2 BackforwardsNextIndex 0
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:14 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:15 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 start one(5167696579015518633)
+2025/09/12 18:34:16 [1] S2 Append 1 logs, lastLogIndex = 2
+2025/09/12 18:34:16 [1] S2 send InstallSnapshot to 0 at 0
+2025/09/12 18:34:16 [1] S2 send InstallSnapshot to 1 at 0
+2025/09/12 18:34:16 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:16 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:16 [1] S1 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:16 [1] S1 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:16 [1] S2 HandleInstallReply from server 0 term 1
+2025/09/12 18:34:16 [1] S2 InstallSnapshot update matchIndex 0 to 0
+2025/09/12 18:34:16 [1] S2 HandleInstallReply from server 1 term 1
+2025/09/12 18:34:16 [1] S2 InstallSnapshot update matchIndex 1 to 0
+2025/09/12 18:34:16 [1] S2 BackforwardsNextIndex 0
+2025/09/12 18:34:16 [1] S2 BackforwardsNextIndex 0
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:16 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:17 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 start one(5167696579015518633)
+2025/09/12 18:34:18 [1] S2 Append 1 logs, lastLogIndex = 3
+2025/09/12 18:34:18 [1] S2 send InstallSnapshot to 0 at 0
+2025/09/12 18:34:18 [1] S2 send InstallSnapshot to 1 at 0
+2025/09/12 18:34:18 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:18 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:18 [1] S1 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:18 [1] S1 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:18 [1] S2 HandleInstallReply from server 0 term 1
+2025/09/12 18:34:18 [1] S2 InstallSnapshot update matchIndex 0 to 0
+2025/09/12 18:34:18 [1] S2 HandleInstallReply from server 1 term 1
+2025/09/12 18:34:18 [1] S2 InstallSnapshot update matchIndex 1 to 0
+2025/09/12 18:34:18 [1] S2 BackforwardsNextIndex 0
+2025/09/12 18:34:18 [1] S2 BackforwardsNextIndex 0
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:18 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:19 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 start one(5167696579015518633)
+2025/09/12 18:34:20 [1] S2 Append 1 logs, lastLogIndex = 4
+2025/09/12 18:34:20 [1] S2 send InstallSnapshot to 0 at 0
+2025/09/12 18:34:20 [1] S2 send InstallSnapshot to 1 at 0
+2025/09/12 18:34:20 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:20 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:20 [1] S2 HandleInstallReply from server 0 term 1
+2025/09/12 18:34:20 [1] S2 InstallSnapshot update matchIndex 0 to 0
+2025/09/12 18:34:20 [1] S1 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:20 [1] S1 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:20 [1] S2 HandleInstallReply from server 1 term 1
+2025/09/12 18:34:20 [1] S2 InstallSnapshot update matchIndex 1 to 0
+2025/09/12 18:34:20 [1] S2 BackforwardsNextIndex 0
+2025/09/12 18:34:20 [1] S2 BackforwardsNextIndex 0
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:20 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:21 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 start one(5167696579015518633)
+2025/09/12 18:34:22 [1] S2 Append 1 logs, lastLogIndex = 5
+2025/09/12 18:34:22 [1] S2 send InstallSnapshot to 0 at 0
+2025/09/12 18:34:22 [1] S2 send InstallSnapshot to 1 at 0
+2025/09/12 18:34:22 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:22 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:22 [1] S2 HandleInstallReply from server 0 term 1
+2025/09/12 18:34:22 [1] S2 InstallSnapshot update matchIndex 0 to 0
+2025/09/12 18:34:22 [1] S1 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:22 [1] S1 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:34:22 [1] S2 HandleInstallReply from server 1 term 1
+2025/09/12 18:34:22 [1] S2 InstallSnapshot update matchIndex 1 to 0
+2025/09/12 18:34:22 [1] S2 BackforwardsNextIndex 0
+2025/09/12 18:34:22 [1] S2 BackforwardsNextIndex 0
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:22 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+2025/09/12 18:34:23 [1] S2 Reject handle append RPC without Backforwards
+Fatal: one(5167696579015518633) failed to reach agreement
+        /home/akane/learning/6.5840/src/raft1/test.go:283
+        /home/akane/learning/6.5840/src/raft1/raft_test.go:1236
+        /home/akane/learning/6.5840/src/raft1/raft_test.go:1302
+info: wrote visualization to /tmp/porcupine-2187655336.html
+--- FAIL: TestSnapshotInstall3D (10.75s)
+FAIL
+exit status 1
+FAIL	6.5840/raft1	10.754s

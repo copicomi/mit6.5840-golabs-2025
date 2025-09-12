@@ -73,13 +73,14 @@ func (rf *Raft) BackforwardsNextIndex(server int) {
 	i := rf.nextIndex[server] - 1
 	// mDebug(rf, "BackforwardsNextIndex with i %d", i)
 	conflictTerm := rf.GetLogTermAtIndexWithoutLock(i)
-	for ; i > rf.snapshotEndIndex; i -- {
+	for ; i >= rf.snapshotEndIndex; i -- {
 		if rf.GetLogTermAtIndexWithoutLock(i) != conflictTerm {
 			break
 		}
 	}
+	// 允许回退到 snapshotEndIndex，当越界时，由replicator判断是否发送 snapshot
 	rf.nextIndex[server] = i + 1
-	// mDebug(rf, "BackforwardsNextIndex %d", rf.nextIndex[server])
+	mDebug(rf, "BackforwardsNextIndex %d", rf.nextIndex[server])
 }
 
 func (rf *Raft) WakeupAllReplicators() { 

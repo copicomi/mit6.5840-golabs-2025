@@ -2,68 +2,25 @@
 2025/09/12 18:33:53 [0] S1 restart!!
 2025/09/12 18:33:53 [0] S2 restart!!
 Test (3D): install snapshots (disconnect) (reliable network)...
-2025/09/12 18:33:53 [1] S0 start election...
 2025/09/12 18:33:53 [1] S1 start election...
-2025/09/12 18:33:53 [1] S2 start election...
+2025/09/12 18:33:53 [1] S0 start election...
 2025/09/12 18:33:53 [1] S1 Got Vote reply from 0, term 1
 2025/09/12 18:33:53 [1] S1 Change to leader
 2025/09/12 18:33:53 [1] S0 Got Vote reply from 2, term 1
-2025/09/12 18:33:53 [1] S1 Got Vote reply from 2, term 1
-2025/09/12 18:33:53 [1] S2 Got Vote reply from 0, term 1
-2025/09/12 18:33:53 [1] S2 Got Vote reply from 1, term 1
 2025/09/12 18:33:53 [1] S0 Got Vote reply from 1, term 1
-2025/09/12 18:33:53 [1] S1 start one(1823310896341350961)
+2025/09/12 18:33:53 [1] S1 Got Vote reply from 2, term 1
+2025/09/12 18:33:53 [1] S1 start one(8393444613970434988)
 2025/09/12 18:33:53 [1] S1 Append 1 logs, lastLogIndex = 1
 2025/09/12 18:33:53 [1] S1 BackforwardsNextIndex 0
 2025/09/12 18:33:53 [1] S1 BackforwardsNextIndex 0
-2025/09/12 18:33:53 [1] S1 send InstallSnapshot to 0 at 0
-2025/09/12 18:33:53 [1] S1 send InstallSnapshot to 2 at 0
-2025/09/12 18:33:53 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:53 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:53 [1] S1 HandleInstallReply from server 0 term 1
-2025/09/12 18:33:53 [1] S1 InstallSnapshot update matchIndex 0 to 0
-2025/09/12 18:33:53 [1] S2 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:53 [1] S2 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:53 [1] S1 HandleInstallReply from server 2 term 1
-2025/09/12 18:33:53 [1] S1 InstallSnapshot update matchIndex 2 to 0
-2025/09/12 18:33:54 [1] S1 BackforwardsNextIndex 0
-2025/09/12 18:33:54 [1] S1 send InstallSnapshot to 2 at 0
-2025/09/12 18:33:54 [1] S1 BackforwardsNextIndex 0
-2025/09/12 18:33:54 [1] S1 send InstallSnapshot to 0 at 0
-2025/09/12 18:33:54 [1] S2 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S2 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S1 HandleInstallReply from server 0 term 1
-2025/09/12 18:33:54 [1] S1 InstallSnapshot update matchIndex 0 to 0
-2025/09/12 18:33:54 [1] S1 HandleInstallReply from server 2 term 1
-2025/09/12 18:33:54 [1] S1 InstallSnapshot update matchIndex 2 to 0
-2025/09/12 18:33:54 [1] S1 BackforwardsNextIndex 0
-2025/09/12 18:33:54 [1] S1 BackforwardsNextIndex 0
-2025/09/12 18:33:54 [1] S1 send InstallSnapshot to 0 at 0
-2025/09/12 18:33:54 [1] S1 send InstallSnapshot to 2 at 0
-2025/09/12 18:33:54 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S1 HandleInstallReply from server 0 term 1
-2025/09/12 18:33:54 [1] S1 InstallSnapshot update matchIndex 0 to 0
-2025/09/12 18:33:54 [1] S2 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S2 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S1 HandleInstallReply from server 2 term 1
-2025/09/12 18:33:54 [1] S1 InstallSnapshot update matchIndex 2 to 0
-2025/09/12 18:33:54 [1] S1 BackforwardsNextIndex 0
-2025/09/12 18:33:54 [1] S1 BackforwardsNextIndex 0
-2025/09/12 18:33:54 [1] S1 send InstallSnapshot to 0 at 0
-2025/09/12 18:33:54 [1] S1 send InstallSnapshot to 2 at 0
-2025/09/12 18:33:54 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S2 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S2 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:54 [1] S1 HandleInstallReply from server 0 term 1
-2025/09/12 18:33:54 [1] S1 InstallSnapshot update matchIndex 0 to 0
-2025/09/12 18:33:54 [1] S1 HandleInstallReply from server 2 term 1
-2025/09/12 18:33:54 [1] S1 InstallSnapshot update matchIndex 2 to 0
-2025/09/12 18:33:54 [1] S1 BackforwardsNextIndex 0
-2025/09/12 18:33:54 [1] S1 BackforwardsNextIndex 0
+2025/09/12 18:33:54 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 18:33:54 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 18:33:54 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 18:33:54 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 18:33:54 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 18:33:54 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 18:33:54 [1] S1 Reject handle append RPC without Backforwards
+2025/09/12 18:33:54 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:33:54 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:33:54 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:33:54 [1] S1 Reject handle append RPC without Backforwards
@@ -94,16 +51,16 @@ Test (3D): install snapshots (disconnect) (reliable network)...
 2025/09/12 18:33:55 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:33:55 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:33:55 [1] S1 Reject handle append RPC without Backforwards
-2025/09/12 18:33:55 [1] S1 start one(1823310896341350961)
+2025/09/12 18:33:55 [1] S1 start one(8393444613970434988)
 2025/09/12 18:33:55 [1] S1 Append 1 logs, lastLogIndex = 2
 2025/09/12 18:33:55 [1] S1 send InstallSnapshot to 2 at 0
 2025/09/12 18:33:55 [1] S1 send InstallSnapshot to 0 at 0
 2025/09/12 18:33:55 [1] S2 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:33:55 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
 2025/09/12 18:33:55 [1] S2 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:33:55 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
 2025/09/12 18:33:55 [1] S1 HandleInstallReply from server 2 term 1
 2025/09/12 18:33:55 [1] S1 InstallSnapshot update matchIndex 2 to 0
-2025/09/12 18:33:55 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:55 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
 2025/09/12 18:33:55 [1] S1 HandleInstallReply from server 0 term 1
 2025/09/12 18:33:55 [1] S1 InstallSnapshot update matchIndex 0 to 0
 2025/09/12 18:33:55 [1] S1 BackforwardsNextIndex 0
@@ -144,18 +101,18 @@ Test (3D): install snapshots (disconnect) (reliable network)...
 2025/09/12 18:33:57 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:33:57 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:33:57 [1] S1 Reject handle append RPC without Backforwards
-2025/09/12 18:33:57 [1] S1 start one(1823310896341350961)
+2025/09/12 18:33:57 [1] S1 start one(8393444613970434988)
 2025/09/12 18:33:57 [1] S1 Append 1 logs, lastLogIndex = 3
 2025/09/12 18:33:57 [1] S1 send InstallSnapshot to 2 at 0
 2025/09/12 18:33:57 [1] S1 send InstallSnapshot to 0 at 0
-2025/09/12 18:33:57 [1] S2 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:57 [1] S2 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:57 [1] S1 HandleInstallReply from server 2 term 1
-2025/09/12 18:33:57 [1] S1 InstallSnapshot update matchIndex 2 to 0
 2025/09/12 18:33:57 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
 2025/09/12 18:33:57 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:33:57 [1] S2 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
+2025/09/12 18:33:57 [1] S2 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
 2025/09/12 18:33:57 [1] S1 HandleInstallReply from server 0 term 1
 2025/09/12 18:33:57 [1] S1 InstallSnapshot update matchIndex 0 to 0
+2025/09/12 18:33:57 [1] S1 HandleInstallReply from server 2 term 1
+2025/09/12 18:33:57 [1] S1 InstallSnapshot update matchIndex 2 to 0
 2025/09/12 18:33:57 [1] S1 BackforwardsNextIndex 0
 2025/09/12 18:33:57 [1] S1 BackforwardsNextIndex 0
 2025/09/12 18:33:57 [1] S1 Reject handle append RPC without Backforwards
@@ -196,12 +153,12 @@ Test (3D): install snapshots (disconnect) (reliable network)...
 2025/09/12 18:33:57 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:33:57 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:33:57 [1] S1 Reject handle append RPC without Backforwards
-2025/09/12 18:33:57 [1] S1 start one(1823310896341350961)
+2025/09/12 18:33:57 [1] S1 start one(8393444613970434988)
 2025/09/12 18:33:57 [1] S1 Append 1 logs, lastLogIndex = 4
 2025/09/12 18:33:57 [1] S1 send InstallSnapshot to 2 at 0
+2025/09/12 18:33:57 [1] S1 send InstallSnapshot to 0 at 0
 2025/09/12 18:33:57 [1] S2 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
 2025/09/12 18:33:57 [1] S2 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
-2025/09/12 18:33:57 [1] S1 send InstallSnapshot to 0 at 0
 2025/09/12 18:33:57 [1] S1 HandleInstallReply from server 2 term 1
 2025/09/12 18:33:57 [1] S1 InstallSnapshot update matchIndex 2 to 0
 2025/09/12 18:33:57 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
@@ -248,14 +205,14 @@ Test (3D): install snapshots (disconnect) (reliable network)...
 2025/09/12 18:33:59 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:33:59 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:33:59 [1] S1 Reject handle append RPC without Backforwards
-2025/09/12 18:33:59 [1] S1 start one(1823310896341350961)
+2025/09/12 18:33:59 [1] S1 start one(8393444613970434988)
 2025/09/12 18:33:59 [1] S1 Append 1 logs, lastLogIndex = 5
 2025/09/12 18:33:59 [1] S1 send InstallSnapshot to 2 at 0
-2025/09/12 18:33:59 [1] S1 send InstallSnapshot to 0 at 0
 2025/09/12 18:33:59 [1] S2 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
 2025/09/12 18:33:59 [1] S2 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
 2025/09/12 18:33:59 [1] S1 HandleInstallReply from server 2 term 1
 2025/09/12 18:33:59 [1] S1 InstallSnapshot update matchIndex 2 to 0
+2025/09/12 18:33:59 [1] S1 send InstallSnapshot to 0 at 0
 2025/09/12 18:33:59 [1] S0 InstallSnapshot start, apply 0, commit 0, log 0, snapshot 0, len 1
 2025/09/12 18:33:59 [1] S0 InstallSnapshot reject, apply 0, commit 0, log 0, snapshot 0, len 1
 2025/09/12 18:33:59 [1] S1 HandleInstallReply from server 0 term 1
@@ -300,12 +257,12 @@ Test (3D): install snapshots (disconnect) (reliable network)...
 2025/09/12 18:34:01 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:34:01 [1] S1 Reject handle append RPC without Backforwards
 2025/09/12 18:34:01 [1] S1 Reject handle append RPC without Backforwards
-Fatal: one(1823310896341350961) failed to reach agreement
+Fatal: one(8393444613970434988) failed to reach agreement
         /home/akane/learning/6.5840/src/raft1/test.go:283
         /home/akane/learning/6.5840/src/raft1/raft_test.go:1236
         /home/akane/learning/6.5840/src/raft1/raft_test.go:1302
-info: wrote visualization to /tmp/porcupine-3944261584.html
---- FAIL: TestSnapshotInstall3D (10.76s)
+info: wrote visualization to /tmp/porcupine-2074586667.html
+--- FAIL: TestSnapshotInstall3D (10.74s)
 FAIL
 exit status 1
-FAIL	6.5840/raft1	10.770s
+FAIL	6.5840/raft1	10.750s

@@ -52,6 +52,7 @@ func (rf *Raft) HandleInstallReply(server int, args *InstallSnapshotArgs, reply 
 		return
 	}
 	rf.UpdateServerMatchIndex(server, args.LastIncludedIndex)
+	rf.replicateCond[server].Signal()
 	mDebug(rf, "InstallSnapshot update matchIndex %d to %d", server, args.LastIncludedIndex)
 }
 
