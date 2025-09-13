@@ -18,7 +18,7 @@ run_test() {
     local output_file="test_results/test_$i.txt"
     
     # 运行3C相关的测试
-    go test > "$output_file" 2>&1
+    go test -run 3C -race > "$output_file" 2>&1
     
     # 检查测试是否通过
     if grep -q "PASS" "$output_file" && ! grep -q "FAIL" "$output_file"; then

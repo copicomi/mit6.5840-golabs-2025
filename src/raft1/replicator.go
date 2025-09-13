@@ -54,7 +54,7 @@ func (rf *Raft) replicateAppendEntries(server int) {
 
 func (rf *Raft) replicateInstallSnapshot(server int) { 
 	args := &InstallSnapshotArgs{
-		Data: rf.persister.ReadSnapshot(),
+		Data: rf.snapshot,
 		LastIncludedIndex: rf.snapshotEndIndex,
 		LastIncludedTerm: rf.GetSnapshotEndTermWithoutLock(),
 		LeaderId: rf.me,
@@ -73,7 +73,7 @@ func (rf *Raft) BackforwardsNextIndex(server int) {
 	i := rf.nextIndex[server] - 1
 	// mDebug(rf, "BackforwardsNextIndex with i %d", i)
 	conflictTerm := rf.GetLogTermAtIndexWithoutLock(i)
-	for ; i >= rf.snapshotEndIndex; i -- {
+	for ; i >= rf.snapshotEndIndex && i > 0; i -- {
 		if rf.GetLogTermAtIndexWithoutLock(i) != conflictTerm {
 			break
 		}

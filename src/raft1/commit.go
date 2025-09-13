@@ -9,11 +9,11 @@ import (
 func (rf *Raft) applier() {
 	for rf.killed() == false { 
 		rf.mu.Lock()
-		rf.snapshotMu.Lock()
+		rf.applyMu.Lock()
 		if rf.commitIndex > rf.lastApplied {
 			rf.ApplyCommittedLogs()
 		}
-		rf.snapshotMu.Unlock()
+		rf.applyMu.Unlock()
 		rf.mu.Unlock()
 		time.Sleep(10 * time.Millisecond)
 	}
@@ -22,17 +22,22 @@ func (rf *Raft) applier() {
 func (rf *Raft) ApplyCommittedLogs() {
 	mDebug(rf, "Apply %d logs to %d", rf.commitIndex - rf.lastApplied, rf.commitIndex)
 	for i := rf.lastApplied + 1; i <= rf.commitIndex; i++ {
+		i = max(i, rf.lastApplied)
+		if (i > rf.commitIndex) {
+			rf.mu.Lock()
+			return
+		}
 		mDebug(rf, "begin apply log %d", i)
 		mDebugIndex(rf, "APPLY ")
 		entry, _ := rf.GetLogAtIndexWithoutLock(i)
-		rf.lastApplied = i
-		rf.snapshotMu.Unlock()
+		rf.lastApplied = max(rf.lastApplied, i)
+		rf.mu.Unlock()
 		rf.applyCh <- raftapi.ApplyMsg{
 			CommandValid: true,
 			Command:      entry.Command,
 			CommandIndex: i,
 		}
-		rf.snapshotMu.Lock()
+		rf.mu.Lock()
 		mDebug(rf, "end apply log %d", i)
 	}
 }

@@ -1,0 +1,4 @@
+Test (3A): initial election (reliable network)...
+info: wrote visualization to /tmp/porcupine-2640729026.html
+exit status 1
+FAIL	6.5840/raft1	0.656s

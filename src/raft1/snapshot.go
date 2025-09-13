@@ -20,7 +20,9 @@ type InstallSnapshotReply struct {
 
 func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapshotReply) { 
 	rf.mu.Lock()
+	rf.applyMu.Lock()
 	defer rf.mu.Unlock()
+	defer rf.applyMu.Unlock()
 	mDebugIndex(rf, "InstallSnapshot start")
 
 	reply.Term = rf.currentTerm

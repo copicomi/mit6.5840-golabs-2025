@@ -1,0 +1,6 @@
+Test (3C): basic persistence (reliable network)...
+  ... Passed --  time  5.3s #peers 3 #RPCs    92 #Ops    0
+Test (3C): more persistence (reliable network)...
+info: wrote visualization to /tmp/porcupine-1806614427.html
+exit status 1
+FAIL	6.5840/raft1	9.439s
