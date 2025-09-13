@@ -8,13 +8,13 @@ import (
 
 func (rf *Raft) applier() {
 	for rf.killed() == false { 
-		rf.mu.Lock()
 		rf.applyMu.Lock()
+		rf.mu.Lock()
 		if rf.commitIndex > rf.lastApplied {
 			rf.ApplyCommittedLogs()
 		}
-		rf.applyMu.Unlock()
 		rf.mu.Unlock()
+		rf.applyMu.Unlock()
 		time.Sleep(10 * time.Millisecond)
 	}
 }
@@ -23,13 +23,14 @@ func (rf *Raft) ApplyCommittedLogs() {
 	last := rf.lastApplied
 	for i := rf.lastApplied + 1; i <= rf.commitIndex; i++ {
 		i = max(i, rf.lastApplied)
-		if (i > rf.commitIndex) {
+		if i > rf.commitIndex {
 			rf.mu.Lock()
 			return
 		}
 		entry, _ := rf.GetLogAtIndexWithoutLock(i)
 		rf.lastApplied = max(rf.lastApplied, i)
 		rf.mu.Unlock()
+		mDebug(rf, "Apply 1 log to %d", i)
 		rf.applyCh <- raftapi.ApplyMsg{
 			CommandValid: true,
 			Command:      entry.Command,

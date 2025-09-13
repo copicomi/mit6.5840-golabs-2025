@@ -97,12 +97,13 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		return
 	}
 	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
-		mDebug(rf, "Reject append RPC, log is not match")
+		// mDebug(rf, "Reject append RPC, log is not match")
 		return
 	}
 	rf.AppendLogListWithoutLock(args.Entries, args.PrevLogIndex)
 		// mDebug(rf, "Accept append RPC, prevLogIndex %d, term %d, rf.lastLogIndex %d", args.PrevLogIndex, args.Term, rf.GetLastLogIndexWithoutLock())
 	if args.LeaderCommit > rf.commitIndex {
+		mDebug(rf, "Accept append RPC, commitIndex %d, logIndex %d", rf.commitIndex, args.LeaderCommit)
 		rf.commitIndex = min(args.LeaderCommit, rf.GetLastLogIndexWithoutLock())
 	}
 	reply.Success = true

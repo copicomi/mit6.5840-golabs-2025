@@ -58,8 +58,8 @@ type Raft struct {
 // that index. Raft should now trim its log as much as possible.
 func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	// Your code here (3D).
-	rf.applyMu.Lock()
-	defer rf.applyMu.Unlock()
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
 	rf.SnapShotWithoutLock(index, snapshot)
 }
 
@@ -75,6 +75,8 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 func Make(peers []*labrpc.ClientEnd, me int,
 	persister *tester.Persister, applyCh chan raftapi.ApplyMsg) raftapi.Raft {
 	rf := &Raft{}
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
 	rf.peers = peers
 	rf.persister = persister
 	rf.me = me

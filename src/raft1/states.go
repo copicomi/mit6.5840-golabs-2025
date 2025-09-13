@@ -176,6 +176,7 @@ func (rf *Raft) IsMatchPrevLog(index int, term int) bool {
 		return false
 	}
 	if rf.GetLogTermAtIndexWithoutLock(index) != term {
+		mDebug(rf, "Log term mismatch at %d, %d, %d", index, rf.GetLogTermAtIndexWithoutLock(index), term)
 		return false
 	}
 	return true

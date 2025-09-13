@@ -51,6 +51,9 @@ func (rf *Raft) CutLogListWithoutLock(index int) {
 }
 
 func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
+	if prevLogIndex == 0 {
+		mDebug(rf, "Append %d logs, lastLogIndex = %d", len(logs), rf.GetLastLogIndexWithoutLock())
+	}
 	for i, entry := range logs {
 		logIndex := prevLogIndex + 1 + i
 		if logIndex <= rf.GetLastLogIndexWithoutLock(){
@@ -61,6 +64,10 @@ func (rf *Raft) AppendLogListWithoutLock(logs []LogEntry, prevLogIndex int) {
 			}
 		}
 		rf.AppendSingleLogWithoutLock(entry)
+	}
+	if prevLogIndex == 0 {
+		mDebug(rf, "Append %d logs, lastLogIndex = %d", len(logs), rf.GetLastLogIndexWithoutLock())
+		mDebugIndex(rf, "append log list")
 	}
 	if len(logs) > 0 {
 		mDebug(rf, "Append %d logs, lastLogIndex = %d", len(logs), rf.GetLastLogIndexWithoutLock())
