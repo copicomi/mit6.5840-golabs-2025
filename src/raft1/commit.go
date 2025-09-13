@@ -20,15 +20,13 @@ func (rf *Raft) applier() {
 }
 
 func (rf *Raft) ApplyCommittedLogs() {
-	mDebug(rf, "Apply %d logs to %d", rf.commitIndex - rf.lastApplied, rf.commitIndex)
+	last := rf.lastApplied
 	for i := rf.lastApplied + 1; i <= rf.commitIndex; i++ {
 		i = max(i, rf.lastApplied)
 		if (i > rf.commitIndex) {
 			rf.mu.Lock()
 			return
 		}
-		mDebug(rf, "begin apply log %d", i)
-		mDebugIndex(rf, "APPLY ")
 		entry, _ := rf.GetLogAtIndexWithoutLock(i)
 		rf.lastApplied = max(rf.lastApplied, i)
 		rf.mu.Unlock()
@@ -38,8 +36,8 @@ func (rf *Raft) ApplyCommittedLogs() {
 			CommandIndex: i,
 		}
 		rf.mu.Lock()
-		mDebug(rf, "end apply log %d", i)
 	}
+	mDebug(rf, "Apply %d logs to %d", rf.commitIndex - last, rf.commitIndex)
 }
 
 func (rf *Raft) UpdateCommitIndex() {

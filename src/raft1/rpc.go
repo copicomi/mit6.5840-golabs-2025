@@ -80,8 +80,10 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	if len(args.Entries) > 0 {
 		 mDebug(rf, "Got append RPC with pervLogIndex %d loglen %d term %d", args.PrevLogIndex, len(args.Entries), args.Term)
 		 mDebugIndex(rf, "")
+	}
 	term := args.Term
 	reply.Term = rf.currentTerm
 	reply.Success = false
@@ -95,7 +97,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		return
 	}
 	if !rf.IsMatchPrevLog(args.PrevLogIndex, args.PrevLogTerm) {
-		//mDebug(rf, "Reject append RPC, log is not match")
+		mDebug(rf, "Reject append RPC, log is not match")
 		return
 	}
 	rf.AppendLogListWithoutLock(args.Entries, args.PrevLogIndex)
@@ -110,7 +112,13 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 func (rf *Raft) HandleAppendReply(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	if len(args.Entries) > 0 {
+		mDebug(rf, "Got append RPC reply from %d, term %d, loglen %d", server, reply.Term, len(args.Entries))
+	}
 	if !rf.CheckRPCTermWithoutLock(reply.Term) {
+		return
+	}
+	if rf.state != Leader {
 		return
 	}
 	if reply.Success { 
@@ -136,10 +144,10 @@ func (rf *Raft) HandleVoteReply(server int, args *RequestVoteArgs, reply *Reques
 	if !rf.CheckRPCTermWithoutLock(reply.Term) {
 		return
 	}
+	if rf.state != Candidate {
+		return
+	}
 	if reply.VoteGranted {
-		if rf.state != Candidate {
-			return
-		}
 		rf.incVoteCountWithoutLock()
 		if rf.voteCount > len(rf.peers) / 2 {
 			// DPrintf("%d Winning Election", rf.me)
